@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="aFileChooser">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../aFileChooser" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../aFileChooser/gen" />
+      <root url="file://$PROJECT_DIR$/../aFileChooser/src" />
+    </SOURCES>
+  </library>
+</component>

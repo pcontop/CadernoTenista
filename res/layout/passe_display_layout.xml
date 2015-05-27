@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:padding="3dp">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            >
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/PartidaDisplayHeader"
+                android:id="@+id/passe_display_header"
+                android:text="TipoEvento:"
+                android:layout_weight="3"
+                android:paddingLeft="3dp"
+                />
+        <View android:layout_width="1dp"
+              android:layout_height="fill_parent"
+              android:background="@android:color/darker_gray"
+                />
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/PartidaDisplayEntry"
+                android:id="@+id/passe_display_value"
+                android:text="TipoEvento:"
+                android:layout_weight="1"
+                android:paddingLeft="3dp"
+                />
+
+    </LinearLayout>
+    <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            />
+</LinearLayout>

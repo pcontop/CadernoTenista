@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Bean/Bean.iml" filepath="$PROJECT_DIR$/Bean/Bean.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CadernoTenista.iml" filepath="$PROJECT_DIR$/CadernoTenista.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DAO/DAO.iml" filepath="$PROJECT_DIR$/DAO/DAO.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OlheiroHelper/OlheiroHelper.iml" filepath="$PROJECT_DIR$/OlheiroHelper/OlheiroHelper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PartidaLoader/PartidaLoader.iml" filepath="$PROJECT_DIR$/PartidaLoader/PartidaLoader.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RestOperations/RestOperations.iml" filepath="$PROJECT_DIR$/RestOperations/RestOperations.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TestExport/TestExport.iml" filepath="$PROJECT_DIR$/TestExport/TestExport.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../aFileChooser/aFileChooser.iml" filepath="$PROJECT_DIR$/../aFileChooser/aFileChooser.iml" />
+    </modules>
+  </component>
+</project>

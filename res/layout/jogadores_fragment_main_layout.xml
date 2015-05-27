@@ -1,0 +1,16 @@
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        >
+    <Button
+            android:id="@+id/passe_fragment_adicione_jogador"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/adicione_jogador"
+            android:textColor="#000000"
+            />
+</LinearLayout>

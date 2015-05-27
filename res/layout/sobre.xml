@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                style="@style/PartidaMain"
+                android:layout_gravity="center"
+                android:layout_height="match_parent">
+    <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+             android:text="@string/app_name"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:textSize="30dp"
+            android:id="@+id/about_titulo"
+            android:textStyle="bold"/>
+    <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="@string/versao_beta"
+              android:layout_centerHorizontal="true"
+              android:textSize="25dp"
+              android:id="@+id/about_beta"
+              android:layout_below="@id/about_titulo"
+              android:paddingBottom="15dp"
+              android:textStyle="bold"/>
+    <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="@string/desenvolvedor"
+              android:layout_below="@id/about_beta"
+              android:id="@+id/about_developer"
+              style="@style/SobreBold"
+            />
+    <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="@string/paulo_contopoulos"
+              android:layout_below="@id/about_beta"
+              android:layout_toRightOf="@id/about_developer"
+              style="@style/SobreNormal"
+            />
+    <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="@string/colaboracao"
+              android:layout_below="@id/about_developer"
+              android:id="@+id/about_colaboracao"
+              style="@style/SobreBold"
+            />
+    <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="@string/olhar_digital"
+              android:layout_below="@id/about_developer"
+              android:layout_toRightOf="@id/about_colaboracao"
+              style="@style/SobreNormal"
+            />
+
+    <TextView android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:text="@string/avaliacao_disclaimer"
+              android:layout_below="@id/about_colaboracao"
+              android:gravity="center"
+              style="@style/SobreBold"
+              android:paddingTop="25dp"
+            />
+
+</RelativeLayout>

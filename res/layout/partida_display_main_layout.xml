@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:paddingTop="5dp"
+              style="@style/PartidaMain">
+    <RelativeLayout android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/partida_display_header_container"
+                    android:alpha="0.7"
+            >
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  style="@style/PartidaDisplayHeader"
+                  android:text="@string/local"
+                  android:id="@+id/partida_display_localizacao"/>
+
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="Valor"
+                  style="@style/PartidaDisplayEntry"
+                  android:layout_toRightOf="@id/partida_display_localizacao"
+                  android:id="@+id/partida_display_localizacao_valor"
+                />
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  style="@style/PartidaDisplayHeader"
+                  android:text="@string/data_inicio"
+                  android:id="@+id/partida_display_data_inicio"
+                  android:layout_below="@id/partida_display_localizacao"/>
+
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="Valor"
+                  style="@style/PartidaDisplayEntry"
+                  android:id="@+id/partida_display_data_inicio_valor"
+                  android:layout_toRightOf="@id/partida_display_data_inicio"
+                  android:layout_below="@id/partida_display_localizacao_valor"
+                />
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  style="@style/PartidaDisplayHeader"
+                  android:text="@string/terminou_prim_tempo_em"
+                  android:id="@+id/partida_display_data_fim_primeiro_tempo"
+                  android:layout_below="@id/partida_display_data_inicio"/>
+
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="Valor"
+                  style="@style/PartidaDisplayEntry"
+                  android:id="@+id/partida_display_data_fim_primeiro_tempo_valor"
+                  android:layout_toRightOf="@id/partida_display_data_fim_primeiro_tempo"
+                  android:layout_below="@id/partida_display_data_inicio_valor"
+                />
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  style="@style/PartidaDisplayHeader"
+                  android:text="@string/comecou_segundo_tempo_em"
+                  android:id="@+id/partida_display_data_inicio_segundo_tempo"
+                  android:layout_below="@id/partida_display_data_fim_primeiro_tempo"/>
+
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="Valor"
+                  style="@style/PartidaDisplayEntry"
+                  android:id="@+id/partida_display_data_inicio_segundo_tempo_valor"
+                  android:layout_toRightOf="@id/partida_display_data_inicio_segundo_tempo"
+                  android:layout_below="@id/partida_display_data_fim_primeiro_tempo_valor"
+                />
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  style="@style/PartidaDisplayHeader"
+                  android:text="@string/terminou_segundo_tempo_em"
+                  android:id="@+id/partida_display_data_fim_segundo_tempo"
+                  android:layout_below="@id/partida_display_data_inicio_segundo_tempo"/>
+
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="Valor"
+                  style="@style/PartidaDisplayEntry"
+                  android:id="@+id/partida_display_data_fim_segundo_tempo_valor"
+                  android:layout_toRightOf="@id/partida_display_data_fim_segundo_tempo"
+                  android:layout_below="@id/partida_display_data_inicio_segundo_tempo_valor"
+                />
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  style="@style/PartidaDisplayHeader"
+                  android:text="@string/ultimo_envio"
+                  android:id="@+id/partida_display_data_ultimo_envio"
+                  android:layout_below="@id/partida_display_data_fim_segundo_tempo"/>
+
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="Valor"
+                  style="@style/PartidaDisplayEntry"
+                  android:id="@+id/partida_display_data_ultimo_envio_valor"
+                  android:layout_toRightOf="@id/partida_display_data_ultimo_envio"
+                  android:layout_below="@id/partida_display_data_fim_segundo_tempo_valor"
+                />
+
+    </RelativeLayout>
+    <GridView
+              android:id="@+id/partida_display_grid_jogadores"
+              android:layout_width="match_parent"
+              android:layout_height="0dp"
+              android:columnWidth="140dp"
+              android:numColumns="auto_fit"
+              android:verticalSpacing="10dp"
+              android:horizontalSpacing="10dp"
+              android:stretchMode="columnWidth"
+              android:gravity="center"
+              android:layout_weight="1"
+              android:paddingTop="5dp"
+            />
+</LinearLayout>

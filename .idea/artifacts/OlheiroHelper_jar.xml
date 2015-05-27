@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="OlheiroHelper:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/OlheiroHelper_jar</output-path>
+    <root id="archive" name="OlheiroHelper.jar">
+      <element id="module-output" name="OlheiroHelper" />
+    </root>
+  </artifact>
+</component>

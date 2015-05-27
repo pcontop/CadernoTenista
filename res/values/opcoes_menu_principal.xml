@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="opcoes_menu_principal">
+        <item>Note Passes on a Match</item>
+        <item>List Games</item>
+        <item>About</item>
+    </string-array>
+</resources>

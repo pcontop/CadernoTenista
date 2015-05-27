@@ -1,0 +1,25 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:id="@+id/pagina_layout_dia"
+              android:paddingLeft="6dp"
+              android:paddingRight="6dp"
+              android:paddingTop="2dp"
+              android:paddingBottom="2dp"
+              android:orientation="horizontal"
+              style="@style/PartidaMain"
+        >
+        <FrameLayout
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:id="@+id/timer_fragment"
+             android:layout_weight="1"
+                ></FrameLayout>
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/passe_fragment"
+            android:layout_weight="1"
+            ></FrameLayout>
+
+</LinearLayout>

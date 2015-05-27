@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="tempos_array">
+        <item>Game Start</item>
+        <item>End First Half</item>
+        <item>Start Second Half</item>
+        <item>End Game</item>
+    </string-array>
+</resources>

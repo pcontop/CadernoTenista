@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/context_menu_passe_jogador_delete"
+          android:title="@string/delete" />
+    <item android:id="@+id/context_menu_passe_jogador_alterar_nome"
+          android:title="@string/alterar_nome" />
+    <item android:id="@+id/context_menu_passe_jogador_alterar_tipos_passe"
+          android:title="@string/alterar_tipos_passe_jogador" />
+
+</menu>
