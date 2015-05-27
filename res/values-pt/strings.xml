@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Caderno Olheiro</string>
+    <string name="app_name">Caderno Tenista</string>
     <string name="action_settings">Configurações</string>
     <string name="hello_world">Olá Mundo! Creditar http://www.freesfx.co.uk/info/eula/</string>
     <string name="inicio_de_jogo">Início de Jogo</string>
