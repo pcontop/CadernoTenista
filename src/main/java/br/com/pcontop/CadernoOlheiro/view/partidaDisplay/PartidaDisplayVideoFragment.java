@@ -8,9 +8,28 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.*;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.MediaController;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.VideoView;
+
+import com.ipaulpro.afilechooser.utils.FileUtils;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
+import java.util.Map;
+
 import br.com.pcontop.CadernoOlheiro.R;
-import br.com.pcontop.CadernoOlheiro.bean.*;
+import br.com.pcontop.CadernoOlheiro.bean.EventoJogo;
+import br.com.pcontop.CadernoOlheiro.bean.Jogador;
+import br.com.pcontop.CadernoOlheiro.bean.Partida;
+import br.com.pcontop.CadernoOlheiro.bean.TemposJogo;
+import br.com.pcontop.CadernoOlheiro.bean.TipoEvento;
 import br.com.pcontop.CadernoOlheiro.control.FabricaController;
 import br.com.pcontop.CadernoOlheiro.control.OlheiroController;
 import br.com.pcontop.CadernoOlheiro.helper.TempoHelper;
@@ -19,12 +38,6 @@ import br.com.pcontop.CadernoOlheiro.view.LanguageFormatter;
 import br.com.pcontop.CadernoOlheiro.view.ParametroTela;
 import br.com.pcontop.CadernoOlheiro.view.TelaPrincipal;
 import br.com.pcontop.CadernoOlheiro.view.Telas;
-import com.ipaulpro.afilechooser.utils.FileUtils;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.Date;
-import java.util.Map;
 
 /**
  * Created by PauloBruno on 12/12/13.
@@ -236,7 +249,7 @@ public class PartidaDisplayVideoFragment extends Fragment implements TelaPrincip
         }
 
         private int getCorTipoEvento(TipoEvento tipoEvento){
-            switch (tipoEvento.getQualificadorPasse()){
+            switch (tipoEvento.getQualificadorJogada()){
                 case BOM:
                     return Color.GREEN;
                 case MAL:
@@ -436,6 +449,11 @@ public class PartidaDisplayVideoFragment extends Fragment implements TelaPrincip
         @Override
         public boolean canSeekForward() {
             return videoView.canSeekForward();
+        }
+
+        @Override
+        public int getAudioSessionId() {
+            return 0;
         }
     }
 

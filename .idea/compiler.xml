@@ -23,10 +23,8 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="CadernoOlheiro" />
+        <module name="CadernoTenista" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="CadernoOlheiro" target="1.5" />
-    </bytecodeTargetLevel>
   </component>
 </project>
