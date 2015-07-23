@@ -78,37 +78,37 @@ public class TesteCriacaoPartida {
         return time;
     }
 
-    private List<EventoJogo> buildListaEventos(){
-        EventoJogo eventoJogo = EventoJogo.create()
+    private List<EventoPartida> buildListaEventos(){
+        EventoPartida eventoPartida = EventoPartida.create()
                 .setId("AAA")
                 .setTipoEvento(TipoEvento.DESARME_FALTA)
                 .setHora(new Date())
                 .commit();
-        List<EventoJogo> eventos = new ArrayList<EventoJogo>();
-        eventos.add(eventoJogo);
-        EventoJogo eventoJogo2 = EventoJogo.create()
+        List<EventoPartida> eventos = new ArrayList<EventoPartida>();
+        eventos.add(eventoPartida);
+        EventoPartida eventoPartida2 = EventoPartida.create()
                 .setId("BBB")
                 .setTipoEvento(TipoEvento.DESARME_FALTA)
                 .setHora(new Date())
                 .commit();
-        eventos.add(eventoJogo2);
+        eventos.add(eventoPartida2);
         return eventos;
     }
 
-    private List<EventoJogo> buildListaEventos2(){
-        EventoJogo eventoJogo = EventoJogo.create()
+    private List<EventoPartida> buildListaEventos2(){
+        EventoPartida eventoPartida = EventoPartida.create()
                 .setId("HHH")
                 .setTipoEvento(TipoEvento.CHUTE_A_GOL_FORA)
                 .setHora(new Date())
                 .commit();
-        List<EventoJogo> eventos = new ArrayList<EventoJogo>();
-        eventos.add(eventoJogo);
-        EventoJogo eventoJogo2 = EventoJogo.create()
+        List<EventoPartida> eventos = new ArrayList<EventoPartida>();
+        eventos.add(eventoPartida);
+        EventoPartida eventoPartida2 = EventoPartida.create()
                 .setId("III")
                 .setTipoEvento(TipoEvento.DRIBLE_CERTO)
                 .setHora(new Date())
                 .commit();
-        eventos.add(eventoJogo2);
+        eventos.add(eventoPartida2);
         return eventos;
     }
 

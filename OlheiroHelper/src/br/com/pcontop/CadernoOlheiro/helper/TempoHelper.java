@@ -1,7 +1,7 @@
 package br.com.pcontop.CadernoOlheiro.helper;
 
 import br.com.pcontop.CadernoOlheiro.bean.Partida;
-import br.com.pcontop.CadernoOlheiro.bean.TemposJogo;
+import br.com.pcontop.CadernoOlheiro.bean.TemposPartida;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -14,49 +14,49 @@ public class TempoHelper {
 
     }
 
-    private static String getNomeTempo(TemposJogo temposJogo){
-        String description = temposJogo.getDescricao();
+    private static String getNomeTempo(TemposPartida temposPartida){
+        String description = temposPartida.getDescricao();
         return description;
     }
 
-    public static TemposJogo getTempoJogo(Partida partida, Date data){
+    public static TemposPartida getTempoJogo(Partida partida, Date data){
         if (partida==null
                 || partida.getDataInicio()==null
                 || partida.getDataFimPrimeiroTempo() ==null
                 || partida.getDataInicioSegundoTempo()==null
                 || partida.getDataFimSegundoTempo()==null
                 || data==null){
-            return TemposJogo.INDEFINIDA;
+            return TemposPartida.INDEFINIDA;
         }
         Calendar dataVerificada = getCalendarFromDate(data);
 
         Calendar inicioJogo =getCalendarFromDate(partida.getDataInicio());
 
         if (dataVerificada.before(inicioJogo)){
-            return TemposJogo.ANTES_JOGO;
+            return TemposPartida.ANTES_JOGO;
         }
 
         Calendar fimPrimeiroTempo = getCalendarFromDate(partida.getDataFimPrimeiroTempo());
         if (dataVerificada.after(inicioJogo) && dataVerificada.before(fimPrimeiroTempo)){
-            return TemposJogo.PRIMEIRO_TEMPO;
+            return TemposPartida.PRIMEIRO_TEMPO;
         }
 
         Calendar inicioSegundoTempo = getCalendarFromDate(partida.getDataInicioSegundoTempo());
         if (dataVerificada.after(fimPrimeiroTempo) && dataVerificada.before(inicioSegundoTempo)){
-            return TemposJogo.INTERVALO;
+            return TemposPartida.INTERVALO;
         }
 
         Calendar fimSegundoTempo = getCalendarFromDate(partida.getDataFimSegundoTempo());
         if (dataVerificada.after(inicioSegundoTempo) && dataVerificada.before(fimSegundoTempo)){
-            return TemposJogo.SEGUNDO_TEMPO;
+            return TemposPartida.SEGUNDO_TEMPO;
         }
 
-        return  TemposJogo.APOS_JOGO;
+        return  TemposPartida.APOS_JOGO;
 
     }
 
     public static String getDescricaoTempo(Partida partida, Date data){
-        TemposJogo tempoJogo = getTempoJogo(partida,data);
+        TemposPartida tempoJogo = getTempoJogo(partida,data);
         return tempoJogo.getDescricao();
 
     }
@@ -68,7 +68,7 @@ public class TempoHelper {
     }
 
     public static Date tempoDesdeUltimoInicio(Partida partida, Date data){
-        TemposJogo tempoData = getTempoJogo(partida, data);
+        TemposPartida tempoData = getTempoJogo(partida, data);
         switch (tempoData){
             case INDEFINIDA:
                 return null;

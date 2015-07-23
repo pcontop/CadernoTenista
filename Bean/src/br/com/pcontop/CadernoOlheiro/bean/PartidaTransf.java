@@ -21,16 +21,16 @@ public class PartidaTransf implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     private Localidade local;
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private Time time1;
+    private Jogador jogador1;
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private Time time2;
+    private Jogador jogador2;
     private Date dataCriacao;
     private Date dataInicio;
     private Date dataFimPrimeiroTempo;
     private Date dataInicioSegundoTempo;
     private Date dataFimSegundoTempo;
     private Date ultimoEnvio;
-    private SetTipoEvento tiposEventosSelecionados;
+    private SetTiposEventos tiposEventosSelecionados;
     private String pathVideoPrimeiroTempo;
     private String pathVideoSegundoTempo;
 
@@ -44,8 +44,8 @@ public class PartidaTransf implements Serializable {
         this.dataFimPrimeiroTempo = partida.getDataFimPrimeiroTempo();
         this.dataInicioSegundoTempo = partida.getDataInicioSegundoTempo();
         this.dataFimSegundoTempo = partida.getDataFimSegundoTempo();
-        this.time1 = partida.getTime1();
-        this.time2 = partida.getTime2();
+        this.jogador1 = partida.getJogador1();
+        this.jogador2 = partida.getJogador2();
         this.olheiro = partida.getOlheiro();
         this.local = partida.getLocal();
         this.pathVideoPrimeiroTempo = partida.getPathVideoPrimeiroTempo();
@@ -60,8 +60,8 @@ public class PartidaTransf implements Serializable {
                 + "Id: " + id
                 + ", " + olheiro
                 + ", " + local
-                + ", " + time1
-                + ", " + time2
+                + ", " + jogador1
+                + ", " + jogador2
                 + ", Data Criação: " + dataCriacao
                 + ", Data Último Envio: " + ultimoEnvio
                 + ", Data Início: " + dataInicio
@@ -114,12 +114,12 @@ public class PartidaTransf implements Serializable {
         return local;
     }
 
-    public Time getTime1() {
-        return time1;
+    public Jogador getJogador1() {
+        return jogador1;
     }
 
-    public Time getTime2() {
-        return time2;
+    public Jogador getJogador2() {
+        return jogador2;
     }
 
     public Date getDataCriacao() {

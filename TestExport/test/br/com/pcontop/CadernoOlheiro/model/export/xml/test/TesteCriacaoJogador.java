@@ -1,6 +1,6 @@
 package br.com.pcontop.CadernoOlheiro.model.export.xml.test;
 
-import br.com.pcontop.CadernoOlheiro.bean.EventoJogo;
+import br.com.pcontop.CadernoOlheiro.bean.EventoPartida;
 import br.com.pcontop.CadernoOlheiro.bean.Jogador;
 import br.com.pcontop.CadernoOlheiro.bean.TipoEvento;
 import br.com.pcontop.CadernoOlheiro.model.export.xml.jogador.JogadorExporterImpl;
@@ -43,20 +43,20 @@ public class TesteCriacaoJogador {
         return jogador;
     }
 
-    private List<EventoJogo> buildListaEventos(){
-        EventoJogo eventoJogo = EventoJogo.create()
+    private List<EventoPartida> buildListaEventos(){
+        EventoPartida eventoPartida = EventoPartida.create()
                 .setId("AAA")
                 .setTipoEvento(TipoEvento.DESARME_FALTA)
                 .setHora(new Date())
                 .commit();
-        List<EventoJogo> eventos = new ArrayList<EventoJogo>();
-        eventos.add(eventoJogo);
-        EventoJogo eventoJogo2 = EventoJogo.create()
+        List<EventoPartida> eventos = new ArrayList<EventoPartida>();
+        eventos.add(eventoPartida);
+        EventoPartida eventoPartida2 = EventoPartida.create()
                 .setId("BBB")
                 .setTipoEvento(TipoEvento.CHUTE_A_GOL_DEFENDIDO)
                 .setHora(new Date())
                 .commit();
-        eventos.add(eventoJogo2);
+        eventos.add(eventoPartida2);
         return eventos;
     }
 

@@ -1,6 +1,6 @@
 package br.com.pcontop.CadernoOlheiro.model.export.xml.test;
 
-import br.com.pcontop.CadernoOlheiro.bean.EventoJogo;
+import br.com.pcontop.CadernoOlheiro.bean.EventoPartida;
 import br.com.pcontop.CadernoOlheiro.bean.TipoEvento;
 import br.com.pcontop.CadernoOlheiro.model.export.xml.eventoJogo.EventoJogoExporterImpl;
 import org.junit.Test;
@@ -22,9 +22,9 @@ public class TesteCriacaoEventoJogo  {
       @Test
       public void testCriacaoEventoJogo(){
           EventoJogoExporterImpl eventoJogoExporter = (EventoJogoExporterImpl) EventoJogoExporterImpl.getInstance();
-          EventoJogo eventoJogo = getEventoJogo();
+          EventoPartida eventoPartida = getEventoJogo();
           try {
-              Element element =  eventoJogoExporter.export(eventoJogo);
+              Element element =  eventoJogoExporter.export(eventoPartida);
               assertNotNull(element);
               String resultado = eventoJogoExporter.nodeToString(element);
               assertNotNull(resultado);
@@ -35,8 +35,8 @@ public class TesteCriacaoEventoJogo  {
           }
       }
 
-    private EventoJogo getEventoJogo() {
-        return EventoJogo.create()
+    private EventoPartida getEventoJogo() {
+        return EventoPartida.create()
                       .setId("AAA")
                       .setTipoEvento(TipoEvento.DESARME_FALTA)
                       .setHora(new Date())

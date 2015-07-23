@@ -88,78 +88,78 @@ public class PartidaHelper {
         return Jogador.create().setId("2222").setNome("Claudinever").setEventos(buildListaEventos2()).commit();
     }
 
-    private static List<EventoJogo> buildListaEventos(){
-        EventoJogo eventoJogo = buildEventoJogo();
-        List<EventoJogo> eventos = new ArrayList<>();
-        eventos.add(eventoJogo);
-        EventoJogo eventoJogo2 = EventoJogo.create()
+    private static List<EventoPartida> buildListaEventos(){
+        EventoPartida eventoPartida = buildEventoJogo();
+        List<EventoPartida> eventos = new ArrayList<>();
+        eventos.add(eventoPartida);
+        EventoPartida eventoPartida2 = EventoPartida.create()
                 .setId("BBB")
                 .setTipoEvento(TipoEvento.CHUTE_A_GOL_GOL)
                 .setHora(new Date())
                 .commit();
-        eventos.add(eventoJogo2);
+        eventos.add(eventoPartida2);
         return eventos;
     }
 
-    private static List<EventoJogo> buildListaEventos2(){
-        EventoJogo eventoJogo = EventoJogo.create()
+    private static List<EventoPartida> buildListaEventos2(){
+        EventoPartida eventoPartida = EventoPartida.create()
                 .setId("HHH")
                 .setTipoEvento(TipoEvento.CHUTE_A_GOL_FORA)
                 .setHora(new Date())
                 .commit();
-        List<EventoJogo> eventos = new ArrayList<EventoJogo>();
-        eventos.add(eventoJogo);
-        EventoJogo eventoJogo2 = EventoJogo.create()
+        List<EventoPartida> eventos = new ArrayList<EventoPartida>();
+        eventos.add(eventoPartida);
+        EventoPartida eventoPartida2 = EventoPartida.create()
                 .setId("III")
                 .setTipoEvento(TipoEvento.DRIBLE_CERTO)
                 .setHora(new Date())
                 .commit();
-        eventos.add(eventoJogo2);
+        eventos.add(eventoPartida2);
         return eventos;
     }
 
-    private static List<EventoJogo> buildListaEventos3(){
-        EventoJogo eventoJogo = EventoJogo.create()
+    private static List<EventoPartida> buildListaEventos3(){
+        EventoPartida eventoPartida = EventoPartida.create()
                 .setId("FDF")
                 .setTipoEvento(TipoEvento.CHUTE_A_GOL_FORA)
                 .setHora(new Date())
                 .commit();
-        List<EventoJogo> eventos = new ArrayList<EventoJogo>();
-        eventos.add(eventoJogo);
-        EventoJogo eventoJogo2 = EventoJogo.create()
+        List<EventoPartida> eventos = new ArrayList<EventoPartida>();
+        eventos.add(eventoPartida);
+        EventoPartida eventoPartida2 = EventoPartida.create()
                 .setId("LOL")
                 .setTipoEvento(TipoEvento.DRIBLE_CERTO)
                 .setHora(new Date())
                 .commit();
-        eventos.add(eventoJogo2);
+        eventos.add(eventoPartida2);
         return eventos;
     }
 
-    private static List<EventoJogo> buildListaEventos4(){
-        EventoJogo eventoJogo = EventoJogo.create()
+    private static List<EventoPartida> buildListaEventos4(){
+        EventoPartida eventoPartida = EventoPartida.create()
                 .setId("LAP")
                 .setTipoEvento(TipoEvento.CHUTE_A_GOL_FORA)
                 .setHora(new Date())
                 .commit();
-        List<EventoJogo> eventos = new ArrayList<EventoJogo>();
-        eventos.add(eventoJogo);
-        EventoJogo eventoJogo2 = EventoJogo.create()
+        List<EventoPartida> eventos = new ArrayList<EventoPartida>();
+        eventos.add(eventoPartida);
+        EventoPartida eventoPartida2 = EventoPartida.create()
                 .setId("TAAW")
                 .setTipoEvento(TipoEvento.DRIBLE_CERTO)
                 .setHora(new Date())
                 .commit();
-        eventos.add(eventoJogo2);
+        eventos.add(eventoPartida2);
         return eventos;
     }
 
 
-    public static EventoJogo buildEventoJogo(){
-        EventoJogo eventoJogo = EventoJogo.create()
+    public static EventoPartida buildEventoJogo(){
+        EventoPartida eventoPartida = EventoPartida.create()
                 .setId("AAA")
                 .setTipoEvento(TipoEvento.DESARME_FALTA)
                 .setHora(new Date())
                 .commit();
-        return eventoJogo;
+        return eventoPartida;
 
     }
 

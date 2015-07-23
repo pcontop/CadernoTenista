@@ -97,8 +97,8 @@ public class JogoModel {
         timeDAO.remova(partida.getTime2());
         for (Jogador jogador:partida.getJogadores()) {
             jogadorDAO.remova(jogador);
-            for (EventoJogo eventoJogo:jogador.getEventos()){
-                eventoJogoDAO.remova(eventoJogo);
+            for (EventoPartida eventoPartida :jogador.getEventos()){
+                eventoJogoDAO.remova(eventoPartida);
             }
         }
     }
@@ -107,7 +107,7 @@ public class JogoModel {
         return jogadorDAO.get(id);
     }
 
-    public void insiraOuAtualize(EventoJogo eventoJogo) {
+    public void insiraOuAtualize(EventoPartida eventoPartida) {
         insiraOuAtualize(partidaAtual);
     }
 
@@ -123,18 +123,18 @@ public class JogoModel {
 
 
     public void crieEventoEInsira(TipoEvento tipoEvento, Jogador jogador, Date hora){
-        EventoJogo eventoJogo = crieEvento(tipoEvento,hora);
-        jogador.getEventos().add(eventoJogo);
-        insiraOuAtualize(eventoJogo);
+        EventoPartida eventoPartida = crieEvento(tipoEvento,hora);
+        jogador.getEventos().add(eventoPartida);
+        insiraOuAtualize(eventoPartida);
     }
 
-    public EventoJogo crieEvento(TipoEvento tipoEvento, Date hora){
-            EventoJogo eventoJogo = EventoJogo.create()
+    public EventoPartida crieEvento(TipoEvento tipoEvento, Date hora){
+            EventoPartida eventoPartida = EventoPartida.create()
                     .setTipoEvento(tipoEvento)
                     .setHora(hora)
                     .setId(getUniqueId())
                     .commit();
-            return eventoJogo;
+            return eventoPartida;
     }
 
     public Time getTime(String id) {

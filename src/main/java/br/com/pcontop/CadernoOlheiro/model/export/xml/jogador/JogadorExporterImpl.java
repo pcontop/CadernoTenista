@@ -1,6 +1,6 @@
 package br.com.pcontop.CadernoOlheiro.model.export.xml.jogador;
 
-import br.com.pcontop.CadernoOlheiro.bean.EventoJogo;
+import br.com.pcontop.CadernoOlheiro.bean.EventoPartida;
 import br.com.pcontop.CadernoOlheiro.bean.Jogador;
 import br.com.pcontop.CadernoOlheiro.bean.TagsXml;
 import br.com.pcontop.CadernoOlheiro.model.export.xml.XMLAdapter;
@@ -39,9 +39,9 @@ public class JogadorExporterImpl extends XMLAdapter implements br.com.pcontop.Ca
         return jogadorNode;
     }
 
-    private void adicioneEventos(Element jogadorNode, List<EventoJogo> eventos) throws ParserConfigurationException {
-        for (EventoJogo eventoJogo:eventos){
-            Element nodeEvento = EventoJogoExporterImpl.getInstance().export(eventoJogo);
+    private void adicioneEventos(Element jogadorNode, List<EventoPartida> eventos) throws ParserConfigurationException {
+        for (EventoPartida eventoPartida :eventos){
+            Element nodeEvento = EventoJogoExporterImpl.getInstance().export(eventoPartida);
             importeNode(document, jogadorNode, nodeEvento);
         }
     }

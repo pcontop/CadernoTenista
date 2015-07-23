@@ -15,14 +15,14 @@ import java.util.Date;
  * To change this template use File | Settings | File Templates.
  */
 @Entity
-public class EventoJogo implements Comparable<EventoJogo>, Serializable {
+public class EventoPartida implements Comparable<EventoPartida>, Serializable {
     @Id
     private String id;
     @Enumerated(EnumType.STRING)
     private TipoEvento tipoEvento;
     private Date hora;
 
-    private EventoJogo() {
+    private EventoPartida() {
 
     }
 
@@ -31,36 +31,30 @@ public class EventoJogo implements Comparable<EventoJogo>, Serializable {
     }
 
     @Override
-    public int compareTo(EventoJogo o) {
+    public int compareTo(EventoPartida o) {
         return hora.compareTo(o.hora);
     }
 
     public static class Builder {
-        public String id;
-        public TipoEvento tipoEvento;
-        public Date hora;
+        EventoPartida eventoPartida = new EventoPartida();
 
         public Builder setId(String id) {
-            this.id = id;
+            eventoPartida.id = id;
             return this;
         }
 
         public Builder setTipoEvento(TipoEvento tipoEvento) {
-            this.tipoEvento = tipoEvento;
+            eventoPartida.tipoEvento = tipoEvento;
             return this;
         }
 
         public Builder setHora(Date hora) {
-            this.hora = hora;
+            eventoPartida.hora = hora;
             return this;
         }
 
-        public EventoJogo commit(){
-            EventoJogo eventoJogo = new EventoJogo();
-            eventoJogo.id=this.id;
-            eventoJogo.tipoEvento=this.tipoEvento;
-            eventoJogo.hora=this.hora;
-            return eventoJogo;
+        public EventoPartida commit(){
+            return eventoPartida;
         }
 
     }
@@ -70,7 +64,7 @@ public class EventoJogo implements Comparable<EventoJogo>, Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        EventoJogo that = (EventoJogo) o;
+        EventoPartida that = (EventoPartida) o;
 
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
 
@@ -94,7 +88,7 @@ public class EventoJogo implements Comparable<EventoJogo>, Serializable {
 
     @Override
     public String toString() {
-        String result = "EventoJogo: ["
+        String result = "EventoPartida: ["
                 + "id: " + id
                 + ", Tipo Evento: " + tipoEvento
                 + ", Hora: " + hora

@@ -1,6 +1,6 @@
 package br.com.pcontop.CadernoOlheiro.model.export.xml.eventoJogo;
 
-import br.com.pcontop.CadernoOlheiro.bean.EventoJogo;
+import br.com.pcontop.CadernoOlheiro.bean.EventoPartida;
 import br.com.pcontop.CadernoOlheiro.model.export.xml.XmlExporter;
 import org.w3c.dom.Element;
 
@@ -14,5 +14,5 @@ import javax.xml.parsers.ParserConfigurationException;
  * To change this template use File | Settings | File Templates.
  */
 public interface EventoJogoExporter extends XmlExporter {
-    public Element export(EventoJogo eventoJogo) throws ParserConfigurationException;
+    public Element export(EventoPartida eventoPartida) throws ParserConfigurationException;
 }

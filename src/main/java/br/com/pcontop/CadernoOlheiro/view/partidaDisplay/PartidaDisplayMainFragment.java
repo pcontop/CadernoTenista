@@ -225,11 +225,11 @@ public class PartidaDisplayMainFragment extends Fragment implements TelaPrincipa
 
         private int getCorTipoEvento(TipoEvento tipoEvento){
             switch (tipoEvento.getQualificadorJogada()){
-                case BOM:
+                case BOA:
                     return Color.GREEN;
-                case MAL:
+                case RUIM:
                     return Color.RED;
-                case NEUTRO:
+                case NEUTRA:
                     return Color.WHITE;
                 default:
                     return Color.TRANSPARENT;

@@ -24,7 +24,6 @@ public enum TagsXml {
     LOCALIDADE("LOCALIDADE"),
     DESCRICAO("DESCRICAO"),
     CRIACAO_PARTIDA("CRIACAO_PARTIDA"),
-    TIMES("TIMES")
     ;
 
 

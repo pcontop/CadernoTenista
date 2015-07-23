@@ -1,8 +1,6 @@
 package br.com.pcontop.CadernoOlheiro.model.dao.eventoJogo;
 
-import br.com.pcontop.CadernoOlheiro.bean.EventoJogo;
-
-import java.text.ParseException;
+import br.com.pcontop.CadernoOlheiro.bean.EventoPartida;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,7 +11,7 @@ import java.text.ParseException;
  */
 public interface EventoJogoDAO {
 
-    public EventoJogo get(String id);
-    public void remova(EventoJogo eventoJogo);
+    public EventoPartida get(String id);
+    public void remova(EventoPartida eventoPartida);
 
 }

@@ -1,7 +1,7 @@
 package br.com.pcontop.CadernoOlheiro.model.dao.eventoJogo;
 
 import android.content.Context;
-import br.com.pcontop.CadernoOlheiro.bean.EventoJogo;
+import br.com.pcontop.CadernoOlheiro.bean.EventoPartida;
 import br.com.pcontop.CadernoOlheiro.model.dao.NeodatisDAOAdapter;
 import org.neodatis.odb.Objects;
 import org.neodatis.odb.core.query.IQuery;
@@ -22,22 +22,22 @@ public class EventoJogoDaoNeodatis extends NeodatisDAOAdapter implements EventoJ
 
 
     @Override
-    public synchronized EventoJogo get(String id) {
-        IQuery query = getODB().criteriaQuery(EventoJogo.class, Where.equal("id", id));
-        Objects<EventoJogo> eventosJogo = getODB().getObjects(query);
+    public synchronized EventoPartida get(String id) {
+        IQuery query = getODB().criteriaQuery(EventoPartida.class, Where.equal("id", id));
+        Objects<EventoPartida> eventosJogo = getODB().getObjects(query);
         if (eventosJogo.hasNext()){
             return eventosJogo.next();
         }
         return null;
     }
 
-    public void insiraOuAtualize(EventoJogo eventoJogo)  {
-        getODB().store(eventoJogo);
+    public void insiraOuAtualize(EventoPartida eventoPartida)  {
+        getODB().store(eventoPartida);
         commit();
     }
 
-    public synchronized void remova(EventoJogo eventoJogo) {
-        getODB().delete(eventoJogo);
+    public synchronized void remova(EventoPartida eventoPartida) {
+        getODB().delete(eventoPartida);
         commit();
     }
 }

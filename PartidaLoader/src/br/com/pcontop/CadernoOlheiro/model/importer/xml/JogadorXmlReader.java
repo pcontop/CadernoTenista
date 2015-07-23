@@ -1,6 +1,6 @@
 package br.com.pcontop.CadernoOlheiro.model.importer.xml;
 
-import br.com.pcontop.CadernoOlheiro.bean.EventoJogo;
+import br.com.pcontop.CadernoOlheiro.bean.EventoPartida;
 import br.com.pcontop.CadernoOlheiro.bean.Jogador;
 import br.com.pcontop.CadernoOlheiro.bean.TagsXml;
 import org.w3c.dom.Element;
@@ -22,7 +22,7 @@ public class JogadorXmlReader {
         String id = getAtributoDeTag(elementJogador, TagsXml.ID);
         String nome = getAtributoDeTag(elementJogador, TagsXml.NOME);
 
-        List<EventoJogo> eventos = getEventosJogo(elementJogador);
+        List<EventoPartida> eventos = getEventosJogo(elementJogador);
 
         Jogador jogador = Jogador.create()
                 .setId(id)
@@ -33,8 +33,8 @@ public class JogadorXmlReader {
 
     }
 
-    private static List<EventoJogo> getEventosJogo(Element elementJogador) throws ParseException {
-        List<EventoJogo> eventos = new ArrayList<>();
+    private static List<EventoPartida> getEventosJogo(Element elementJogador) throws ParseException {
+        List<EventoPartida> eventos = new ArrayList<>();
         NodeList nodesEventos = elementJogador.getElementsByTagName(TagsXml.EVENTO_JOGO.getDescritor());
         for (int i=0;i<nodesEventos.getLength();i++){
             Node node = nodesEventos.item(i);
@@ -42,8 +42,8 @@ public class JogadorXmlReader {
                 continue;
             }
             Element elementEvento = (Element) node;
-            EventoJogo eventoJogo = EventoJogoXmlReader.read(elementEvento);
-            eventos.add(eventoJogo);
+            EventoPartida eventoPartida = EventoJogoXmlReader.read(elementEvento);
+            eventos.add(eventoPartida);
         }
 
         return eventos;

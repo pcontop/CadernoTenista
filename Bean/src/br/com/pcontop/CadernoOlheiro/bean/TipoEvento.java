@@ -1,8 +1,6 @@
 package br.com.pcontop.CadernoOlheiro.bean;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,33 +10,23 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public enum TipoEvento implements Serializable {
-    PASSE_CERTO("jogador_passe_certo", QualificadorJogada.BOM),
-    PASSE_ERRADO("jogador_passe_errado", QualificadorJogada.MAL),
-    CHUTE_A_GOL_DEFENDIDO("jogador_chute_a_gol_defendido", QualificadorJogada.NEUTRO),
-    CHUTE_A_GOL_FORA("jogador_chute_a_gol_fora", QualificadorJogada.MAL),
-    CHUTE_A_GOL_GOL("jogador_chute_a_gol_gol", QualificadorJogada.BOM),
-    LANCAMENTO_CERTO("jogador_lancamento_certo", QualificadorJogada.BOM),
-    LANCAMENTO_ERRADO("jogador_lancamento_errado", QualificadorJogada.MAL),
-    DRIBLE_CERTO("jogador_drible_certo", QualificadorJogada.BOM),
-    DRIBLE_ERRADO("jogador_drible_errado", QualificadorJogada.MAL),
-    DESARME_RECUPERACAO ("jogador_desarme_recuperacao", QualificadorJogada.BOM),
-    DESARME_FALTA("jogador_desarme_falta", QualificadorJogada.MAL),
-    DESARME_TENTATIVA("jogador_desarme_tentativa", QualificadorJogada.NEUTRO),
-    INTERCEPTACAO_CERTA("jogador_interceptacao_certa", QualificadorJogada.BOM),
-    INTERCEPTACAO_ERRADA("jogador_interceptacao_errada", QualificadorJogada.MAL),
-    FALTA_SOFRIDA("jogador_falta_sofrida", QualificadorJogada.NEUTRO)
+    BACKHAND_CERTO("jogador_backhand_certo", QualificadorJogada.BOA),
+    BACKHAND_ERRADO("jogador_backhand_errado", QualificadorJogada.RUIM),
+    ACE_CERTO("jogador_ace_certo", QualificadorJogada.BOA),
+    ACE_ERRADO("jogador_ace_errado", QualificadorJogada.RUIM),
+
+    CHUTE_A_GOL_GOL("jogador_chute_a_gol_gol", QualificadorJogada.BOA),
+    LANCAMENTO_CERTO("jogador_lancamento_certo", QualificadorJogada.BOA),
+    LANCAMENTO_ERRADO("jogador_lancamento_errado", QualificadorJogada.RUIM),
+    DRIBLE_CERTO("jogador_drible_certo", QualificadorJogada.BOA),
+    DRIBLE_ERRADO("jogador_drible_errado", QualificadorJogada.RUIM),
+    DESARME_RECUPERACAO ("jogador_desarme_recuperacao", QualificadorJogada.BOA),
+    DESARME_FALTA("jogador_desarme_falta", QualificadorJogada.RUIM),
+    DESARME_TENTATIVA("jogador_desarme_tentativa", QualificadorJogada.NEUTRA),
+    INTERCEPTACAO_CERTA("jogador_interceptacao_certa", QualificadorJogada.BOA),
+    INTERCEPTACAO_ERRADA("jogador_interceptacao_errada", QualificadorJogada.RUIM),
+    FALTA_SOFRIDA("jogador_falta_sofrida", QualificadorJogada.NEUTRA)
     ;
-
-    private static List<TipoEvento> listaTiposEventosJogadores;
-
-    static {
-        listaTiposEventosJogadores = new ArrayList<>();
-        for (TipoEvento tipoEvento:TipoEvento.values()){
-            if (tipoEvento.getDescricao().startsWith("jogador_")) {
-                listaTiposEventosJogadores.add(tipoEvento);
-            }
-        }
-    }
 
     private final String descricao;
     private final QualificadorJogada qualificadorJogada;

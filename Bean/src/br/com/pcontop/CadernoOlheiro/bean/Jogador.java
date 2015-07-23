@@ -19,14 +19,14 @@ public class Jogador implements Serializable {
     private String id;
     private String nome;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<EventoJogo> eventos;
-    private SetTipoEvento tiposEventos;
+    private List<EventoPartida> eventos;
+    private SetTiposEventos tiposEventos;
 
     public Set<TipoEvento> getTiposEventos() {
         return tiposEventos;
     }
 
-    public List<EventoJogo> getEventos() {
+    public List<EventoPartida> getEventos() {
         return eventos;
     }
 
@@ -63,25 +63,25 @@ public class Jogador implements Serializable {
         return new Builder();
     }
 
-    public List<EventoJogo> busqueEventosdoTipo(TipoEvento tipoEvento){
-        List<EventoJogo> eventosDoTipo = new ArrayList<>();
-        for (EventoJogo eventoJogo:eventos) {
-            if (eventoJogo.getTipoEvento().equals(tipoEvento)){
-                eventosDoTipo.add(eventoJogo);
+    public List<EventoPartida> busqueEventosdoTipo(TipoEvento tipoEvento){
+        List<EventoPartida> eventosDoTipo = new ArrayList<>();
+        for (EventoPartida eventoPartida :eventos) {
+            if (eventoPartida.getTipoEvento().equals(tipoEvento)){
+                eventosDoTipo.add(eventoPartida);
             }
         }
         return eventosDoTipo;
     }
 
     public void inicializeTiposEventos() {
-        this.tiposEventos = new SetTipoEvento();
+        this.tiposEventos = new SetTiposEventos();
     }
 
     public static class Builder {
         private String id;
         private String nome;
-        private List<EventoJogo> eventos = new ArrayList<>();
-        private SetTipoEvento tiposEventos;
+        private List<EventoPartida> eventos = new ArrayList<>();
+        private SetTiposEventos tiposEventos;
 
         public Builder setId(String id) {
             this.id = id;
@@ -93,13 +93,13 @@ public class Jogador implements Serializable {
             return this;
         }
 
-        public Builder setEventos(List<EventoJogo> eventos) {
+        public Builder setEventos(List<EventoPartida> eventos) {
             this.eventos = eventos;
             return this;
         }
 
         public Builder setTiposEventos(Set<TipoEvento> tipoEventos){
-            this.tiposEventos = (SetTipoEvento) tipoEventos;
+            this.tiposEventos = (SetTiposEventos) tipoEventos;
             return this;
         }
 
@@ -143,11 +143,11 @@ public class Jogador implements Serializable {
      * @param qualificadorJogada
      * @return
      */
-    public List<EventoJogo> busqueEventos(QualificadorJogada qualificadorJogada){
-        List<EventoJogo> eventosDoQualificador = new ArrayList<>();
-        for (EventoJogo eventoJogo: eventos){
-            if (eventoJogo.getTipoEvento().getQualificadorJogada().equals(qualificadorJogada)){
-                eventosDoQualificador.add(eventoJogo);
+    public List<EventoPartida> busqueEventos(QualificadorJogada qualificadorJogada){
+        List<EventoPartida> eventosDoQualificador = new ArrayList<>();
+        for (EventoPartida eventoPartida : eventos){
+            if (eventoPartida.getTipoEvento().getQualificadorJogada().equals(qualificadorJogada)){
+                eventosDoQualificador.add(eventoPartida);
             }
         }
         return eventosDoQualificador;

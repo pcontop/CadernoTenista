@@ -60,14 +60,14 @@ public class XmlImportTest extends Assert {
         assertNotNull(jogador.getNome());
         assertNotNull(jogador.getEventos());
         assert(jogador.getEventos().size()>0);
-        for (EventoJogo eventoJogo: jogador.getEventos()){
-            verifiqueAtributosEvetoJogo(eventoJogo);
+        for (EventoPartida eventoPartida : jogador.getEventos()){
+            verifiqueAtributosEvetoJogo(eventoPartida);
         }
     }
 
-    private void verifiqueAtributosEvetoJogo(EventoJogo eventoJogo) {
-        assertNotNull(eventoJogo.getId());
-        assertNotNull(eventoJogo.getHora());
-        assertNotNull(eventoJogo.getTipoEvento());
+    private void verifiqueAtributosEvetoJogo(EventoPartida eventoPartida) {
+        assertNotNull(eventoPartida.getId());
+        assertNotNull(eventoPartida.getHora());
+        assertNotNull(eventoPartida.getTipoEvento());
     }
 }

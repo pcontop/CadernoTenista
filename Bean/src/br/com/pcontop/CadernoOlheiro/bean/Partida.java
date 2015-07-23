@@ -15,15 +15,15 @@ public class Partida implements Comparable<Partida>, Serializable {
     private String id;
     private Olheiro olheiro;
     private Localidade local;
-    private Time time1;
-    private Time time2;
-    private final Date dataCriacao;
+    private Jogador jogador1;
+    private Jogador jogador2;
+    private Date dataCriacao;
     private Date dataInicio;
     private Date dataFimPrimeiroTempo;
     private Date dataInicioSegundoTempo;
     private Date dataFimSegundoTempo;
     private Date ultimoEnvio;
-    private SetTipoEvento tiposEventosSelecionados;
+    private SetTiposEventos tiposEventosSelecionados;
     private String pathVideoPrimeiroTempo;
     private String pathVideoSegundoTempo;
 
@@ -45,8 +45,8 @@ public class Partida implements Comparable<Partida>, Serializable {
                 + "Id: " + id
                 + ", " + olheiro
                 + ", " + local
-                + ", " + time1
-                + ", " + time2
+                + ", " + jogador1
+                + ", " + jogador2
                 + ", Data Criação: " + dataCriacao
                 + ", Data Último Envio: " + ultimoEnvio
                 + ", Data Início: " + dataInicio
@@ -58,60 +58,31 @@ public class Partida implements Comparable<Partida>, Serializable {
         return retorno;
     }
 
-    public void addJogadorTime(Jogador jogador, Time time){
-        if (time.equals(time1)){
-            addJogadorTime1(jogador);
-        }
-        if (time.equals(time2)){
-            addJogadorTime2(jogador);
-        }
+    public void setJogador1(Jogador jogador){
+        jogador1 = jogador;
     }
 
-    public void addJogadorTime1(Jogador jogador){
-        if (time2.getJogadores().contains(jogador)){
-            time2.getJogadores().remove(jogador);
-        }
-        time1.getJogadores().add(jogador);
+    public void setJogador2(Jogador jogador){
+        jogador2 = jogador;
     }
 
-    public void addJogadorTime2(Jogador jogador){
-        if (time1.getJogadores().contains(jogador)){
-            time1.getJogadores().remove(jogador);
-        }
-        time2.getJogadores().add(jogador);
+    public Jogador getJogador1() {
+        return jogador1;
     }
 
-    public void removaJogador(Jogador jogador){
-        time1.getJogadores().remove(jogador);
-        time2.getJogadores().remove(jogador);
-    }
-
-    public List<Jogador> getJogadores() {
-        List<Jogador> jogadores = new ArrayList<>();
-        jogadores.addAll(time1.getJogadores());
-        jogadores.addAll(time2.getJogadores());
-        return jogadores;
-    }
-
-    public Time getTime(Jogador jogador){
-        if (time1.getJogadores().contains(jogador)){
-            return time1;
-        }
-        if (time2.getJogadores().contains(jogador)){
-            return time2;
-        }
-        return null;
+    public Jogador getJogador2() {
+        return jogador2;
     }
 
     public static Builder create(){
         return new Builder();
     }
 
-    public List<EventoJogo> getEventos() {
-        List<EventoJogo> eventoJogoList = new ArrayList<>();
-        eventoJogoList.addAll(time1.getEventos());
-        eventoJogoList.addAll(time2.getEventos());
-        return eventoJogoList;
+    public List<EventoPartida> getEventos() {
+        List<EventoPartida> eventoPartidaList = new ArrayList<>();
+        eventoPartidaList.addAll(jogador1.getEventos());
+        eventoPartidaList.addAll(jogador2.getEventos());
+        return eventoPartidaList;
     }
 
     @Override
@@ -119,115 +90,75 @@ public class Partida implements Comparable<Partida>, Serializable {
         return dataCriacao.compareTo(o.dataCriacao);
     }
 
-    public Jogador busqueJogadorPorId(String idJogador) {
-        List<Jogador> jogadores = getJogadores();
-        for (Jogador jogador: jogadores){
-            if (jogador.getId().equals(idJogador)){
-                return jogador;
-            }
-        }
-        return null;
-    }
-
-
     public static class Builder {
-        private String id;
-        private Olheiro olheiro;
-        private Localidade local;
-        private Time time1;
-        private Time time2;
-        private Date dataInicio;
-        private Date dataFimPrimeiroTempo;
-        private Date dataInicioSegundoTempo;
-        private Date dataFimSegundoTempo;
-        private Date dataCriacao;
-        private Set<TipoEvento> tiposEventosSelecionados = new HashSet<>();
-        private String pathVideoPrimeiroTempo;
-        private String pathVideoSegundoTempo;
+        Partida partida = new Partida();
 
         public Builder setId(String id) {
-            this.id = id;
+            partida.id = id;
             return this;
         }
 
         public Builder setOlheiro(Olheiro olheiro) {
-            this.olheiro = olheiro;
+            partida.olheiro = olheiro;
             return this;
         }
 
         public Builder setLocal(Localidade local) {
-            this.local = local;
+            partida.local = local;
             return this;
         }
 
-        public Builder setTime1(Time time1) {
-            this.time1 = time1;
+        public Builder setJogador1(Jogador jogador1) {
+            partida.jogador1 = jogador1;
             return this;
         }
 
-        public Builder setTime2(Time time2) {
-            this.time2 = time2;
+        public Builder setJogador2(Jogador jogador2) {
+            partida.jogador2 = jogador2;
             return this;
         }
 
         public Builder setDataInicio(Date dataInicio) {
-            this.dataInicio = dataInicio;
+            partida.dataInicio = dataInicio;
             return this;
         }
 
         public Builder setDataFimPrimeiroTempo(Date dataFimPrimeiroTempo) {
-            this.dataFimPrimeiroTempo = dataFimPrimeiroTempo;
+            partida.dataFimPrimeiroTempo = dataFimPrimeiroTempo;
             return this;
         }
 
         public Builder setDataInicioSegundoTempo(Date dataInicioSegundoTempo) {
-            this.dataInicioSegundoTempo = dataInicioSegundoTempo;
+            partida.dataInicioSegundoTempo = dataInicioSegundoTempo;
             return this;
         }
 
         public Builder setDataFimSegundoTempo(Date dataFimSegundoTempo) {
-            this.dataFimSegundoTempo = dataFimSegundoTempo;
+            partida.dataFimSegundoTempo = dataFimSegundoTempo;
             return this;
         }
 
         public Builder setTiposEventosSelecionados(Set<TipoEvento> tiposEventosSelecionados) {
-            this.tiposEventosSelecionados = tiposEventosSelecionados;
+            partida.tiposEventosSelecionados = new SetTiposEventos(tiposEventosSelecionados);
             return this;
         }
 
         public Builder setDataCriacao(Date dataCriacao){
-            this.dataCriacao = dataCriacao;
+            partida.dataCriacao = dataCriacao;
             return this;
         }
 
         public Builder setPathVideoPrimeiroTempo(String pathVideoPrimeiroTempo) {
-            this.pathVideoPrimeiroTempo = pathVideoPrimeiroTempo;
+            partida.pathVideoPrimeiroTempo = pathVideoPrimeiroTempo;
             return this;
         }
 
         public Builder setPathVideoSegundoTempo(String pathVideoSegundoTempo) {
-            this.pathVideoSegundoTempo = pathVideoSegundoTempo;
+            partida.pathVideoSegundoTempo = pathVideoSegundoTempo;
             return this;
         }
 
         public Partida commit(){
-            Partida partida = new Partida(dataCriacao);
-            partida.id=this.id;
-            partida.olheiro=this.olheiro;
-            partida.local=this.local;
-            partida.time1=this.time1;
-            partida.time2=this.time2;
-            partida.dataInicio=this.dataInicio;
-            partida.dataFimPrimeiroTempo=this.dataFimPrimeiroTempo;
-            partida.dataInicioSegundoTempo=this.dataInicioSegundoTempo;
-            partida.dataFimSegundoTempo=this.dataFimSegundoTempo;
-            if (tiposEventosSelecionados!=null){
-                SetTipoEvento setTiposEventosSelecionados = new SetTipoEvento();
-                setTiposEventosSelecionados.addAll(tiposEventosSelecionados);
-                partida.tiposEventosSelecionados =  setTiposEventosSelecionados;
-            }
-            partida.pathVideoPrimeiroTempo = pathVideoPrimeiroTempo;
-            partida.pathVideoSegundoTempo = pathVideoSegundoTempo;
             return partida;
         }
     }
@@ -271,14 +202,6 @@ public class Partida implements Comparable<Partida>, Serializable {
 
     public Localidade getLocal() {
         return local;
-    }
-
-    public Time getTime1() {
-        return time1;
-    }
-
-    public Time getTime2() {
-        return time2;
     }
 
     public Date getDataCriacao() {

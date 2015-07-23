@@ -2,7 +2,7 @@ package br.com.pcontop.CadernoOlheiro.model.export.excel.file;
 
 import android.content.Context;
 import android.util.Log;
-import br.com.pcontop.CadernoOlheiro.bean.EventoJogo;
+import br.com.pcontop.CadernoOlheiro.bean.EventoPartida;
 import br.com.pcontop.CadernoOlheiro.bean.Jogador;
 import br.com.pcontop.CadernoOlheiro.bean.Partida;
 import br.com.pcontop.CadernoOlheiro.bean.Time;
@@ -71,8 +71,8 @@ public class FileExporterExcel extends FileExporter {
         Sheet sheet = workbook.createSheet(nomeSheet);
         adicioneCabecalhoJogador(sheet);
         for (int i=0;i<jogador.getEventos().size();i++){
-            EventoJogo eventoJogo = jogador.getEventos().get(i);
-            adicioneEvento(sheet, i+1, eventoJogo);
+            EventoPartida eventoPartida = jogador.getEventos().get(i);
+            adicioneEvento(sheet, i+1, eventoPartida);
         }
         //sheet.autoSizeColumn(0);
         //sheet.autoSizeColumn(1);
@@ -112,15 +112,15 @@ public class FileExporterExcel extends FileExporter {
         return tempoTraduzido;
     }
 
-    private void adicioneEvento(Sheet sheet, int linha, EventoJogo eventoJogo) {
+    private void adicioneEvento(Sheet sheet, int linha, EventoPartida eventoPartida) {
         Row linha1 =sheet.createRow(linha);
         Cell cell = linha1.createCell(0);
-        String tempo = getTempoTraduzido(context, partida, eventoJogo.getHora());
+        String tempo = getTempoTraduzido(context, partida, eventoPartida.getHora());
         cell.setCellValue(tempo);
         cell.setCellStyle(styles.get("cell_normal"));
 
         cell = linha1.createCell(1);
-        Date diferenca = TempoHelper.tempoDesdeUltimoInicio(partida, eventoJogo.getHora());
+        Date diferenca = TempoHelper.tempoDesdeUltimoInicio(partida, eventoPartida.getHora());
         if (diferenca!=null){
             String textoDiferenca = TempoHelper.getTextoDiferencaTempo(diferenca);
             cell.setCellValue(textoDiferenca);
@@ -128,11 +128,11 @@ public class FileExporterExcel extends FileExporter {
         cell.setCellStyle(styles.get("cell_normal"));
 
         cell = linha1.createCell(2);
-        cell.setCellValue(eventoJogo.getHora());
+        cell.setCellValue(eventoPartida.getHora());
         cell.setCellStyle(styles.get("cell_normal_date"));
 
         cell = linha1.createCell(3);
-        String tipoEvento = TextTranslator.translateFromStringName(context, eventoJogo.getTipoEvento().getDescricao());
+        String tipoEvento = TextTranslator.translateFromStringName(context, eventoPartida.getTipoEvento().getDescricao());
         cell.setCellValue(tipoEvento);
         cell.setCellStyle(styles.get("cell_normal"));
 
