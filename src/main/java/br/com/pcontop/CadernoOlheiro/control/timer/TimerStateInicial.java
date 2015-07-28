@@ -26,10 +26,6 @@ public class TimerStateInicial extends TimerStateAdapter {
         return proximoEstado;
     }
 
-    @Override
-    public TimerState getProximoEstado() {
-        return TimerStateFactory.crie(olheiroController, TimerStateType.PRIMEIRO_TEMPO_EM_ANDAMENTO, this);
-    }
 
     @Override
     public TimerStateType getTimerStateType() {
@@ -37,14 +33,14 @@ public class TimerStateInicial extends TimerStateAdapter {
     }
 
     @Override
-    public TimerState recuperar(TimerFragment timerFragment) {
-        super.recuperar(timerFragment);
+    public TimerState recuperarDescanso(TimerFragment timerFragment) {
+        super.recuperarDescanso(timerFragment);
         inicializeDisplay();
         return this;
     }
 
     private void inicializeDisplay() {
-        getTimerFragment().setBotaoTimerTexto(R.string.inicio_de_jogo);
+        getTimerFragment().setBotaoTimerTexto(R.string.iniciar_partida);
         getTimerFragment().setTimerValue("00:00:00");
     }
 

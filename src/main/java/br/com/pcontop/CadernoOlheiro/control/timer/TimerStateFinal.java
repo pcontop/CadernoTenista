@@ -2,8 +2,6 @@ package br.com.pcontop.CadernoOlheiro.control.timer;
 
 import br.com.pcontop.CadernoOlheiro.view.TimerFragment;
 
-import java.util.Date;
-
 /**
  * Created with IntelliJ IDEA.
  * User: Paulo
@@ -11,11 +9,10 @@ import java.util.Date;
  * time: 16:11
  * To change this template use File | Settings | File Templates.
  */
-public class TimerStateFimSegundoTempo extends TimerStateAdapter {
+public class TimerStateFinal extends TimerStateAdapter {
     @Override
     public TimerState inicialize(TimerState lastTimerState) {
         super.inicialize(lastTimerState);
-        olheiroController.setDataFimSegundoTempo(new Date());
         return transiteProximoEstado();
     }
 
@@ -27,18 +24,13 @@ public class TimerStateFimSegundoTempo extends TimerStateAdapter {
     }
 
     @Override
-    public TimerState getProximoEstado() {
-        return TimerStateFactory.crie(olheiroController, TimerStateType.INICIAL, this);
-    }
-
-    @Override
     public TimerStateType getTimerStateType() {
-        return TimerStateType.FIM_SEGUNDO_TEMPO;
+        return TimerStateType.FINAL;
     }
 
     @Override
-    public TimerState recuperar(TimerFragment timerFragment) {
-        super.recuperar(timerFragment);
+    public TimerState recuperarDescanso(TimerFragment timerFragment) {
+        super.recuperarDescanso(timerFragment);
         return transiteProximoEstado();
     }
 

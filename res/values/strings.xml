@@ -6,12 +6,10 @@
     <string name="hello">Hello CadernoTenista!</string>
     <string name="action_settings">Configurations</string>
     <string name="inicio">00:00:00</string>
-    <string name="inicio_de_jogo">Game Start</string>
-    <string name="inicio_primeiro_tempo">Start First Half</string>
-    <string name="fim_primeiro_tempo">End First Half</string>
-    <string name="inicio_segundo_tempo">Start Second Half</string>
-    <string name="fim_segundo_tempo">End Second Half</string>
-    <string name="fim_de_jogo">End Game</string>
+    <string name="iniciar_partida">Match Start</string>
+    <string name="iniciar_set">Start Set</string>
+    <string name="terminar_set">End Set</string>
+    <string name="terminar_partida">End Match</string>
     <string name="jogador_passe_certo">Right Pass</string>
     <string name="jogador_passe_errado">Wrong Pass</string>
     <string name="adicione_jogador">Add Player</string>

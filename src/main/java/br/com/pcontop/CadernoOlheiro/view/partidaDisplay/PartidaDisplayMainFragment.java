@@ -10,7 +10,7 @@ import android.widget.*;
 import br.com.pcontop.CadernoOlheiro.R;
 import br.com.pcontop.CadernoOlheiro.bean.Jogador;
 import br.com.pcontop.CadernoOlheiro.bean.Partida;
-import br.com.pcontop.CadernoOlheiro.bean.TipoEvento;
+import br.com.pcontop.CadernoOlheiro.bean.TiposEvento;
 import br.com.pcontop.CadernoOlheiro.control.FabricaController;
 import br.com.pcontop.CadernoOlheiro.control.OlheiroController;
 import br.com.pcontop.CadernoOlheiro.view.LanguageFormatter;
@@ -114,17 +114,17 @@ public class PartidaDisplayMainFragment extends Fragment implements TelaPrincipa
         );
         setTextViewDate(
                 R.id.partida_display_data_fim_primeiro_tempo_valor,
-                partida.getDataFimPrimeiroTempo(),
+                partida.getDataFimPrimeiroSet(),
                 R.string.sem_data_fim_primeiro_tempo_definida
         );
         setTextViewDate(
                 R.id.partida_display_data_inicio_segundo_tempo_valor,
-                partida.getDataInicioSegundoTempo(),
+                partida.getDataInicioSegundoSet(),
                 R.string.sem_data_inicio_definida
         );
         setTextViewDate(
                 R.id.partida_display_data_fim_segundo_tempo_valor,
-                partida.getDataFimSegundoTempo(),
+                partida.getDataFimSegundoSet(),
                 R.string.sem_data_fim_primeiro_tempo_definida
         );
         setTextViewDate(
@@ -189,32 +189,32 @@ public class PartidaDisplayMainFragment extends Fragment implements TelaPrincipa
         private void definaPasses() {
             LinearLayout layoutTiposPasses = (LinearLayout) this.findViewById(R.id.jogador_grid_passes);
             layoutTiposPasses.removeAllViews();
-            Map<TipoEvento, Integer> mapPassesRealizados = getMapaPasses();
-            for (TipoEvento tipoEvento: mapPassesRealizados.keySet()){
-                ViewGroup layoutTipoEvento = getLayoutTipoEvento(tipoEvento, mapPassesRealizados.get(tipoEvento));
+            Map<TiposEvento, Integer> mapPassesRealizados = getMapaPasses();
+            for (TiposEvento tiposEvento : mapPassesRealizados.keySet()){
+                ViewGroup layoutTipoEvento = getLayoutTipoEvento(tiposEvento, mapPassesRealizados.get(tiposEvento));
                 layoutTiposPasses.addView(layoutTipoEvento);
             }
         }
 
-        private ViewGroup getLayoutTipoEvento(TipoEvento tipoEvento, Integer quantidade) {
+        private ViewGroup getLayoutTipoEvento(TiposEvento tiposEvento, Integer quantidade) {
 
             LinearLayout layoutPasse = (LinearLayout) inflater.inflate(R.layout.passe_display_layout, null);
 
             TextView nomeTipoEvento = (TextView) layoutPasse.findViewById(R.id.passe_display_header);
-            String textoEvento = olheiroController.getStringDeNomeRef(tipoEvento.getDescricao());
+            String textoEvento = olheiroController.getStringDeNomeRef(tiposEvento.getDescricao());
             nomeTipoEvento.setText(textoEvento);
 
             TextView quantidadeEventos = (TextView) layoutPasse.findViewById(R.id.passe_display_value);
             quantidadeEventos.setText(quantidade.toString());
 
-            definaCorTipoEvento(layoutPasse, tipoEvento);
+            definaCorTipoEvento(layoutPasse, tiposEvento);
             return layoutPasse;
 
         }
 
 
-        private void definaCorTipoEvento(ViewGroup viewGroup, TipoEvento tipoEvento) {
-            int cor = getCorTipoEvento(tipoEvento);
+        private void definaCorTipoEvento(ViewGroup viewGroup, TiposEvento tiposEvento) {
+            int cor = getCorTipoEvento(tiposEvento);
             /* Antigo processo - mantido para referência futura.
             //viewGroup.setBackgroundResource(R.drawable.partida_passe_display);
             //GradientDrawable shapeDrawable = (GradientDrawable) viewGroup.getBackground();
@@ -223,8 +223,8 @@ public class PartidaDisplayMainFragment extends Fragment implements TelaPrincipa
             viewGroup.setBackgroundColor(cor);
         }
 
-        private int getCorTipoEvento(TipoEvento tipoEvento){
-            switch (tipoEvento.getQualificadorJogada()){
+        private int getCorTipoEvento(TiposEvento tiposEvento){
+            switch (tiposEvento.getQualificadorJogada()){
                 case BOA:
                     return Color.GREEN;
                 case RUIM:
@@ -236,18 +236,18 @@ public class PartidaDisplayMainFragment extends Fragment implements TelaPrincipa
             }
         }
 
-        private Map<TipoEvento, Integer> getMapaPasses() {
-            Map<TipoEvento, Integer> passesPorTipo = new LinkedHashMap<>();
-            Set<TipoEvento> tiposEventos;
+        private Map<TiposEvento, Integer> getMapaPasses() {
+            Map<TiposEvento, Integer> passesPorTipo = new LinkedHashMap<>();
+            Set<TiposEvento> tiposEventos;
             if (jogador.getTiposEventos()==null){
                 tiposEventos = partida.getTiposEventosSelecionados();
             } else {
                 tiposEventos = jogador.getTiposEventos();
             }
             tiposEventos = new TreeSet<>(tiposEventos);
-            for (TipoEvento tipoEvento: tiposEventos){
-                int quantidade = jogador.busqueEventosdoTipo(tipoEvento).size();
-                passesPorTipo.put(tipoEvento, quantidade);
+            for (TiposEvento tiposEvento : tiposEventos){
+                int quantidade = jogador.busqueEventosdoTipo(tiposEvento).size();
+                passesPorTipo.put(tiposEvento, quantidade);
             }
             return passesPorTipo;
         }

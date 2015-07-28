@@ -124,7 +124,7 @@ public class TimerFragmentImpl extends Fragment implements TimerFragment {
     private void recupereEstadoSalvo(Bundle savedInstanceState) {
         estadoSalvo = savedInstanceState.getInt(SALVAR_ESTADO);
         setTimerState(TimerStateFactory.recupere(olheiroController, estadoSalvo));
-        getTimerState().recuperar(this);
+        getTimerState().recuperarDescanso(this);
     }
 
     @Override

@@ -3,8 +3,6 @@ package br.com.pcontop.CadernoOlheiro.control.timer;
 import br.com.pcontop.CadernoOlheiro.R;
 import br.com.pcontop.CadernoOlheiro.view.TimerFragment;
 
-import java.util.Date;
-
 /**
  * Created with IntelliJ IDEA.
  * User: Paulo
@@ -12,15 +10,13 @@ import java.util.Date;
  * time: 16:11
  * To change this template use File | Settings | File Templates.
  */
-public class TimerStateFimPrimeiroTempo extends TimerStateAdapter {
+public class TimerStateFimSet extends TimerStateAdapter {
 
     @Override
     public TimerState inicialize(TimerState lastTimerState) {
         super.inicialize(lastTimerState);
-        getTimerFragment().setBotaoTimerTexto(R.string.inicio_segundo_tempo);
+        getTimerFragment().setBotaoTimerTexto(R.string.iniciar_set);
         getTimerFragment().setTimerValue("00:00:00");
-        olheiroController.setDataInicioSegundoTempo(null);
-        olheiroController.setDataFimPrimeiroTempo(new Date());
         return this;
     }
 
@@ -31,19 +27,14 @@ public class TimerStateFimPrimeiroTempo extends TimerStateAdapter {
     }
 
     @Override
-    public TimerState getProximoEstado() {
-        return TimerStateFactory.crie(olheiroController, TimerStateType.SEGUNDO_TEMPO_EM_ANDAMENTO, this);
-    }
-
-    @Override
     public TimerStateType getTimerStateType() {
-        return TimerStateType.FIM_PRIMEIRO_TEMPO;
+        return TimerStateType.INTERVALO_SET;
     }
 
     @Override
-    public TimerState recuperar(TimerFragment timerFragment) {
-        super.recuperar(timerFragment);
-        timerFragment.setBotaoTimerTexto(R.string.inicio_segundo_tempo);
+    public TimerState recuperarDescanso(TimerFragment timerFragment) {
+        super.recuperarDescanso(timerFragment);
+        timerFragment.setBotaoTimerTexto(R.string.iniciar_set);
         timerFragment.setTimerValue("00:00:00");
         return this;
     }

@@ -11,6 +11,7 @@ import java.io.File;
 /**
  * Created by PauloBruno on 25/01/14.
  */
+@Deprecated
 public class XmlImportTest extends Assert {
     private final static String xmlImportacao="teste\\partida_Curitiba_20140125204510.xml";
 
@@ -24,12 +25,8 @@ public class XmlImportTest extends Assert {
             assertNotNull(partida);
             assertNotNull(partida.getId());
             assertNotNull(partida.getDataCriacao());
-            assertNotNull(partida.getTime1());
-            verifiqueAtributosTime(partida.getTime1());
-            assertNotNull(partida.getTime2());
             assertNotNull(partida.getLocal());
             verifiqueLocal(partida.getLocal());
-            verifiqueAtributosTime(partida.getTime2());
         } catch (ImporterException e) {
             e.printStackTrace();
             assert (false);
@@ -43,17 +40,6 @@ public class XmlImportTest extends Assert {
         assertNotNull(local.getLongitude());
     }
 
-    private void verifiqueAtributosTime(Time time) {
-        assertNotNull(time.getId());
-        assertNotNull(time.getNome());
-        assertNotNull(time.getCor());
-        assertNotNull(time.getJogadores());
-        assert(time.getJogadores().size()>0);
-        for (Jogador jogador: time.getJogadores()){
-            verifiqueAtributosJogador(jogador);
-        }
-
-    }
 
     private void verifiqueAtributosJogador(Jogador jogador) {
         assertNotNull(jogador.getId());
@@ -68,6 +54,6 @@ public class XmlImportTest extends Assert {
     private void verifiqueAtributosEvetoJogo(EventoPartida eventoPartida) {
         assertNotNull(eventoPartida.getId());
         assertNotNull(eventoPartida.getHora());
-        assertNotNull(eventoPartida.getTipoEvento());
+        assertNotNull(eventoPartida.getTiposEvento());
     }
 }

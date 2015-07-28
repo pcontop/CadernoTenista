@@ -1,17 +1,13 @@
 package br.com.pcontop.CadernoOlheiro.model.importer.xml;
 
+import com.thoughtworks.xstream.XStream;
+
+import java.io.InputStream;
+
 import br.com.pcontop.CadernoOlheiro.bean.Partida;
 import br.com.pcontop.CadernoOlheiro.model.importer.ImporterException;
 import br.com.pcontop.CadernoOlheiro.model.importer.file.FileImporter;
-import org.w3c.dom.Document;
-import org.xml.sax.SAXException;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.text.ParseException;
+import br.com.pcontop.CadernoOlheiro.model.xml.XmlConverter;
 
 /**
  * Created by PauloBruno on 25/01/14.
@@ -21,36 +17,15 @@ public class XmlImporter extends FileImporter {
 
     @Override
     public Partida leiaPartida(InputStream inputStream) throws ImporterException {
+        XStream xs = new XStream();
         try {
-            Document partidaDocument = getDocument(inputStream);
-            Partida partida = leiaPartida(partidaDocument);
+            Partida partida = XmlConverter.fromXml(inputStream);
             return partida;
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-            throw new ImporterException("Problemas ao importar xml: " + e.getMessage());
-        } catch (SAXException e) {
-            e.printStackTrace();
-            throw new ImporterException("Problemas ao importar xml: " + e.getMessage());
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new ImporterException("Problemas ao importar xml: " + e.getMessage());
-        } catch (ParseException e) {
-            e.printStackTrace();
-            throw new ImporterException("Problemas ao importar xml: " + e.getMessage());
+        } catch(ClassCastException e){
+            throw new ImporterException("Xml não é de uma partida." + e.toString());
         }
     }
 
-    private Partida leiaPartida(Document partidaDocument) throws ParseException {
-        Partida partida = PartidaXmlReader.read(partidaDocument);
-        return partida;
-    }
-
-    private Document getDocument(InputStream inputStream) throws ParserConfigurationException, IOException, SAXException {
-        DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-        Document document = docBuilder.parse(inputStream);
-        return document;
-    }
 
     private XmlImporter(){}
 

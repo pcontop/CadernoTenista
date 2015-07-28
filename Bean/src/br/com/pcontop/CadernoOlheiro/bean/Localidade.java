@@ -35,32 +35,24 @@ public class Localidade implements Serializable {
     }
 
     public static class Builder {
-        public String id;
-        public String descricao;
-        public Double latitude;
-        public Double longitude;
-
-        public Builder setId(String id) {
-            this.id = id;
-            return this;
-        }
+        private Localidade localidade = new Localidade();
 
         public Builder setDescricao(String descricao) {
-            this.descricao = descricao;
+            localidade.descricao = descricao;
             return this;
         }
 
         public Builder setLatitude(Double latitude) {
-            this.latitude = latitude;
+            localidade.latitude = latitude;
             return this;
         }
         public Builder setLongitude(Double longitude) {
-            this.longitude = longitude;
+            localidade.longitude = longitude;
             return this;
         }
 
         public Localidade commit(){
-            Localidade localidade = new Localidade(this.id, this.descricao, this.latitude, this.longitude);
+            localidade.id=UUIDProvider.getNew();
             return localidade;
         }
     }

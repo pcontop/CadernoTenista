@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.*;
 import br.com.pcontop.CadernoOlheiro.R;
 import br.com.pcontop.CadernoOlheiro.bean.Jogador;
-import br.com.pcontop.CadernoOlheiro.bean.TipoEvento;
+import br.com.pcontop.CadernoOlheiro.bean.TiposEvento;
 import br.com.pcontop.CadernoOlheiro.control.OlheiroController;
 import br.com.pcontop.CadernoOlheiro.control.disabler.CanBeDisabled;
 import br.com.pcontop.CadernoOlheiro.control.disabler.ExecuteEnablerDisabler;
@@ -103,18 +103,18 @@ public class JogadorGridItem extends GridViewItemLayout implements TimerWatcher,
     }
 
     private void adicioneBotoes() {
-        for (TipoEvento tipoEvento: olheiroController.getTiposEventosJogadoresSelecionados(jogador)){
-            final TipoEvento tipoEventoPassar = tipoEvento;
+        for (TiposEvento tiposEvento : olheiroController.getTiposEventosJogadoresSelecionados(jogador)){
+            final TiposEvento tiposEventoPassar = tiposEvento;
             final ViewGroup externalButton = (ViewGroup) inflater.inflate(R.layout.botao_evento, null, false);
             final TextView quantidadeEventos = (TextView) externalButton.findViewById(R.id.jogador_quantidade_eventos);
-            atualizeContagemEvento(tipoEventoPassar, jogador, quantidadeEventos);
+            atualizeContagemEvento(tiposEventoPassar, jogador, quantidadeEventos);
             Button botaoEvento = getButtonFromLayout(externalButton);
-            botaoEvento.setText(olheiroController.getStringDeNomeRef(tipoEvento.getDescricao()));
+            botaoEvento.setText(olheiroController.getStringDeNomeRef(tiposEvento.getDescricao()));
             botaoEvento.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    olheiroController.addEvento(tipoEventoPassar, jogador, new Date());
-                    atualizeContagemEvento(tipoEventoPassar, jogador, quantidadeEventos);
+                    olheiroController.addEvento(tiposEventoPassar, jogador, new Date());
+                    atualizeContagemEvento(tiposEventoPassar, jogador, quantidadeEventos);
                 }
             });
             botoes.add(externalButton);
@@ -129,8 +129,8 @@ public class JogadorGridItem extends GridViewItemLayout implements TimerWatcher,
         }
     }
 
-    private void atualizeContagemEvento(TipoEvento tipoEventoPassar, Jogador jogador, TextView quantidadeEventos) {
-        int quantidade = olheiroController.getQuantidadeEventos(jogador, tipoEventoPassar);
+    private void atualizeContagemEvento(TiposEvento tiposEventoPassar, Jogador jogador, TextView quantidadeEventos) {
+        int quantidade = olheiroController.getQuantidadeEventos(jogador, tiposEventoPassar);
         quantidadeEventos.setText(quantidade+"");
     }
 

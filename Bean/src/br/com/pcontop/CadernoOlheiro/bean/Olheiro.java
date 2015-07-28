@@ -24,36 +24,29 @@ public class Olheiro implements Serializable {
     }
 
     public static class Builder {
-        private String id;
-        private String nome;
-        private String login;
-        private String senha;
+        Olheiro olheiro = new Olheiro();
 
         public Builder setId(String id) {
-            this.id = id;
+            olheiro.id = id;
             return this;
         }
 
         public Builder setNome(String nome) {
-            this.nome = nome;
+            olheiro.nome = nome;
             return this;
         }
 
         public Builder setLogin(String login) {
-            this.login = login;
+            olheiro.login = login;
             return this;
         }
         public Builder setSenha(String senha) {
-            this.senha = senha;
+            olheiro.senha = senha;
             return this;
         }
 
         public Olheiro commit(){
-            Olheiro olheiro = new Olheiro();
-            olheiro.id=this.id;
-            olheiro.nome=this.nome;
-            olheiro.login=this.login;
-            olheiro.senha=this.senha;
+            olheiro.id=UUIDProvider.getNew();
             return olheiro;
         }
 

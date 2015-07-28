@@ -1,5 +1,9 @@
 package br.com.pcontop.CadernoOlheiro.bean;
 
+import android.graphics.Color;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -21,8 +25,9 @@ public class Jogador implements Serializable {
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<EventoPartida> eventos;
     private SetTiposEventos tiposEventos;
+    private String cor;
 
-    public Set<TipoEvento> getTiposEventos() {
+    public Set<TiposEvento> getTiposEventos() {
         return tiposEventos;
     }
 
@@ -47,6 +52,17 @@ public class Jogador implements Serializable {
 
     }
 
+    @JsonIgnore
+    public int getCorAsInt(){
+        int cor = 0xff000000 + Integer.parseInt(this.cor,16);
+        return cor;
+    }
+
+    public String getCor() {
+        return cor;
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -63,10 +79,10 @@ public class Jogador implements Serializable {
         return new Builder();
     }
 
-    public List<EventoPartida> busqueEventosdoTipo(TipoEvento tipoEvento){
+    public List<EventoPartida> busqueEventosdoTipo(TiposEvento tiposEvento){
         List<EventoPartida> eventosDoTipo = new ArrayList<>();
         for (EventoPartida eventoPartida :eventos) {
-            if (eventoPartida.getTipoEvento().equals(tipoEvento)){
+            if (eventoPartida.getTiposEvento().equals(tiposEvento)){
                 eventosDoTipo.add(eventoPartida);
             }
         }
@@ -78,37 +94,30 @@ public class Jogador implements Serializable {
     }
 
     public static class Builder {
-        private String id;
-        private String nome;
-        private List<EventoPartida> eventos = new ArrayList<>();
-        private SetTiposEventos tiposEventos;
-
-        public Builder setId(String id) {
-            this.id = id;
-            return this;
-        }
+        private Jogador jogador = new Jogador();
 
         public Builder setNome(String nome) {
-            this.nome = nome;
+            jogador.nome = nome;
             return this;
         }
 
         public Builder setEventos(List<EventoPartida> eventos) {
-            this.eventos = eventos;
+            jogador.eventos = eventos;
             return this;
         }
 
-        public Builder setTiposEventos(Set<TipoEvento> tipoEventos){
-            this.tiposEventos = (SetTiposEventos) tipoEventos;
+        public Builder setTiposEventos(Set<TiposEvento> tiposEventos){
+            jogador.tiposEventos = (SetTiposEventos) tiposEventos;
+            return this;
+        }
+
+        public Builder setCor(String cor){
+            jogador.cor = cor;
             return this;
         }
 
         public Jogador commit(){
-            Jogador jogador = new Jogador();
-            jogador.id=this.id;
-            jogador.nome=this.nome;
-            jogador.eventos=this.eventos;
-            jogador.tiposEventos=this.tiposEventos;
+            jogador.id=UUIDProvider.getNew();
             return jogador;
         }
 
@@ -146,7 +155,7 @@ public class Jogador implements Serializable {
     public List<EventoPartida> busqueEventos(QualificadorJogada qualificadorJogada){
         List<EventoPartida> eventosDoQualificador = new ArrayList<>();
         for (EventoPartida eventoPartida : eventos){
-            if (eventoPartida.getTipoEvento().getQualificadorJogada().equals(qualificadorJogada)){
+            if (eventoPartida.getTiposEvento().getQualificadorJogada().equals(qualificadorJogada)){
                 eventosDoQualificador.add(eventoPartida);
             }
         }

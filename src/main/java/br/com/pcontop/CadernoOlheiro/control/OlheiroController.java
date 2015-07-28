@@ -46,10 +46,9 @@ public class OlheiroController {
     static {
         Map<TimerStateType, ExecuteEnablerDisabler> actionMap = new HashMap<>();
         actionMap.put(TimerStateType.INICIAL, new Disabler());
-        actionMap.put(TimerStateType.PRIMEIRO_TEMPO_EM_ANDAMENTO, new Enabler());
-        actionMap.put(TimerStateType.FIM_PRIMEIRO_TEMPO, new Disabler());
-        actionMap.put(TimerStateType.SEGUNDO_TEMPO_EM_ANDAMENTO, new Enabler());
-        actionMap.put(TimerStateType.FIM_SEGUNDO_TEMPO, new Disabler());
+        actionMap.put(TimerStateType.SET_EM_ANDAMENTO, new Enabler());
+        actionMap.put(TimerStateType.INTERVALO_SET, new Disabler());
+        actionMap.put(TimerStateType.FINAL, new Disabler());
         habilitacaoPassesEmTempos = actionMap;
     }
 
@@ -132,12 +131,12 @@ public class OlheiroController {
     }
 
     private Jogador crieJogador(String nome){
-        Jogador jogador = jogoModel.crieJogador(nome);
+        Jogador jogador = jogoModel.crieJogador(nome, ColorConstants.COR_PADRAO_JOGADOR_2_AVAI);
         return jogador;
     }
 
-    public void addJogador(Jogador jogador, Time time){
-        jogoModel.addJogadorTime(jogador, time);
+    public void addJogador(Jogador jogador){
+        jogoModel.addJogadorPartida(jogador);
         jogadoresFragment.redesenhe();
     }
 
@@ -147,54 +146,35 @@ public class OlheiroController {
 
     }
 
-    public void addNewJogador(Time time){
-        String nomeJogador = getProximoNomeJogador(time);
-        addNewJogador(nomeJogador, time);
+    public void addNewJogadorPartida(){
+        String nomeJogador = getProximoNomeJogador();
+        addNewJogador(nomeJogador);
     }
 
-    public String getProximoNomeJogador(Time time){
-        return "Jogador " + (time.getJogadores().size()+1);
+    public String getProximoNomeJogador(){
+        return "Jogador " + (getPartida().getJogadores().size()+1);
     }
 
-    public void addNewJogador(String nome, Time time){
+    public void addNewJogador(String nome){
         if (nome==null||nome.trim().equals("")){
-            addNewJogador(time);
+            addNewJogadorPartida();
             return;
         }
         Jogador jogador = crieJogador(nome);
-        addJogador(jogador, time);
-    }
-
-    public void removaJogador(Jogador jogador){
-        jogoModel.remova(jogador);
-        jogadoresFragment.redesenhe();
+        addJogador(jogador);
     }
 
     public Map<TimerStateType, ExecuteEnablerDisabler> getHabilitacaoPassesEmTempos(){
         return habilitacaoPassesEmTempos;
     }
 
-    public Time getTime1(){
-        Time time1 = jogoModel.getTime1();
-        return time1;
-    }
-
-    public Time getTime2(){
-        Time time2 = jogoModel.getTime2();
-        return time2;
-    }
-
-    public int getCorTime(Jogador jogador){
+    public int getCorJogador(Jogador jogador){
         return jogoModel.getCorTime(jogador);
     }
 
-    public int getCorTime(Partida partida, Jogador jogador){
-        return jogoModel.getCorTime(partida, jogador);
-    }
-
-    public void editarJogador(Jogador jogador, String nomeJogador, Time time){
+    public void editarJogador(Jogador jogador, String nomeJogador){
         jogador.setNome(nomeJogador);
-        jogoModel.addJogadorTime(jogador, time);
+        jogoModel.addJogadorPartida(jogador);
         jogadoresFragment.redesenhe();
     }
 
@@ -203,8 +183,8 @@ public class OlheiroController {
         dialogJogador.show(drawerPartida.getFragmentManager(), "AdicioneJogadorFragment");
     }
 
-    public void addEvento(TipoEvento tipoEvento, Jogador jogador, Date date) {
-        jogoModel.crieEventoEInsira(tipoEvento, jogador, date);
+    public void addEvento(TiposEvento tiposEvento, Jogador jogador, Date date) {
+        jogoModel.crieEventoEInsira(tiposEvento, jogador, date);
     }
 
     public String getStringDeNomeRef(String name) {
@@ -241,44 +221,8 @@ public class OlheiroController {
         if (timerState==null) {
             setTimerState(TimerStateFactory.crie(this, null));
         } else {
-            timerState.recuperar(timerFragment);
+            timerState.recuperarDescanso(timerFragment);
         }
-    }
-
-    public void setDataInicioPrimeiroTempo(Date dataInicioPrimeiroTempo) {
-        getPartida().setDataInicio(dataInicioPrimeiroTempo);
-        salvePartida();
-    }
-
-    public void setDataInicioSegundoTempo(Date dataInicioSegundoTempo) {
-        getPartida().setDataInicioSegundoTempo(dataInicioSegundoTempo);
-        salvePartida();
-    }
-
-    public Date getDataInicioPrimeiroTempo() {
-        return getPartida().getDataInicio();
-    }
-
-    public Date getDataInicioSegundoTempo() {
-        return getPartida().getDataInicioSegundoTempo();
-    }
-
-    public Date getDataFimPrimeiroTempo() {
-        return getPartida().getDataFimPrimeiroTempo();
-    }
-
-    public void setDataFimPrimeiroTempo(Date dataFimPrimeiroTempo) {
-        getPartida().setDataFimPrimeiroTempo(dataFimPrimeiroTempo);
-        salvePartida();
-    }
-
-    public Date getDataFimSegundoTempo() {
-        return getPartida().getDataFimSegundoTempo();
-    }
-
-    public void setDataFimSegundoTempo(Date dataFimSegundoTempo) {
-        getPartida().setDataFimSegundoTempo(dataFimSegundoTempo);
-        salvePartida();
     }
 
     public TimerFragment getTimerFragment() {
@@ -287,8 +231,8 @@ public class OlheiroController {
 
     public String[] getArrayTiposEventosJogador() {
         List<String> listaEventos = new ArrayList<>();
-        for (TipoEvento tipoEvento: TipoEvento.values()){
-            listaEventos.add(getStringDeNomeRef(tipoEvento.getDescricao()));
+        for (TiposEvento tiposEvento : TiposEvento.values()){
+            listaEventos.add(getStringDeNomeRef(tiposEvento.getDescricao()));
         }
         String[] eventos = listaEventos.toArray(new String[0]);
         return eventos;
@@ -305,7 +249,7 @@ public class OlheiroController {
         jogadoresFragment.redesenhe();
     }
 
-    public Set<TipoEvento> getTiposEventosJogadoresSelecionados(Jogador jogador) {
+    public Set<TiposEvento> getTiposEventosJogadoresSelecionados(Jogador jogador) {
         if (jogador.getTiposEventos()!=null){
             return jogador.getTiposEventos();
         }
@@ -343,8 +287,8 @@ public class OlheiroController {
         OlheiroController.partidaMainFragment=null;
     }
 
-    public int getQuantidadeEventos(Jogador jogador, TipoEvento tipoEventoPassar) {
-        return jogoModel.getQuantidadeEventos(jogador, tipoEventoPassar);
+    public int getQuantidadeEventos(Jogador jogador, TiposEvento tiposEventoPassar) {
+        return jogoModel.getQuantidadeEventos(jogador, tiposEventoPassar);
     }
 
     public boolean exportePartida(Activity activity, Partida partida){
@@ -443,7 +387,7 @@ public class OlheiroController {
         Map<ParametroTela, Object> params = new HashMap<>();
         params.put(ParametroTela.PARTIDA, partida);
         params.put(ParametroTela.JOGADOR, jogador);
-        drawerPartida.vaParaTela(Telas.DISPLAY_VIDEO_PARTIDA,params);
+        drawerPartida.vaParaTela(Telas.DISPLAY_VIDEO_PARTIDA, params);
     }
 
     public void salvePartida(Partida partida){
@@ -474,5 +418,17 @@ public class OlheiroController {
 
     public void atualizeDisplayPartida() {
         partidaDisplayMainFragment.refreshDisplay();
+    }
+
+    public Date getDataInicioTempoAtual() {
+        return getPartida().getTempoPartida().getDataInicio();
+    }
+
+    public void transiteProximoTempoPartida(Date date) {
+        jogoModel.transiteProximoTempoPartida(date);
+    }
+
+    public TempoPartida getTempoPartidaAtual(){
+        return getPartida().getTempoPartida();
     }
 }

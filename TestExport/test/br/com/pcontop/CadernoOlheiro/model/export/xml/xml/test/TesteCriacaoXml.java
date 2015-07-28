@@ -1,8 +1,8 @@
-package br.com.pcontop.CadernoOlheiro.model.export.xml.test;
+package br.com.pcontop.CadernoOlheiro.model.export.xml.xml.test;
 
 import br.com.pcontop.CadernoOlheiro.bean.Partida;
 import br.com.pcontop.CadernoOlheiro.bean.br.com.pcontop.CadernoOlheiro.bean.test.PartidaHelper;
-import br.com.pcontop.CadernoOlheiro.model.export.xml.file.FileXmlExporter;
+import br.com.pcontop.CadernoOlheiro.model.export.xml.xml.file.FileXmlExporter;
 import org.junit.Test;
 
 import java.io.File;

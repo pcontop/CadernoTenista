@@ -28,8 +28,8 @@ import br.com.pcontop.CadernoOlheiro.R;
 import br.com.pcontop.CadernoOlheiro.bean.EventoPartida;
 import br.com.pcontop.CadernoOlheiro.bean.Jogador;
 import br.com.pcontop.CadernoOlheiro.bean.Partida;
-import br.com.pcontop.CadernoOlheiro.bean.TemposPartida;
-import br.com.pcontop.CadernoOlheiro.bean.TipoEvento;
+import br.com.pcontop.CadernoOlheiro.bean.TiposTempoPartida;
+import br.com.pcontop.CadernoOlheiro.bean.TiposEvento;
 import br.com.pcontop.CadernoOlheiro.control.FabricaController;
 import br.com.pcontop.CadernoOlheiro.control.OlheiroController;
 import br.com.pcontop.CadernoOlheiro.helper.TempoHelper;
@@ -182,17 +182,17 @@ public class PartidaDisplayVideoFragment extends Fragment implements TelaPrincip
         );
         setTextViewDate(
                 R.id.partida_display_data_fim_primeiro_tempo_valor,
-                partida.getDataFimPrimeiroTempo(),
+                partida.getDataFimPrimeiroSet(),
                 R.string.sem_data_fim_primeiro_tempo_definida
         );
         setTextViewDate(
                 R.id.partida_display_data_inicio_segundo_tempo_valor,
-                partida.getDataInicioSegundoTempo(),
+                partida.getDataInicioSegundoSet(),
                 R.string.sem_data_inicio_definida
         );
         setTextViewDate(
                 R.id.partida_display_data_fim_segundo_tempo_valor,
-                partida.getDataFimSegundoTempo(),
+                partida.getDataFimSegundoSet(),
                 R.string.sem_data_fim_primeiro_tempo_definida
         );
     }
@@ -237,7 +237,7 @@ public class PartidaDisplayVideoFragment extends Fragment implements TelaPrincip
         }
 
         private void definaCorItem(EventoPartida eventoPartida, LinearLayout layoutItem) {
-            int corTipoEvento = getCorTipoEvento(eventoPartida.getTipoEvento());
+            int corTipoEvento = getCorTipoEvento(eventoPartida.getTiposEvento());
             int corComAlpha = adicioneAlpha(corTipoEvento);
             layoutItem.setBackgroundColor(corComAlpha);
         }
@@ -248,8 +248,8 @@ public class PartidaDisplayVideoFragment extends Fragment implements TelaPrincip
             return cor;
         }
 
-        private int getCorTipoEvento(TipoEvento tipoEvento){
-            switch (tipoEvento.getQualificadorJogada()){
+        private int getCorTipoEvento(TiposEvento tiposEvento){
+            switch (tiposEvento.getQualificadorJogada()){
                 case BOA:
                     return Color.GREEN;
                 case RUIM:
@@ -272,7 +272,7 @@ public class PartidaDisplayVideoFragment extends Fragment implements TelaPrincip
             decorridos.setText(descDecorridos);
 
             TextView tipoEvento = (TextView) layoutItem.findViewById(R.id.lista_passes_tipo_passe);
-            String tipoEventoRaw = eventoPartida.getTipoEvento().getDescricao();
+            String tipoEventoRaw = eventoPartida.getTiposEvento().getDescricao();
             String tipoEventoTraduzido = TextTranslator.translateFromStringName(getActivity(), tipoEventoRaw);
             tipoEvento.setText(tipoEventoTraduzido);
 
@@ -280,15 +280,15 @@ public class PartidaDisplayVideoFragment extends Fragment implements TelaPrincip
         }
     }
 
-    private void chequeVideos(Partida partida, TemposPartida tempoJogo){
-        if (tempoJogo.equals(TemposPartida.PRIMEIRO_TEMPO)){
+    private void chequeVideos(Partida partida, TiposTempoPartida tempoJogo){
+        if (tempoJogo.equals(TiposTempoPartida.PRIMEIRO_TEMPO)){
             if (partida.getPathVideoPrimeiroTempo()==null){
                 Intent getContentIntent = FileUtils.createGetContentIntent();
                 Intent intent = Intent.createChooser(getContentIntent, "Selecione vídeo para primeiro tempo.");
                 startActivityForResult(intent, REQUEST_CHOOSER_PRIMEIRO);
             }
         }
-        if (tempoJogo.equals(TemposPartida.SEGUNDO_TEMPO)){
+        if (tempoJogo.equals(TiposTempoPartida.SEGUNDO_TEMPO)){
             if (partida.getPathVideoSegundoTempo()==null){
                 Intent getContentIntent = FileUtils.createGetContentIntent();
                 Intent intent = Intent.createChooser(getContentIntent, "Selecione vídeo para segundo tempo.");
@@ -342,7 +342,7 @@ public class PartidaDisplayVideoFragment extends Fragment implements TelaPrincip
     }
 
     public void puleVideoParaEvento(EventoPartida eventoPartida) {
-        TemposPartida tempoJogo = TempoHelper.getTempoJogo(partida, eventoPartida.getHora());
+        TiposTempoPartida tempoJogo = TempoHelper.getTempoPartida(partida, eventoPartida.getHora());
         eventoPartidaAtual = eventoPartida;
         chequeVideos(partida, tempoJogo);
         try {
@@ -374,14 +374,14 @@ public class PartidaDisplayVideoFragment extends Fragment implements TelaPrincip
         videoView.seekTo(tempoTranscorridoMilisec);
     }
 
-    private boolean inicializePlayer(TemposPartida tempoJogo) throws IOException {
+    private boolean inicializePlayer(TiposTempoPartida tempoJogo) throws IOException {
 
         String pathVideo=null;
-        if (tempoJogo.equals(TemposPartida.PRIMEIRO_TEMPO)){
+        if (tempoJogo.equals(TiposTempoPartida.PRIMEIRO_TEMPO)){
             pathVideo = partida.getPathVideoPrimeiroTempo();
         }
 
-        if (tempoJogo.equals(TemposPartida.SEGUNDO_TEMPO)){
+        if (tempoJogo.equals(TiposTempoPartida.SEGUNDO_TEMPO)){
             pathVideo = partida.getPathVideoSegundoTempo();
         }
 

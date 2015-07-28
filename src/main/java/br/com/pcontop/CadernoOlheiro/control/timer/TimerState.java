@@ -13,7 +13,7 @@ public interface TimerState {
     public TimerState inicialize(TimerState lastTimerState);
     public TimerState transiteProximoEstado();
     public TimerStateType getTimerStateType();
-    public TimerState recuperar(TimerFragment timerFragment);
+    public TimerState recuperarDescanso(TimerFragment timerFragment);
     public void updateTimerWatchers();
     public void destroy();
 }

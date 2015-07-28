@@ -24,11 +24,9 @@ public class PartidaTransf implements Serializable {
     private Jogador jogador1;
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Jogador jogador2;
+    private TempoPartida tempoPartida;
+    private ListTemposPartida temposPartida;
     private Date dataCriacao;
-    private Date dataInicio;
-    private Date dataFimPrimeiroTempo;
-    private Date dataInicioSegundoTempo;
-    private Date dataFimSegundoTempo;
     private Date ultimoEnvio;
     private SetTiposEventos tiposEventosSelecionados;
     private String pathVideoPrimeiroTempo;
@@ -40,39 +38,36 @@ public class PartidaTransf implements Serializable {
     public PartidaTransf(Partida partida){
         this.id =partida.getId();
         this.dataCriacao = partida.getDataCriacao();
-        this.dataInicio = partida.getDataInicio();
-        this.dataFimPrimeiroTempo = partida.getDataFimPrimeiroTempo();
-        this.dataInicioSegundoTempo = partida.getDataInicioSegundoTempo();
-        this.dataFimSegundoTempo = partida.getDataFimSegundoTempo();
         this.jogador1 = partida.getJogador1();
         this.jogador2 = partida.getJogador2();
         this.olheiro = partida.getOlheiro();
         this.local = partida.getLocal();
+        this.temposPartida = partida.getTemposPartida();
+        this.tempoPartida=partida.getTempoPartida();
         this.pathVideoPrimeiroTempo = partida.getPathVideoPrimeiroTempo();
         this.pathVideoSegundoTempo = partida.getPathVideoSegundoTempo();
         this.ultimoEnvio = partida.getUltimoEnvio();
 
     }
 
-    @Override
-    public String toString(){
-        String retorno="Partida ["
-                + "Id: " + id
-                + ", " + olheiro
-                + ", " + local
-                + ", " + jogador1
-                + ", " + jogador2
-                + ", Data Criação: " + dataCriacao
-                + ", Data Último Envio: " + ultimoEnvio
-                + ", Data Início: " + dataInicio
-                + ", Data Fim Primeiro Tempo: " + dataFimPrimeiroTempo
-                + ", Data Início Segundo Tempo: " + dataInicioSegundoTempo
-                + ", Data Fim Segundo Tempo: " + dataFimSegundoTempo
-                + ", TiposEventosSelecionados: " + tiposEventosSelecionados
-                + "]";
-        return retorno;
-    }
 
+    @Override
+    public String toString() {
+        return "PartidaTransf{" +
+                "id='" + id + '\'' +
+                ", olheiro=" + olheiro +
+                ", local=" + local +
+                ", jogador1=" + jogador1 +
+                ", jogador2=" + jogador2 +
+                ", tempoPartida=" + tempoPartida +
+                ", temposPartida=" + temposPartida +
+                ", dataCriacao=" + dataCriacao +
+                ", ultimoEnvio=" + ultimoEnvio +
+                ", tiposEventosSelecionados=" + tiposEventosSelecionados +
+                ", pathVideoPrimeiroTempo='" + pathVideoPrimeiroTempo + '\'' +
+                ", pathVideoSegundoTempo='" + pathVideoSegundoTempo + '\'' +
+                '}';
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -126,23 +121,7 @@ public class PartidaTransf implements Serializable {
         return dataCriacao;
     }
 
-    public Date getDataInicio() {
-        return dataInicio;
-    }
-
-    public Date getDataFimPrimeiroTempo() {
-        return dataFimPrimeiroTempo;
-    }
-
-    public Date getDataInicioSegundoTempo() {
-        return dataInicioSegundoTempo;
-    }
-
-    public Date getDataFimSegundoTempo() {
-        return dataFimSegundoTempo;
-    }
-
-    public Set<TipoEvento> getTiposEventosSelecionados() {
+    public Set<TiposEvento> getTiposEventosSelecionados() {
         return tiposEventosSelecionados;
     }
 
@@ -156,22 +135,6 @@ public class PartidaTransf implements Serializable {
 
     public void setLocal(Localidade local) {
         this.local = local;
-    }
-
-    public void setDataInicio(Date dataInicio) {
-        this.dataInicio = dataInicio;
-    }
-
-    public void setDataFimPrimeiroTempo(Date dataFimPrimeiroTempo) {
-        this.dataFimPrimeiroTempo = dataFimPrimeiroTempo;
-    }
-
-    public void setDataInicioSegundoTempo(Date dataInicioSegundoTempo) {
-        this.dataInicioSegundoTempo = dataInicioSegundoTempo;
-    }
-
-    public void setDataFimSegundoTempo(Date dataFimSegundoTempo) {
-        this.dataFimSegundoTempo = dataFimSegundoTempo;
     }
 
     public String getPathVideoPrimeiroTempo() {
@@ -196,5 +159,13 @@ public class PartidaTransf implements Serializable {
 
     public void setUltimoEnvio(Date ultimoEnvio) {
         this.ultimoEnvio = ultimoEnvio;
+    }
+
+    public TempoPartida getTempoPartida() {
+        return tempoPartida;
+    }
+
+    public ListTemposPartida getTemposPartida() {
+        return temposPartida;
     }
 }

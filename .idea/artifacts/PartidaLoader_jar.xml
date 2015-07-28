@@ -2,7 +2,7 @@
   <artifact type="jar" build-on-make="true" name="PartidaLoader:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/PartidaLoader_jar</output-path>
     <root id="archive" name="PartidaLoader.jar">
-      <element id="module-output" name="PartidaLoader" />
+      <element id="module-output" name="PartidaXml" />
     </root>
   </artifact>
 </component>

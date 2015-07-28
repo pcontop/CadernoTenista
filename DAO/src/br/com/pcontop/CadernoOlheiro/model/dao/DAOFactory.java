@@ -1,6 +1,7 @@
 package br.com.pcontop.CadernoOlheiro.model.dao;
 
 import android.content.Context;
+
 import br.com.pcontop.CadernoOlheiro.model.dao.eventoJogo.EventoJogoDAO;
 import br.com.pcontop.CadernoOlheiro.model.dao.eventoJogo.EventoJogoDaoNeodatis;
 import br.com.pcontop.CadernoOlheiro.model.dao.jogador.JogadorDAO;
@@ -9,8 +10,6 @@ import br.com.pcontop.CadernoOlheiro.model.dao.localidade.eventoJogo.LocalidadeD
 import br.com.pcontop.CadernoOlheiro.model.dao.localidade.eventoJogo.LocalidadeDaoNeodatis;
 import br.com.pcontop.CadernoOlheiro.model.dao.partida.PartidaDAO;
 import br.com.pcontop.CadernoOlheiro.model.dao.partida.PartidaDaoNeodatis;
-import br.com.pcontop.CadernoOlheiro.model.dao.time.TimeDAO;
-import br.com.pcontop.CadernoOlheiro.model.dao.time.TimeDaoNeodatis;
 
 /**
  * Created with IntelliJ IDEA.
@@ -44,14 +43,6 @@ public class DAOFactory {
             partidaDAO = new PartidaDaoNeodatis(context);
         }
         return partidaDAO;
-    }
-
-    private static TimeDAO timeDAO;
-    public static TimeDAO getTimeDAO(Context context) {
-        if (timeDAO==null){
-            timeDAO = new TimeDaoNeodatis(context);
-        }
-        return timeDAO;
     }
 
     private static LocalidadeDAO localidadeDAO;

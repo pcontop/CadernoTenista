@@ -59,6 +59,11 @@
             <artifactId>jackson-databind</artifactId>
             <version>${jackson.databind-version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.thoughtworks.xstream</groupId>
+            <artifactId>xstream</artifactId>
+            <version>1.4.4</version>
+        </dependency>
     </dependencies>
     <build>
         <finalName>${project.artifactId}</finalName>

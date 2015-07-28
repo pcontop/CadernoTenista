@@ -8,5 +8,5 @@ package br.com.pcontop.CadernoOlheiro.control.timer;
  * To change this template use File | Settings | File Templates.
  */
 public enum TimerStateType {
-    INICIAL, PRIMEIRO_TEMPO_EM_ANDAMENTO,FIM_PRIMEIRO_TEMPO,SEGUNDO_TEMPO_EM_ANDAMENTO,FIM_SEGUNDO_TEMPO
+    INICIAL, SET_EM_ANDAMENTO,INTERVALO_SET,FINAL
 }

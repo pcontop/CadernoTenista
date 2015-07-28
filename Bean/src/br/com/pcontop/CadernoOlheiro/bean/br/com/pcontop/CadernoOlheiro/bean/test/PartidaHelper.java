@@ -15,48 +15,55 @@ public class PartidaHelper {
 
     public static Partida buildPartidaMinima(){
         Partida partida = Partida.create()
-                .setId("AAAA")
-                .setDataInicio(new Date())
                 .setTiposEventosSelecionados(null)
-                .setTime1(null)
-                .setTime2(null)
                 .setLocal(null)
-                .setDataFimPrimeiroTempo(new Date())
-                .setDataInicioSegundoTempo(new Date())
-                .setDataFimSegundoTempo(new Date())
                 .commit();
         return partida;
     }
 
     public static Partida buildPartida(){
         Partida partida = Partida.create()
-                .setId("AAAA")
-                .setDataInicio(new Date())
                 .setTiposEventosSelecionados(buildTiposEventos())
-                .setTime1(buildTime())
-                .setTime2(buildTime2())
-                .setLocal(buildLocal())
-                .setDataFimPrimeiroTempo(new Date())
-                .setDataInicioSegundoTempo(new Date())
-                .setDataFimSegundoTempo(new Date())
                 .setLocal(buildLocal())
                 .setOlheiro(buildOlheiro())
                 .setPathVideoPrimeiroTempo("www.noplace.org")
                 .setPathVideoSegundoTempo("www.omelete.com")
+                .setJogador1(buildJogador())
+                .setJogador2(buildJogador2())
+                .setTempoPartida(buildTempoPartida())
+                .setTemposPartida(buildTemposPartida())
                 .commit();
         return partida;
     }
 
-    private static Set<TipoEvento> buildTiposEventos() {
-        HashSet<TipoEvento> tiposEventos = new HashSet<>();
-        tiposEventos.add(TipoEvento.CHUTE_A_GOL_DEFENDIDO);
-        tiposEventos.add(TipoEvento.DESARME_FALTA);
+    private static ListTemposPartida buildTemposPartida() {
+        return null;
+    }
+
+    private static TempoPartida buildTempoPartida() {
+        Date date = new Date();
+        Date dataInicio = new Date();
+        Date dataFim = new Date();
+        dataInicio.setTime(date.getTime()-400000);
+        dataFim.setTime(date.getTime()-4000);
+        TempoPartida tempoPartida = TempoPartida.create()
+                .setDataInicio(dataInicio)
+                .setDataFim(dataFim)
+                .setId("NNN")
+                .setTipo(TiposTempoPartida.PRIMEIRO_SET)
+                .commit();
+        return null;
+    }
+
+    private static Set<TiposEvento> buildTiposEventos() {
+        HashSet<TiposEvento> tiposEventos = new HashSet<>();
+        tiposEventos.add(TiposEvento.ACE_CERTO);
+        tiposEventos.add(TiposEvento.BACKHAND_CERTO);
         return tiposEventos;
     }
 
     private static Localidade buildLocal() {
         Localidade localidade = Localidade.create()
-                .setId("1")
                 .setDescricao("Curitiba")
                 .setLatitude(0.0)
                 .setLongitude(0.0)
@@ -64,28 +71,12 @@ public class PartidaHelper {
         return localidade;
     }
 
-    public static Time buildTime(){
-        Set<Jogador> jogadores = new LinkedHashSet<Jogador>();
-        Jogador jogador = Jogador.create().setId("1111").setNome("Robisverson").setEventos(buildListaEventos()).commit();
-        jogadores.add(jogador);
-        Time time = Time.create().setId("NNNN").setCor("FF0000").setJogadores(jogadores).setNome("Atretico").commit();
-        return time;
-    }
-
-    private static Time buildTime2(){
-        Set<Jogador> jogadores = new LinkedHashSet<Jogador>();
-        Jogador jogador2 = buildJogador();
-        Jogador jogador3 = Jogador.create().setId("3333").setNome("Robisverson").setEventos(buildListaEventos3()).commit();
-        Jogador jogador4 = Jogador.create().setId("4444").setNome("Robisverson").setEventos(buildListaEventos4()).commit();
-        jogadores.add(jogador2);
-        jogadores.add(jogador3);
-        jogadores.add(jogador4);
-        Time time = Time.create().setId("MMMM").setCor("00FF00").setJogadores(jogadores).setNome("Parnaense").commit();
-        return time;
-    }
-
     public static Jogador buildJogador() {
-        return Jogador.create().setId("2222").setNome("Claudinever").setEventos(buildListaEventos2()).commit();
+        return Jogador.create().setNome("James Hartmann").setEventos(buildListaEventos2()).commit();
+    }
+
+    public static Jogador buildJogador2() {
+        return Jogador.create().setNome("Leonard Bellarmy").setEventos(buildListaEventos()).commit();
     }
 
     private static List<EventoPartida> buildListaEventos(){
@@ -93,8 +84,7 @@ public class PartidaHelper {
         List<EventoPartida> eventos = new ArrayList<>();
         eventos.add(eventoPartida);
         EventoPartida eventoPartida2 = EventoPartida.create()
-                .setId("BBB")
-                .setTipoEvento(TipoEvento.CHUTE_A_GOL_GOL)
+                .setTipoEvento(TiposEvento.ACE_CERTO)
                 .setHora(new Date())
                 .commit();
         eventos.add(eventoPartida2);
@@ -103,15 +93,13 @@ public class PartidaHelper {
 
     private static List<EventoPartida> buildListaEventos2(){
         EventoPartida eventoPartida = EventoPartida.create()
-                .setId("HHH")
-                .setTipoEvento(TipoEvento.CHUTE_A_GOL_FORA)
+                .setTipoEvento(TiposEvento.BACKHAND_ERRADO)
                 .setHora(new Date())
                 .commit();
         List<EventoPartida> eventos = new ArrayList<EventoPartida>();
         eventos.add(eventoPartida);
         EventoPartida eventoPartida2 = EventoPartida.create()
-                .setId("III")
-                .setTipoEvento(TipoEvento.DRIBLE_CERTO)
+                .setTipoEvento(TiposEvento.ACE_ERRADO)
                 .setHora(new Date())
                 .commit();
         eventos.add(eventoPartida2);
@@ -120,15 +108,13 @@ public class PartidaHelper {
 
     private static List<EventoPartida> buildListaEventos3(){
         EventoPartida eventoPartida = EventoPartida.create()
-                .setId("FDF")
-                .setTipoEvento(TipoEvento.CHUTE_A_GOL_FORA)
+                .setTipoEvento(TiposEvento.BACKHAND_CERTO)
                 .setHora(new Date())
                 .commit();
         List<EventoPartida> eventos = new ArrayList<EventoPartida>();
         eventos.add(eventoPartida);
         EventoPartida eventoPartida2 = EventoPartida.create()
-                .setId("LOL")
-                .setTipoEvento(TipoEvento.DRIBLE_CERTO)
+                .setTipoEvento(TiposEvento.BACKHAND_ERRADO)
                 .setHora(new Date())
                 .commit();
         eventos.add(eventoPartida2);
@@ -137,15 +123,13 @@ public class PartidaHelper {
 
     private static List<EventoPartida> buildListaEventos4(){
         EventoPartida eventoPartida = EventoPartida.create()
-                .setId("LAP")
-                .setTipoEvento(TipoEvento.CHUTE_A_GOL_FORA)
+                .setTipoEvento(TiposEvento.ACE_ERRADO)
                 .setHora(new Date())
                 .commit();
         List<EventoPartida> eventos = new ArrayList<EventoPartida>();
         eventos.add(eventoPartida);
         EventoPartida eventoPartida2 = EventoPartida.create()
-                .setId("TAAW")
-                .setTipoEvento(TipoEvento.DRIBLE_CERTO)
+                .setTipoEvento(TiposEvento.ACE_CERTO)
                 .setHora(new Date())
                 .commit();
         eventos.add(eventoPartida2);
@@ -155,8 +139,7 @@ public class PartidaHelper {
 
     public static EventoPartida buildEventoJogo(){
         EventoPartida eventoPartida = EventoPartida.create()
-                .setId("AAA")
-                .setTipoEvento(TipoEvento.DESARME_FALTA)
+                .setTipoEvento(TiposEvento.ACE_CERTO)
                 .setHora(new Date())
                 .commit();
         return eventoPartida;
@@ -176,7 +159,6 @@ public class PartidaHelper {
     public static Localidade buildLocalidade(){
         Localidade localidade = Localidade
                 .create()
-                .setId("LOC1")
                 .setDescricao("Parnaiba")
                 .setLatitude(0.0)
                 .setLongitude(1.5)

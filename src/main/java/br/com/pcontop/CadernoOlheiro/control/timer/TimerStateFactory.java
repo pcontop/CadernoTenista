@@ -10,41 +10,29 @@ import br.com.pcontop.CadernoOlheiro.control.OlheiroController;
  * To change this template use File | Settings | File Templates.
  */
 public class TimerStateFactory {
-    private static TimerStateType TIMER_STATE_PADRAO =TimerStateType.INICIAL;
 
-
-    private static TimerState busque(TimerStateType timerStateType, OlheiroController olheiroController){
-        switch(timerStateType){
-            case INICIAL:
+    public static TimerState busque(OlheiroController olheiroController){
+        switch(olheiroController.getTempoPartidaAtual().getTipoTempoPartida()){
+            case ANTES_PARTIDA:
                 return new TimerStateInicial().setOlheiroController(olheiroController);
-            case PRIMEIRO_TEMPO_EM_ANDAMENTO:
-                return new TimerStatePrimeiroTempoEmAndamento().setOlheiroController(olheiroController);
-            case FIM_PRIMEIRO_TEMPO:
-                return new TimerStateFimPrimeiroTempo().setOlheiroController(olheiroController);
-            case SEGUNDO_TEMPO_EM_ANDAMENTO:
-                return new TimerStateSegundoTempoEmAndamento().setOlheiroController(olheiroController);
-            case FIM_SEGUNDO_TEMPO:
-                return new TimerStateFimSegundoTempo().setOlheiroController(olheiroController);
+            case PRIMEIRO_SET:case SEGUNDO_SET:case TERCEIRO_SET:case QUARTO_SET: case QUINTO_SET:case SEXTO_SET:case SETIMO_SET:
+                return new TimerStateSetEmAndamento().setOlheiroController(olheiroController);
+            case PRIMEIRO_INTERVALO:case SEGUNDO_INTERVALO:case TERCEIRO_INTERVALO:case QUARTO_INTERVALO: case QUINTO_INTERVALO:case SEXTO_INTERVALO:
+                return new TimerStateFimSet().setOlheiroController(olheiroController);
+            case APOS_JOGO:
+                return new TimerStateFinal().setOlheiroController(olheiroController);
             default:
-                return busqueInicial(olheiroController);
+                return null;
         }
     }
 
-    private static TimerState busqueInicial(OlheiroController olheiroController){
-        return busque(TIMER_STATE_PADRAO, olheiroController);
-    }
 
     public static TimerState crie(OlheiroController olheiroController, TimerState lastTimerState){
-        return busqueInicial(olheiroController).inicialize(lastTimerState);
+        return busque(olheiroController).inicialize(lastTimerState);
     }
 
-    public static TimerState recupere(OlheiroController olheiroController, int numeroEstado){
-        TimerStateType type = TimerStateType.values()[numeroEstado];
-        return busque(type, olheiroController);
+    public static TimerState recupere(OlheiroController olheiroController){
+        return busque(olheiroController);
     }
 
-    public static TimerState crie(OlheiroController olheiroController, TimerStateType tipoEstado, TimerState lastTimerState){
-        TimerState timerState = busque(tipoEstado, olheiroController);
-        return timerState.inicialize(lastTimerState);
-    }
 }

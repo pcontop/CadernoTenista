@@ -8,7 +8,7 @@
     </content>
     <orderEntry type="jdk" jdkName="1.7" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="Bean" scope="PROVIDED" />
+    <orderEntry type="module" module-name="Bean" exported="" scope="PROVIDED" />
     <orderEntry type="module-library" scope="TEST">
       <library name="JUnit4">
         <CLASSES>
@@ -20,6 +20,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" exported="" scope="PROVIDED" name="Maven: com.thoughtworks.xstream:xstream:1.4.4" level="project" />
   </component>
 </module>
-

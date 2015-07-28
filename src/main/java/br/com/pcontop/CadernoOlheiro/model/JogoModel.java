@@ -1,21 +1,28 @@
 package br.com.pcontop.CadernoOlheiro.model;
 
 import android.content.Context;
-import br.com.pcontop.CadernoOlheiro.bean.*;
+
+import java.util.Date;
+import java.util.List;
+
+import br.com.pcontop.CadernoOlheiro.bean.EventoPartida;
+import br.com.pcontop.CadernoOlheiro.bean.Jogador;
+import br.com.pcontop.CadernoOlheiro.bean.Localidade;
+import br.com.pcontop.CadernoOlheiro.bean.Olheiro;
+import br.com.pcontop.CadernoOlheiro.bean.Partida;
+import br.com.pcontop.CadernoOlheiro.bean.TempoPartida;
+import br.com.pcontop.CadernoOlheiro.bean.TiposEvento;
+import br.com.pcontop.CadernoOlheiro.bean.TiposTempoPartida;
 import br.com.pcontop.CadernoOlheiro.model.dao.DAOFactory;
-import br.com.pcontop.CadernoOlheiro.model.dao.UUIDProvider;
+import br.com.pcontop.CadernoOlheiro.bean.UUIDProvider;
 import br.com.pcontop.CadernoOlheiro.model.dao.eventoJogo.EventoJogoDAO;
 import br.com.pcontop.CadernoOlheiro.model.dao.jogador.JogadorDAO;
 import br.com.pcontop.CadernoOlheiro.model.dao.localidade.eventoJogo.LocalidadeDAO;
 import br.com.pcontop.CadernoOlheiro.model.dao.partida.PartidaDAO;
-import br.com.pcontop.CadernoOlheiro.model.dao.time.TimeDAO;
 import br.com.pcontop.CadernoOlheiro.model.export.Exporter;
 import br.com.pcontop.CadernoOlheiro.model.export.ExporterException;
 import br.com.pcontop.CadernoOlheiro.model.export.ExporterFactory;
 import br.com.pcontop.CadernoOlheiro.view.ColorConstants;
-
-import java.util.Date;
-import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -27,58 +34,56 @@ import java.util.List;
 public class JogoModel {
     Context context;
     JogadorDAO jogadorDAO;
-    TimeDAO timeDAO;
     PartidaDAO partidaDAO;
     EventoJogoDAO eventoJogoDAO;
     LocalidadeDAO localidadeDAO;
-
 
 
     private Partida partidaAtual;
     public JogoModel(Context context){
         this.context=context;
         this.jogadorDAO = DAOFactory.getJogadorDAO(context);
-        this.timeDAO = DAOFactory.getTimeDAO(context);
         this.eventoJogoDAO = DAOFactory.getEventoJogoDAO(context);
         this.partidaDAO = DAOFactory.getPartidaDAO(context);
         this.localidadeDAO=DAOFactory.getLocalidadeDAO(context);
     }
 
     public Partida criePartida(Localidade local, Olheiro olheiro){
-        Time time1 = crieTime(Time.TIME_1, ColorConstants.COR_PADRAO_TIME_1_AVAI);
-        Time time2 = crieTime(Time.TIME_2, ColorConstants.COR_PADRAO_TIME_2_AVAI);
+        Jogador jogador1 = crieJogador(null, ColorConstants.COR_PADRAO_JOGADOR_1_AVAI);
+        TempoPartida tempoPartida = crieTempoPartida(TiposTempoPartida.ANTES_PARTIDA, new Date());
 
         Partida partida = Partida.create()
-                                 .setId(getUniqueId())
                                  .setLocal(local)
                                  .setOlheiro(olheiro)
-                                 .setTime1(time1)
-                                 .setTime2(time2)
+                                 .setJogador1(jogador1)
+                                 .setTempoPartida(tempoPartida)
                                  .commit();
 
-        partida.getTiposEventosSelecionados().add(TipoEvento.PASSE_CERTO);
-        partida.getTiposEventosSelecionados().add(TipoEvento.PASSE_ERRADO);
+        partida.getTiposEventosSelecionados().add(TiposEvento.BACKHAND_CERTO);
+        partida.getTiposEventosSelecionados().add(TiposEvento.BACKHAND_ERRADO);
         setPartidaAtual(partida);
         return partida;
+    }
+
+    private TempoPartida crieTempoPartida(TiposTempoPartida tipoTempoPartida, Date dataInicio) {
+        TempoPartida tempoPartida = TempoPartida.create()
+                .setTipo(tipoTempoPartida)
+                .setDataInicio(dataInicio)
+                .commit();
+        return tempoPartida;
+
     }
 
     private void setPartidaAtual(Partida partida) {
         this.partidaAtual = partida;
     }
 
-    public Time crieTime(String nome, String cor) {
-        Time time = Time.create()
-                    .setId(getUniqueId())
-                    .setNome(nome)
-                    .setCor(cor)
-                    .commit();
-        return time;
-    }
-
-    public Jogador crieJogador(String nome) {
+    public Jogador crieJogador(String nome, String cor) {
         Jogador jogador = Jogador.create()
-        .setId(getUniqueId())
-        .setNome(nome).commit();
+                .setNome(nome)
+                .setCor(cor)
+                .commit()
+                ;
         return jogador;
     }
 
@@ -93,8 +98,6 @@ public class JogoModel {
 
     public void remova(Partida partida) {
         partidaDAO.remova(partida);
-        timeDAO.remova(partida.getTime1());
-        timeDAO.remova(partida.getTime2());
         for (Jogador jogador:partida.getJogadores()) {
             jogadorDAO.remova(jogador);
             for (EventoPartida eventoPartida :jogador.getEventos()){
@@ -115,34 +118,19 @@ public class JogoModel {
         insiraOuAtualize(partidaAtual);
     }
 
-    public void remova(Jogador jogador){
-        partidaAtual.removaJogador(jogador);
-        insiraOuAtualize(partidaAtual);
-        jogadorDAO.remova(jogador);
-    }
 
-
-    public void crieEventoEInsira(TipoEvento tipoEvento, Jogador jogador, Date hora){
-        EventoPartida eventoPartida = crieEvento(tipoEvento,hora);
+    public void crieEventoEInsira(TiposEvento tiposEvento, Jogador jogador, Date hora){
+        EventoPartida eventoPartida = crieEvento(tiposEvento, hora);
         jogador.getEventos().add(eventoPartida);
         insiraOuAtualize(eventoPartida);
     }
 
-    public EventoPartida crieEvento(TipoEvento tipoEvento, Date hora){
+    public EventoPartida crieEvento(TiposEvento tiposEvento, Date hora){
             EventoPartida eventoPartida = EventoPartida.create()
-                    .setTipoEvento(tipoEvento)
+                    .setTipoEvento(tiposEvento)
                     .setHora(hora)
-                    .setId(getUniqueId())
                     .commit();
             return eventoPartida;
-    }
-
-    public Time getTime(String id) {
-        return timeDAO.get(id);
-    }
-
-    public String getUniqueId(){
-        return UUIDProvider.getNew();
     }
 
     public Olheiro getOlheiro(){
@@ -151,27 +139,20 @@ public class JogoModel {
     }
 
 
-    public void addJogadorTime(Jogador jogador, Time time) {
-        partidaAtual.addJogadorTime(jogador, time);
+    public void addJogadorPartida(Jogador jogador) {
+        partidaAtual.setJogador2(jogador);
         insiraOuAtualize(partidaAtual);
     }
 
     public int getCorTime(Jogador jogador) {
-        return getCorTime(partidaAtual, jogador);
+        return getCor(jogador);
     }
 
-    public int getCorTime(Partida partida, Jogador jogador) {
-        Time time = partida.getTime(jogador);
-        return time.getCorAsInt();
+    public int getCor(Jogador jogador) {
+        return jogador.getCorAsInt();
     }
 
 
-    public Time getTime1(){
-        return partidaAtual.getTime1();
-    }
-    public Time getTime2(){
-        return partidaAtual.getTime2();
-    }
 
     public List<Jogador> getJogadoresPartida() {
         return partidaAtual.getJogadores();
@@ -200,8 +181,8 @@ public class JogoModel {
         //ODBProvider.closeConnection();
     }
 
-    public int getQuantidadeEventos(Jogador jogador, TipoEvento tipoEventoPassar) {
-        return jogador.busqueEventosdoTipo(tipoEventoPassar).size();
+    public int getQuantidadeEventos(Jogador jogador, TiposEvento tiposEventoPassar) {
+        return jogador.busqueEventosdoTipo(tiposEventoPassar).size();
     }
 
     public boolean exportePartida(Partida partida) throws ExporterException {
@@ -226,11 +207,13 @@ public class JogoModel {
     private Localidade getNewLocalidade(String descricao, Double latitude, Double longitude) {
         Localidade localidade = Localidade.create()
                 .setDescricao(descricao)
-                .setId(getUniqueId())
                 .setLatitude(latitude)
                 .setLongitude(longitude)
                 .commit();
         return localidade;
     }
 
+    public void transiteProximoTempoPartida(Date date) {
+        partidaAtual.transiteProximoTempo(date);
+    }
 }

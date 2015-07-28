@@ -1,15 +1,26 @@
 package br.com.pcontop.CadernoOlheiro.model.export.xml;
 
-import org.w3c.dom.Node;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+
+import br.com.pcontop.CadernoOlheiro.bean.Partida;
+import br.com.pcontop.CadernoOlheiro.model.export.file.FileExporter;
+import br.com.pcontop.CadernoOlheiro.model.xml.XmlConverter;
 
 /**
- * Created with IntelliJ IDEA.
- * User: PauloBruno
- * Date: 20/11/13
- * Time: 23:45
- * To change this template use File | Settings | File Templates.
+ * Created by pcont_000 on 26/07/2015.
  */
-public interface XmlExporter {
-    public String nodeToString(Node node) throws Exception;
-    //public String documentToString(Document document) throws IOException;
+public class XmlExporter extends FileExporter{
+    @Override
+    public String getSufixo() {
+        return ".xml";
+    }
+
+    @Override
+    protected boolean imprimaPartida(OutputStream outputStream, Partida partida) {
+        String xmlPartida = XmlConverter.toXml(partida);
+        PrintWriter printWriter = new PrintWriter(outputStream);
+        printWriter.print(xmlPartida);
+        return true;
+    }
 }

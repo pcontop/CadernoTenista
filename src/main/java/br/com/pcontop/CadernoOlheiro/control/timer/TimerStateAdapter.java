@@ -4,6 +4,7 @@ import br.com.pcontop.CadernoOlheiro.control.OlheiroController;
 import br.com.pcontop.CadernoOlheiro.view.TimerFragment;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.TimeZone;
 
 /**
@@ -51,17 +52,17 @@ public abstract class TimerStateAdapter implements TimerState {
         }
     }
 
-    public abstract TimerState getProximoEstado();
 
     @Override
     public TimerState transiteProximoEstado() {
-        TimerState proximoEstado = getProximoEstado();
+        olheiroController.transiteProximoTempoPartida(new Date());
+        TimerState proximoEstado = TimerStateFactory.busque(olheiroController);
         this.destroy();
         return proximoEstado;
     }
 
     @Override
-    public TimerState recuperar(TimerFragment timerFragment) {
+    public TimerState recuperarDescanso(TimerFragment timerFragment) {
         recuperarObjetos(timerFragment);
         return null;
     }

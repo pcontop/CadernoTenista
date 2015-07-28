@@ -18,25 +18,15 @@ public class Partida implements Comparable<Partida>, Serializable {
     private Jogador jogador1;
     private Jogador jogador2;
     private Date dataCriacao;
-    private Date dataInicio;
-    private Date dataFimPrimeiroTempo;
-    private Date dataInicioSegundoTempo;
-    private Date dataFimSegundoTempo;
     private Date ultimoEnvio;
     private SetTiposEventos tiposEventosSelecionados;
     private String pathVideoPrimeiroTempo;
     private String pathVideoSegundoTempo;
+    private TempoPartida tempoPartida;
+    private ListTemposPartida temposPartida = new ListTemposPartida();
 
     private Partida(){
         dataCriacao = new Date();
-    }
-
-    private Partida(Date dataCriacao){
-        if (dataCriacao!=null){
-            this.dataCriacao = dataCriacao;
-        } else {
-            this.dataCriacao = new Date();
-        }
     }
 
     @Override
@@ -49,10 +39,8 @@ public class Partida implements Comparable<Partida>, Serializable {
                 + ", " + jogador2
                 + ", Data Criação: " + dataCriacao
                 + ", Data Último Envio: " + ultimoEnvio
-                + ", Data Início: " + dataInicio
-                + ", Data Fim Primeiro Tempo: " + dataFimPrimeiroTempo
-                + ", Data Início Segundo Tempo: " + dataInicioSegundoTempo
-                + ", Data Fim Segundo Tempo: " + dataFimSegundoTempo
+                + ", Tempo Atual: " + tempoPartida
+                + ", Tempos Passados: " + temposPartida
                 + ", TiposEventosSelecionados: " + tiposEventosSelecionados
                 + "]";
         return retorno;
@@ -90,13 +78,14 @@ public class Partida implements Comparable<Partida>, Serializable {
         return dataCriacao.compareTo(o.dataCriacao);
     }
 
+    public void transiteProximoTempo(Date date) {
+        tempoPartida.setDataFim(date);
+        TempoPartida proximoTempo = TempoPartidaFactory.getProximoTempo(tempoPartida, date);
+        setTempoPartida(proximoTempo);
+    }
+
     public static class Builder {
         Partida partida = new Partida();
-
-        public Builder setId(String id) {
-            partida.id = id;
-            return this;
-        }
 
         public Builder setOlheiro(Olheiro olheiro) {
             partida.olheiro = olheiro;
@@ -118,27 +107,7 @@ public class Partida implements Comparable<Partida>, Serializable {
             return this;
         }
 
-        public Builder setDataInicio(Date dataInicio) {
-            partida.dataInicio = dataInicio;
-            return this;
-        }
-
-        public Builder setDataFimPrimeiroTempo(Date dataFimPrimeiroTempo) {
-            partida.dataFimPrimeiroTempo = dataFimPrimeiroTempo;
-            return this;
-        }
-
-        public Builder setDataInicioSegundoTempo(Date dataInicioSegundoTempo) {
-            partida.dataInicioSegundoTempo = dataInicioSegundoTempo;
-            return this;
-        }
-
-        public Builder setDataFimSegundoTempo(Date dataFimSegundoTempo) {
-            partida.dataFimSegundoTempo = dataFimSegundoTempo;
-            return this;
-        }
-
-        public Builder setTiposEventosSelecionados(Set<TipoEvento> tiposEventosSelecionados) {
+        public Builder setTiposEventosSelecionados(Set<TiposEvento> tiposEventosSelecionados) {
             partida.tiposEventosSelecionados = new SetTiposEventos(tiposEventosSelecionados);
             return this;
         }
@@ -158,7 +127,21 @@ public class Partida implements Comparable<Partida>, Serializable {
             return this;
         }
 
+        public Builder setTemposPartida(ListTemposPartida temposPartida) {
+            partida.temposPartida=temposPartida;
+            return this;
+        }
+
+        public Builder setTempoPartida(TempoPartida tempoPartida){
+            partida.tempoPartida=tempoPartida;
+            return this;
+        }
+
         public Partida commit(){
+            if (partida.getTemposPartida().size()==0 && partida.getTempoPartida()!=null){
+                partida.getTemposPartida().add(partida.getTempoPartida());
+            }
+            partida.setId(UUIDProvider.getNew());
             return partida;
         }
     }
@@ -208,23 +191,7 @@ public class Partida implements Comparable<Partida>, Serializable {
         return dataCriacao;
     }
 
-    public Date getDataInicio() {
-        return dataInicio;
-    }
-
-    public Date getDataFimPrimeiroTempo() {
-        return dataFimPrimeiroTempo;
-    }
-
-    public Date getDataInicioSegundoTempo() {
-        return dataInicioSegundoTempo;
-    }
-
-    public Date getDataFimSegundoTempo() {
-        return dataFimSegundoTempo;
-    }
-
-    public Set<TipoEvento> getTiposEventosSelecionados() {
+    public Set<TiposEvento> getTiposEventosSelecionados() {
         return tiposEventosSelecionados;
     }
 
@@ -238,22 +205,6 @@ public class Partida implements Comparable<Partida>, Serializable {
 
     public void setLocal(Localidade local) {
         this.local = local;
-    }
-
-    public void setDataInicio(Date dataInicio) {
-        this.dataInicio = dataInicio;
-    }
-
-    public void setDataFimPrimeiroTempo(Date dataFimPrimeiroTempo) {
-        this.dataFimPrimeiroTempo = dataFimPrimeiroTempo;
-    }
-
-    public void setDataInicioSegundoTempo(Date dataInicioSegundoTempo) {
-        this.dataInicioSegundoTempo = dataInicioSegundoTempo;
-    }
-
-    public void setDataFimSegundoTempo(Date dataFimSegundoTempo) {
-        this.dataFimSegundoTempo = dataFimSegundoTempo;
     }
 
     public String getPathVideoPrimeiroTempo() {
@@ -279,4 +230,43 @@ public class Partida implements Comparable<Partida>, Serializable {
     public void setUltimoEnvio(Date ultimoEnvio) {
         this.ultimoEnvio = ultimoEnvio;
     }
+
+    public TempoPartida getTempoPartida() {
+        return tempoPartida;
+    }
+
+    public void setTempoPartida(TempoPartida tempoPartida) {
+        temposPartida.add(this.tempoPartida);
+        this.tempoPartida = tempoPartida;
+    }
+
+    public ListTemposPartida getTemposPartida() {
+        return temposPartida;
+    }
+
+    public TiposTempoPartida getTipoTempoPartida(){
+        if (tempoPartida==null){
+            return null;
+        }
+        return tempoPartida.getTipoTempoPartida();
+    }
+
+    public String getDescricaoTempoAtual(){
+        if (tempoPartida==null||tempoPartida.getTipoTempoPartida()==null){
+            return null;
+        }
+        return tempoPartida.getTipoTempoPartida().getDescricao();
+    }
+
+    public List<Jogador> getJogadores(){
+        List<Jogador> jogadores = new ArrayList<>();
+        if (jogador1!=null){
+            jogadores.add(jogador1);
+        }
+        if (jogador2!=null){
+            jogadores.add(jogador2);
+        }
+        return jogadores;
+    }
+
 }

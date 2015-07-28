@@ -2,7 +2,7 @@ package br.com.pcontop.CadernoOlheiro.model.dao.test;
 
 import br.com.pcontop.CadernoOlheiro.bean.Partida;
 import br.com.pcontop.CadernoOlheiro.model.dao.DAOFactory;
-import br.com.pcontop.CadernoOlheiro.model.dao.UUIDProvider;
+import br.com.pcontop.CadernoOlheiro.bean.UUIDProvider;
 import br.com.pcontop.CadernoOlheiro.model.dao.partida.PartidaDaoNeodatis;
 import junit.framework.Assert;
 import org.junit.After;

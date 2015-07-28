@@ -1,4 +1,4 @@
-package br.com.pcontop.CadernoOlheiro.model.dao;
+package br.com.pcontop.CadernoOlheiro.bean;
 
 import java.util.UUID;
 

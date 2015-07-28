@@ -1,12 +1,13 @@
 package br.com.pcontop.CadernoOlheiro.control.timer;
 
 import android.os.Handler;
-import br.com.pcontop.CadernoOlheiro.R;
-import br.com.pcontop.CadernoOlheiro.view.TimerFragment;
 
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import br.com.pcontop.CadernoOlheiro.R;
+import br.com.pcontop.CadernoOlheiro.view.TimerFragment;
 
 /**
  * Created with IntelliJ IDEA.
@@ -15,45 +16,37 @@ import java.util.TimerTask;
  * time: 14:24
  * To change this template use File | Settings | File Templates.
  */
-public class TimerStateSegundoTempoEmAndamento extends TimerStateAdapter {
+public class TimerStateSetEmAndamento extends TimerStateAdapter {
     TimerTask task;
     private final Handler handler = new Handler();
 
     @Override
     public TimerState inicialize(TimerState lastTimerState) {
         super.inicialize(lastTimerState);
-        definaBotao();
-        olheiroController.setDataInicioSegundoTempo(new Date());
+        setTextoBotao(getTimerFragment());
         inicieTimer();
         return this;
     }
 
-    private void definaBotao(){
-        getTimerFragment().setBotaoTimerTexto(R.string.fim_de_jogo);
+    private void setTextoBotao(TimerFragment timerFragment) {
+        timerFragment.setBotaoTimerTexto(R.string.terminar_set);
     }
 
     @Override
     public TimerState transiteProximoEstado() {
-        pareTimer();
         TimerState proximoEstado = super.transiteProximoEstado();
         return proximoEstado;
     }
 
     @Override
-    public TimerState getProximoEstado() {
-        return TimerStateFactory.crie(olheiroController, TimerStateType.FIM_SEGUNDO_TEMPO, this);
-    }
-
-    @Override
     public TimerStateType getTimerStateType() {
-        return TimerStateType.SEGUNDO_TEMPO_EM_ANDAMENTO;
+        return TimerStateType.SET_EM_ANDAMENTO;
     }
 
     @Override
-    public TimerState recuperar(TimerFragment timerFragment) {
-        super.recuperar(timerFragment);
-        Date dataInicio = olheiroController.getDataInicioSegundoTempo();
-        definaBotao();
+    public TimerState recuperarDescanso(TimerFragment timerFragment) {
+        super.recuperarDescanso(timerFragment);
+        setTextoBotao(timerFragment);
         inicieTimer();
         return this;
     }
@@ -86,8 +79,8 @@ public class TimerStateSegundoTempoEmAndamento extends TimerStateAdapter {
     }
 
     private void atualizeRelogio() {
-        if (olheiroController.getDataInicioSegundoTempo()!=null){
-            long diferenca= new Date().getTime() - olheiroController.getDataInicioSegundoTempo().getTime();
+        if (olheiroController.getDataInicioTempoAtual()!=null){
+            long diferenca= new Date().getTime() - olheiroController.getDataInicioTempoAtual().getTime();
             Date tempoPercorrido = new Date();
             tempoPercorrido.setTime(diferenca);
             String textoDisplay = dateFormatDisplay.format(tempoPercorrido);
