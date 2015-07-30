@@ -3,7 +3,7 @@
 
     <string name="app_name">Caderno Tenista</string>
     <string name="action_settings">Configurações</string>
-    <string name="hello_world">Olá Mundo! Creditar http://www.freesfx.co.uk/info/eula/</string>
+    <string name="hello">Olá Mundo! Creditar http://www.freesfx.co.uk/info/eula/</string>
     <string name="iniciar_partida">Iniciar Partida</string>
     <string name="iniciar_set">Iniciar Set</string>
     <string name="terminar_set">Terminar Set</string>
