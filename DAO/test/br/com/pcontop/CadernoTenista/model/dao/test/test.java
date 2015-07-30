@@ -40,7 +40,7 @@ public class test extends Assert {
         partidaDAO.removaTodosRegistros();
         String uuid = UUIDProvider.getNew();
         System.out.println("Criando Partida com id: " + uuid);
-        Partida partida = Partida.create().setId(uuid).setDataInicio(new Date()).commit();
+        Partida partida = Partida.create().commit();
         partidaDAO.insiraOuAtualize(partida);
         Partida partida2 = partidaDAO.get(uuid);
         assertNotNull(partida2);
@@ -55,14 +55,13 @@ public class test extends Assert {
     public void testAlterPartida(){
         partidaDAO.removaTodosRegistros();
         String uuid = UUIDProvider.getNew();
-        Partida partida = Partida.create().setId(uuid).setDataInicio(new Date()).commit();
+        Partida partida = Partida.create().commit();
         int hash = partida.hashCode();
         String id = partida.getId();
         partidaDAO.insiraOuAtualize(partida);
         //OID oid1 = partidaDAO.getOid(partida);
         //assertEquals(hash, partida.hashCode());
         hash = partida.hashCode();
-        partida.setDataInicio(new Date());
         assertEquals(hash,partida.hashCode());
         assertEquals(id,partida.getId());
         partidaDAO.insiraOuAtualize(partida);
@@ -82,7 +81,7 @@ public class test extends Assert {
     @Test
     public void testListPartidas(){
         String uuid = UUIDProvider.getNew();
-        Partida partida = Partida.create().setId(uuid).setDataInicio(new Date()).commit();
+        Partida partida = Partida.create().commit();
         partidaDAO.insiraOuAtualize(partida);
         List<Partida> partidas= partidaDAO.getAll();
         assertNotNull(partidas);

@@ -26,6 +26,8 @@ public class DialogEventosJogador extends DialogFragment {
     private Set<Integer> mSelectedItems;
     private Jogador jogador;
 
+    public DialogEventosJogador(){}
+
     public DialogEventosJogador(Jogador jogador){
         olheiroController = FabricaController.getOlheiroController(null);
         this.jogador=jogador;

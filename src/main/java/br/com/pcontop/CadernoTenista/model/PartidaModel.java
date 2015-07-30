@@ -22,6 +22,7 @@ import br.com.pcontop.CadernoTenista.model.export.Exporter;
 import br.com.pcontop.CadernoTenista.model.export.ExporterException;
 import br.com.pcontop.CadernoTenista.model.export.ExporterFactory;
 import br.com.pcontop.CadernoTenista.view.ColorConstants;
+import javafx.scene.paint.Color;
 
 /**
  * Created with IntelliJ IDEA.
@@ -30,7 +31,7 @@ import br.com.pcontop.CadernoTenista.view.ColorConstants;
  * time: 17:53
  * To change this template use File | Settings | File Templates.
  */
-public class JogoModel {
+public class PartidaModel {
     Context context;
     JogadorDAO jogadorDAO;
     PartidaDAO partidaDAO;
@@ -39,7 +40,7 @@ public class JogoModel {
 
 
     private Partida partidaAtual;
-    public JogoModel(Context context){
+    public PartidaModel(Context context){
         this.context=context;
         this.jogadorDAO = DAOFactory.getJogadorDAO(context);
         this.eventoJogoDAO = DAOFactory.getEventoJogoDAO(context);
@@ -143,10 +144,6 @@ public class JogoModel {
         insiraOuAtualize(partidaAtual);
     }
 
-    public int getCorTime(Jogador jogador) {
-        return getCor(jogador);
-    }
-
     public int getCor(Jogador jogador) {
         return jogador.getCorAsInt();
     }
@@ -214,5 +211,22 @@ public class JogoModel {
 
     public void transiteProximoTempoPartida(Date date) {
         partidaAtual.transiteProximoTempo(date);
+    }
+
+    public void removaJogador(Jogador jogador) {
+        partidaAtual.remova(jogador);
+        salvePartida();
+    }
+
+    public int getCorJogador1() {
+        return partidaAtual.getJogador1().getCorAsInt();
+    }
+
+    public int getCorJogador2() {
+        Jogador jogador2 = partidaAtual.getJogador2();
+        if (jogador2!=null) {
+            return partidaAtual.getJogador2().getCorAsInt();
+        }
+        return 0xff000000 + Integer.parseInt(Color.AQUAMARINE.toString(),16);
     }
 }

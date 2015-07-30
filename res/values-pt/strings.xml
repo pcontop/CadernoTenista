@@ -72,5 +72,8 @@
     <string name="ultimo_envio">Enviado em:</string>
     <string name="nao_enviado">Não enviado.</string>
     <string name="reenviando_partida">Tentando enviar a partida novamente.</string>
+    <string name="lado_1">Lado 1</string>
+    <string name="lado_2">Lado 2</string>
+
 
 </resources>

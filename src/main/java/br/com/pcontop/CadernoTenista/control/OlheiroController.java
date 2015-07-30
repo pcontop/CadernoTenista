@@ -4,8 +4,21 @@ import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import br.com.pcontop.CadernoTenista.R;
-import br.com.pcontop.CadernoTenista.bean.*;
+import br.com.pcontop.CadernoTenista.bean.Jogador;
+import br.com.pcontop.CadernoTenista.bean.Localidade;
+import br.com.pcontop.CadernoTenista.bean.Olheiro;
+import br.com.pcontop.CadernoTenista.bean.Partida;
+import br.com.pcontop.CadernoTenista.bean.TempoPartida;
+import br.com.pcontop.CadernoTenista.bean.TiposEvento;
 import br.com.pcontop.CadernoTenista.control.dialogs.DialogEventosHelper;
 import br.com.pcontop.CadernoTenista.control.disabler.Disabler;
 import br.com.pcontop.CadernoTenista.control.disabler.Enabler;
@@ -14,14 +27,22 @@ import br.com.pcontop.CadernoTenista.control.timer.TimerState;
 import br.com.pcontop.CadernoTenista.control.timer.TimerStateFactory;
 import br.com.pcontop.CadernoTenista.control.timer.TimerStateType;
 import br.com.pcontop.CadernoTenista.control.timer.TimerWatcher;
-import br.com.pcontop.CadernoTenista.model.JogoModel;
+import br.com.pcontop.CadernoTenista.model.PartidaModel;
 import br.com.pcontop.CadernoTenista.model.export.ExporterException;
-import br.com.pcontop.CadernoTenista.view.*;
-import br.com.pcontop.CadernoTenista.view.dialogs.*;
+import br.com.pcontop.CadernoTenista.view.ColorConstants;
+import br.com.pcontop.CadernoTenista.view.DrawerPartida;
+import br.com.pcontop.CadernoTenista.view.ListaPartidasMainFragment;
+import br.com.pcontop.CadernoTenista.view.ParametroTela;
+import br.com.pcontop.CadernoTenista.view.PartidaMainFragment;
+import br.com.pcontop.CadernoTenista.view.Telas;
+import br.com.pcontop.CadernoTenista.view.TimerFragment;
+import br.com.pcontop.CadernoTenista.view.dialogs.ActionDialogJogador;
+import br.com.pcontop.CadernoTenista.view.dialogs.DialogEventos;
+import br.com.pcontop.CadernoTenista.view.dialogs.DialogEventosJogador;
+import br.com.pcontop.CadernoTenista.view.dialogs.DialogJogador;
+import br.com.pcontop.CadernoTenista.view.dialogs.DialogLocal;
 import br.com.pcontop.CadernoTenista.view.jogadoresFragment.JogadoresFragment;
 import br.com.pcontop.CadernoTenista.view.partidaDisplay.PartidaDisplay;
-
-import java.util.*;
 
 
 /**
@@ -39,7 +60,7 @@ public class OlheiroController {
     private static DrawerPartida drawerPartida;
     private static TimerFragment timerFragment;
     private static TimerState timerState;
-    static JogoModel jogoModel;
+    static PartidaModel partidaModel;
     private ListaPartidasMainFragment listaPartidasMainFragment;
     private static List<TimerWatcher> timerWatcherList = new ArrayList<>();
 
@@ -56,7 +77,7 @@ public class OlheiroController {
 
     protected OlheiroController(Context context){
         this.context=context;
-        jogoModel = new JogoModel(context);
+        partidaModel = new PartidaModel(context);
     }
 
     public Context getContext(){
@@ -64,7 +85,7 @@ public class OlheiroController {
     }
 
     public void criePartida(){
-        jogoModel.criePartida(getLocal(), getOlheiro());
+        partidaModel.criePartida(getLocal(), getOlheiro());
         if (jogadoresFragment!=null){
             jogadoresFragment.redesenhe();
         }
@@ -75,7 +96,7 @@ public class OlheiroController {
     }
 
     private Olheiro getOlheiro(){
-        return jogoModel.getOlheiro();
+        return partidaModel.getOlheiro();
     }
 
     public Localidade getLocal() {
@@ -123,7 +144,7 @@ public class OlheiroController {
     }
 
     public List<Jogador> getJogadoresPartida(){
-        List<Jogador> jogadorList = jogoModel.getJogadoresPartida();
+        List<Jogador> jogadorList = partidaModel.getJogadoresPartida();
         if (jogadorList ==null) {
             jogadorList = new ArrayList<>();
         }
@@ -131,12 +152,12 @@ public class OlheiroController {
     }
 
     private Jogador crieJogador(String nome){
-        Jogador jogador = jogoModel.crieJogador(nome, ColorConstants.COR_PADRAO_JOGADOR_2_AVAI);
+        Jogador jogador = partidaModel.crieJogador(nome, ColorConstants.COR_PADRAO_JOGADOR_2_AVAI);
         return jogador;
     }
 
     public void addJogador(Jogador jogador){
-        jogoModel.addJogadorPartida(jogador);
+        partidaModel.addJogadorPartida(jogador);
         jogadoresFragment.redesenhe();
     }
 
@@ -168,13 +189,13 @@ public class OlheiroController {
         return habilitacaoPassesEmTempos;
     }
 
-    public int getCorJogador(Jogador jogador){
-        return jogoModel.getCorTime(jogador);
+    public int getCor(Jogador jogador){
+        return partidaModel.getCor(jogador);
     }
 
     public void editarJogador(Jogador jogador, String nomeJogador){
         jogador.setNome(nomeJogador);
-        jogoModel.addJogadorPartida(jogador);
+        partidaModel.addJogadorPartida(jogador);
         jogadoresFragment.redesenhe();
     }
 
@@ -184,7 +205,7 @@ public class OlheiroController {
     }
 
     public void addEvento(TiposEvento tiposEvento, Jogador jogador, Date date) {
-        jogoModel.crieEventoEInsira(tiposEvento, jogador, date);
+        partidaModel.crieEventoEInsira(tiposEvento, jogador, date);
     }
 
     public String getStringDeNomeRef(String name) {
@@ -200,12 +221,12 @@ public class OlheiroController {
     }
 
     public Partida getPartida(){
-        return jogoModel.getPartidaAtual();
+        return partidaModel.getPartidaAtual();
     }
 
 
     public void recuperePartida(String idPartida) {
-        jogoModel.recuperePartida(idPartida);
+        partidaModel.recuperePartida(idPartida);
     }
 
     public TimerState getTimerState(){
@@ -257,7 +278,7 @@ public class OlheiroController {
     }
 
     public void salvePartida() {
-        jogoModel.salvePartida();
+        partidaModel.salvePartida();
     }
 
     public void setListaPartidasMainFragment(ListaPartidasMainFragment listaPartidasMainFragment) {
@@ -270,12 +291,12 @@ public class OlheiroController {
     }
 
     public List<Partida> getPartidasPassadas(){
-        return jogoModel.getPartidasPassadas();
+        return partidaModel.getPartidasPassadas();
     }
 
 
     public void releaseResources() {
-        jogoModel.releaseResources();
+        partidaModel.releaseResources();
     }
 
     public void setPartidaMainFragment(PartidaMainFragment partidaMainFragment) {
@@ -288,7 +309,7 @@ public class OlheiroController {
     }
 
     public int getQuantidadeEventos(Jogador jogador, TiposEvento tiposEventoPassar) {
-        return jogoModel.getQuantidadeEventos(jogador, tiposEventoPassar);
+        return partidaModel.getQuantidadeEventos(jogador, tiposEventoPassar);
     }
 
     public boolean exportePartida(Activity activity, Partida partida){
@@ -296,7 +317,7 @@ public class OlheiroController {
         while (contador < 3){
 
             try {
-                if (jogoModel.exportePartida(partida)) {
+                if (partidaModel.exportePartida(partida)) {
                     toast(activity, R.string.partida_enviada, Toast.LENGTH_SHORT);
                     return true;
                 }
@@ -311,7 +332,7 @@ public class OlheiroController {
     }
 
     public void removaPartidaDaLista(Partida partida) {
-        jogoModel.remova(partida);
+        partidaModel.remova(partida);
         listaPartidasMainFragment.refreshDisplay();
     }
 
@@ -341,11 +362,11 @@ public class OlheiroController {
     }
 
     public Partida getPartida(String idPartida) {
-        return jogoModel.getPartida(idPartida);
+        return partidaModel.getPartida(idPartida);
     }
 
     public void definaLocalidade(String descricao, Double latitude, Double longitude) {
-        jogoModel.definaLocalidade(descricao, latitude, longitude);
+        partidaModel.definaLocalidade(descricao, latitude, longitude);
     }
 
     public void definaLocalidadePartida(){
@@ -391,7 +412,7 @@ public class OlheiroController {
     }
 
     public void salvePartida(Partida partida){
-        jogoModel.insiraOuAtualize(partida);
+        partidaModel.insiraOuAtualize(partida);
     }
 
     public void apresenteResultadoPartidaAtual() {
@@ -425,10 +446,22 @@ public class OlheiroController {
     }
 
     public void transiteProximoTempoPartida(Date date) {
-        jogoModel.transiteProximoTempoPartida(date);
+        partidaModel.transiteProximoTempoPartida(date);
     }
 
     public TempoPartida getTempoPartidaAtual(){
         return getPartida().getTempoPartida();
+    }
+
+    public void removaJogador(Jogador jogador) {
+        partidaModel.removaJogador(jogador);
+    }
+
+    public int getCorJogador1() {
+        return partidaModel.getCorJogador1();
+    }
+
+    public int getCorJogador2() {
+        return partidaModel.getCorJogador2();
     }
 }

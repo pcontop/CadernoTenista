@@ -178,7 +178,7 @@ public class JogadoresFragmentImpl extends Fragment implements JogadoresFragment
             }
 
             private void definaCor(Jogador jogador) {
-                int cor = olheiroController.getCorTime(jogador);
+                int cor = olheiroController.getCor(jogador);
                 this.setBackgroundResource(R.drawable.jogador);
                 GradientDrawable shapeDrawable = (GradientDrawable) this.getBackground();
                 shapeDrawable.setColor(cor);

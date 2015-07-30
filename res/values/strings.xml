@@ -73,5 +73,7 @@
     <string name="ultimo_envio">Sent to Server:</string>
     <string name="nao_enviado">Not sent.</string>
     <string name="reenviando_partida">Trying to send match again.</string>
+    <string name="lado_1">First Side</string>
+    <string name="lado_2">Second Side</string>
 
 </resources>

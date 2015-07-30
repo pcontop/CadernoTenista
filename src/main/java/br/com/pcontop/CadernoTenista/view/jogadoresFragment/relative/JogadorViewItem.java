@@ -58,7 +58,7 @@ public class JogadorViewItem extends LinearLayout implements TimerWatcher, CanBe
     }
 
     private void definaCor() {
-        int cor = olheiroController.getCorTime(jogador);
+        int cor = olheiroController.getCor(jogador);
         this.setBackgroundResource(R.drawable.jogador);
         GradientDrawable shapeDrawable = (GradientDrawable) this.getBackground();
         shapeDrawable.setColor(cor);

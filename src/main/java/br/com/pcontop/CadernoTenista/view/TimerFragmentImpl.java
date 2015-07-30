@@ -9,14 +9,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import java.util.Timer;
+
 import br.com.pcontop.CadernoTenista.R;
-import br.com.pcontop.CadernoTenista.bean.Time;
 import br.com.pcontop.CadernoTenista.control.FabricaController;
 import br.com.pcontop.CadernoTenista.control.OlheiroController;
 import br.com.pcontop.CadernoTenista.control.timer.TimerState;
 import br.com.pcontop.CadernoTenista.control.timer.TimerStateFactory;
-
-import java.util.Timer;
 
 /**
  * Created with IntelliJ IDEA.
@@ -83,17 +83,15 @@ public class TimerFragmentImpl extends Fragment implements TimerFragment {
     }
 
     private void inicializeTimes(ViewGroup layoutPrincipal) {
-        Time time1 = olheiroController.getTime1();
         TextView nomeTime1 = (TextView) layoutPrincipal.findViewById(R.id.timer_nome_time1);
-        nomeTime1.setText(time1.getNome());
+        nomeTime1.setText(getText(R.string.lado_1));
         TextView corTime1 = (TextView) layoutPrincipal.findViewById(R.id.timer_cor_time1);
-        corTime1.setBackgroundColor(time1.getCorAsInt());
+        corTime1.setBackgroundColor(olheiroController.getCorJogador1());
 
-        Time time2 = olheiroController.getTime2();
         TextView nomeTime2 = (TextView) layoutPrincipal.findViewById(R.id.timer_nome_time2);
-        nomeTime2.setText(time2.getNome());
+        nomeTime2.setText(getText(R.string.lado_2));
         TextView corTime2 = (TextView) layoutPrincipal.findViewById(R.id.timer_cor_time2);
-        corTime2.setBackgroundColor(time2.getCorAsInt());
+        corTime2.setBackgroundColor(olheiroController.getCorJogador2());
     }
 
     private void verifiqueEstado(Bundle savedInstanceState){
@@ -123,7 +121,7 @@ public class TimerFragmentImpl extends Fragment implements TimerFragment {
 
     private void recupereEstadoSalvo(Bundle savedInstanceState) {
         estadoSalvo = savedInstanceState.getInt(SALVAR_ESTADO);
-        setTimerState(TimerStateFactory.recupere(olheiroController, estadoSalvo));
+        setTimerState(TimerStateFactory.recupere(olheiroController));
         getTimerState().recuperarDescanso(this);
     }
 

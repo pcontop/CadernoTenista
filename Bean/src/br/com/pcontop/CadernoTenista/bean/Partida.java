@@ -1,6 +1,8 @@
 package br.com.pcontop.CadernoTenista.bean;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.util.*;
 
@@ -82,6 +84,55 @@ public class Partida implements Comparable<Partida>, Serializable {
         tempoPartida.setDataFim(date);
         TempoPartida proximoTempo = TempoPartidaFactory.getProximoTempo(tempoPartida, date);
         setTempoPartida(proximoTempo);
+    }
+
+    public void remova(Jogador jogador) {
+        if (jogador1.equals(jogador)){
+            jogador1=null;
+        }
+        if (jogador2.equals(jogador)){
+            jogador2=null;
+        }
+    }
+
+    @JsonIgnore
+    public Date getDataInicio() {
+        return getDataTipoTempo(TiposTempoPartida.PRIMEIRO_INTERVALO);
+    }
+
+    @JsonIgnore
+    private Date getDataTipoTempo(TiposTempoPartida tipoTempoPartida){
+        for (TempoPartida tempoPartida: getTemposPartida()){
+            if (tempoPartida.getTipoTempoPartida().equals(tipoTempoPartida)){
+                return tempoPartida.getDataInicio();
+            }
+        }
+        return null;
+    }
+
+    @JsonIgnore
+    public Date getDataFimPrimeiroSet() {
+        return getDataTipoTempo(TiposTempoPartida.PRIMEIRO_INTERVALO);
+    }
+
+    @JsonIgnore
+    public Date getDataInicioSegundoSet() {
+        return getDataTipoTempo(TiposTempoPartida.SEGUNDO_SET);
+    }
+
+    @JsonIgnore
+    public Date getDataFimSegundoSet() {
+        return getDataTipoTempo(TiposTempoPartida.SEGUNDO_INTERVALO);
+    }
+
+    public Jogador busqueJogadorPorId(String idJogador) {
+        if (jogador1.getId().equals(idJogador)){
+            return jogador1;
+        }
+        if (jogador2.getId().equals(idJogador)){
+            return jogador2;
+        }
+        return null;
     }
 
     public static class Builder {

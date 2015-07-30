@@ -1,5 +1,6 @@
 package br.com.pcontop.CadernoTenista.view.dialogs;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -8,9 +9,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.EditText;
+
 import br.com.pcontop.CadernoTenista.R;
 import br.com.pcontop.CadernoTenista.bean.Jogador;
-import br.com.pcontop.CadernoTenista.bean.Time;
 import br.com.pcontop.CadernoTenista.control.FabricaController;
 import br.com.pcontop.CadernoTenista.control.OlheiroController;
 
@@ -32,6 +33,7 @@ public class DialogJogador extends DialogFragment {
 
     }
 
+    @SuppressLint("ValidFragment")
     public DialogJogador(ActionDialogJogador action, Jogador jogador) {
         super();
         this.action=action;
@@ -40,8 +42,6 @@ public class DialogJogador extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        final Time time1 = olheiroController.getTime1();
-        final Time time2 = olheiroController.getTime2();
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater layoutInflater = getActivity().getLayoutInflater();
@@ -52,27 +52,27 @@ public class DialogJogador extends DialogFragment {
             editNomeJogador.selectAll();
         }
         builder.setView(viewDialog);
-        builder.setMessage(R.string.escolha_time)
-                .setPositiveButton(time2.getNome(), new DialogInterface.OnClickListener() {
+        builder
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        executarAcao(time2);
+                        executarAcao();
                     }
                 })
-                .setNegativeButton(time1.getNome(), new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.cancelar, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        executarAcao(time1);
+
                     }
                 });
         return builder.create();
     }
 
-    protected void executarAcao(Time time){
+    protected void executarAcao(){
         switch (action){
             case ADICIONAR:
-                olheiroController.addNewJogador(editNomeJogador.getText().toString(), time);
+                olheiroController.addNewJogador(editNomeJogador.getText().toString());
                 break;
             case EDITAR:
-                olheiroController.editarJogador(jogador, editNomeJogador.getText().toString(), time);
+                olheiroController.editarJogador(jogador, editNomeJogador.getText().toString());
                 break;
             default:
         }
