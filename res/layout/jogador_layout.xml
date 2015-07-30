@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<br.com.pcontop.CadernoOlheiro.view.jogadoresFragment.autoGridView.JogadorGridItem
+<br.com.pcontop.CadernoTenista.view.jogadoresFragment.autoGridView.JogadorGridItem
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -21,7 +21,7 @@
             android:paddingBottom="5dp"
             android:textStyle="bold"
             android:textColor="#000000"/>
-    <br.com.pcontop.CadernoOlheiro.view.components.ExpandableHeightGridView
+    <br.com.pcontop.CadernoTenista.view.components.ExpandableHeightGridView
             android:layout_width="fill_parent"
             android:layout_weight="1"
             android:layout_height="0dp"
@@ -36,4 +36,4 @@
             android:id="@+id/jogador_grid_botoes"
             android:numColumns="1"
             />
-</br.com.pcontop.CadernoOlheiro.view.jogadoresFragment.autoGridView.JogadorGridItem>
+</br.com.pcontop.CadernoTenista.view.jogadoresFragment.autoGridView.JogadorGridItem>

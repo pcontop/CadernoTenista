@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="br.com.pcontop.CadernoOlheiro"
+          package="br.com.pcontop.CadernoTenista"
           android:versionCode="1"
           android:versionName="1.0-SNAPSHOT" >
 
@@ -20,7 +20,7 @@
             android:label="@string/app_name"
             android:theme="@style/AppTheme">
 
-        <activity android:name=".view.DrawerPartida" android:theme="@android:style/Theme.Holo">
+        <activity android:name="br.com.pcontop.CadernoTenista.view.DrawerPartida" android:theme="@android:style/Theme.Holo">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

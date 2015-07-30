@@ -26,8 +26,5 @@
         <module name="CadernoTenista" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="CadernoTenista" target="1.5" />
-    </bytecodeTargetLevel>
   </component>
 </project>

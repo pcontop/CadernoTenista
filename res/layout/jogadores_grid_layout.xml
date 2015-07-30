@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<br.com.pcontop.CadernoOlheiro.view.components.AutoMeasureGridView
+<br.com.pcontop.CadernoTenista.view.components.AutoMeasureGridView
         xmlns:android="http://schemas.android.com/apk/res/android"
           android:id="@+id/passe_grid_layout"
           android:layout_width="match_parent"
