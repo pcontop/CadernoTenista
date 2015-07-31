@@ -2,6 +2,7 @@ package br.com.pcontop.CadernoTenista.helper;
 
 import br.com.pcontop.CadernoTenista.bean.Partida;
 import br.com.pcontop.CadernoTenista.bean.TempoPartida;
+import br.com.pcontop.CadernoTenista.bean.TiposTempoPartida;
 
 import java.util.Date;
 
@@ -13,14 +14,23 @@ public class TempoHelper {
 
     }
 
-    public static Date getTempoTranscorridoDesdeUltimoInicio(Partida partida, Date momento){
+    private static TempoPartida getTempoPartida(Partida partida, Date momento){
         for (TempoPartida tempoPartida: partida.getTemposPartida()){
             if (momento.compareTo(tempoPartida.getDataInicio())>=0 &&
-            momento.compareTo(tempoPartida.getDataFim())<=0){
-                return subtraiaData(momento, tempoPartida.getDataFim());
+                    momento.compareTo(tempoPartida.getDataFim())<=0){
+                return tempoPartida;
             }
         }
         return null;
+
+    }
+
+    public static Date getTempoTranscorridoDesdeUltimoInicio(Partida partida, Date momento){
+        TempoPartida tempoPartida = getTempoPartida(partida, momento);
+        if (tempoPartida==null){
+            return null;
+        }
+        return subtraiaData(momento, tempoPartida.getDataFim());
     }
 
     private static Date subtraiaData(Date data, Date dataInicio) {
@@ -49,4 +59,19 @@ public class TempoHelper {
         return diffSeconds;
     }
 
+    public static String getDescricaoTempo(Partida partida, Date hora) {
+        TempoPartida tempoPartida = getTempoPartida(partida, hora);
+        if (tempoPartida==null){
+            return null;
+        }
+        return tempoPartida.getTipoTempoPartida().getDescricao();
+    }
+
+    public static TiposTempoPartida getTipoTempoPartida(Partida partida, Date hora) {
+        TempoPartida tempoPartida = getTempoPartida(partida, hora);
+        if (tempoPartida==null){
+            return null;
+        }
+        return tempoPartida.getTipoTempoPartida();
+    }
 }

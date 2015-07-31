@@ -267,7 +267,7 @@ public class PartidaDisplayVideoFragment extends Fragment implements TelaPrincip
             String tempoDescrito = TextTranslator.translateFromStringName(getActivity(), tempoRaw);
 
             TextView decorridos = (TextView) layoutItem.findViewById(R.id.lista_passes_horario);
-            Date tempoDecorridos = TempoHelper.tempoDesdeUltimoInicio(partida, eventoPartida.getHora());
+            Date tempoDecorridos = TempoHelper.getTempoTranscorridoDesdeUltimoInicio(partida, eventoPartida.getHora());
             String descDecorridos = TempoHelper.getTextoDiferencaTempo(tempoDecorridos);
             decorridos.setText(descDecorridos);
 
@@ -281,17 +281,17 @@ public class PartidaDisplayVideoFragment extends Fragment implements TelaPrincip
     }
 
     private void chequeVideos(Partida partida, TiposTempoPartida tempoJogo){
-        if (tempoJogo.equals(TiposTempoPartida.PRIMEIRO_TEMPO)){
+        if (tempoJogo.equals(TiposTempoPartida.PRIMEIRO_SET)){
             if (partida.getPathVideoPrimeiroTempo()==null){
                 Intent getContentIntent = FileUtils.createGetContentIntent();
-                Intent intent = Intent.createChooser(getContentIntent, "Selecione vídeo para primeiro tempo.");
+                Intent intent = Intent.createChooser(getContentIntent, getText(R.string.selecione_video_primeiro_set));
                 startActivityForResult(intent, REQUEST_CHOOSER_PRIMEIRO);
             }
         }
-        if (tempoJogo.equals(TiposTempoPartida.SEGUNDO_TEMPO)){
+        if (tempoJogo.equals(TiposTempoPartida.SEGUNDO_SET)){
             if (partida.getPathVideoSegundoTempo()==null){
                 Intent getContentIntent = FileUtils.createGetContentIntent();
-                Intent intent = Intent.createChooser(getContentIntent, "Selecione vídeo para segundo tempo.");
+                Intent intent = Intent.createChooser(getContentIntent, getText(R.string.selecione_video_segundo_set));
                 startActivityForResult(intent, REQUEST_CHOOSER_SEGUNDO);
             }
         }
@@ -342,12 +342,12 @@ public class PartidaDisplayVideoFragment extends Fragment implements TelaPrincip
     }
 
     public void puleVideoParaEvento(EventoPartida eventoPartida) {
-        TiposTempoPartida tempoJogo = TempoHelper.getTempoPartida(partida, eventoPartida.getHora());
+        TiposTempoPartida tempoJogo = TempoHelper.getTipoTempoPartida(partida, eventoPartida.getHora());
         eventoPartidaAtual = eventoPartida;
         chequeVideos(partida, tempoJogo);
         try {
             if (inicializePlayer(tempoJogo)){
-                Date tempoTranscorrido = TempoHelper.tempoDesdeUltimoInicio(partida, eventoPartida.getHora());
+                Date tempoTranscorrido = TempoHelper.getTempoTranscorridoDesdeUltimoInicio(partida, eventoPartida.getHora());
                 Toast.makeText(getActivity(),"Indo para momento " + TempoHelper.getTextoDiferencaTempo(tempoTranscorrido),Toast.LENGTH_SHORT).show();
                 pulePlayerParaDecorridos(tempoTranscorrido);
                 inicieVideo();
@@ -377,11 +377,11 @@ public class PartidaDisplayVideoFragment extends Fragment implements TelaPrincip
     private boolean inicializePlayer(TiposTempoPartida tempoJogo) throws IOException {
 
         String pathVideo=null;
-        if (tempoJogo.equals(TiposTempoPartida.PRIMEIRO_TEMPO)){
+        if (tempoJogo.equals(TiposTempoPartida.PRIMEIRO_SET)){
             pathVideo = partida.getPathVideoPrimeiroTempo();
         }
 
-        if (tempoJogo.equals(TiposTempoPartida.SEGUNDO_TEMPO)){
+        if (tempoJogo.equals(TiposTempoPartida.SEGUNDO_SET)){
             pathVideo = partida.getPathVideoSegundoTempo();
         }
 
@@ -451,10 +451,6 @@ public class PartidaDisplayVideoFragment extends Fragment implements TelaPrincip
             return videoView.canSeekForward();
         }
 
-        @Override
-        public int getAudioSessionId() {
-            return 0;
-        }
     }
 
     @Override

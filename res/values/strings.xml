@@ -75,5 +75,7 @@
     <string name="reenviando_partida">Trying to send match again.</string>
     <string name="lado_1">First Side</string>
     <string name="lado_2">Second Side</string>
+    <string name="selecione_video_primeiro_set">Choose video for first Set.</string>
+    <string name="selecione_video_segundo_set">Choose video for second Set.</string>
 
 </resources>
