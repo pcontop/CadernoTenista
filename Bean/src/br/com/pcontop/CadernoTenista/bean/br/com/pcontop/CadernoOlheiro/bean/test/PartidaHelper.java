@@ -49,7 +49,7 @@ public class PartidaHelper {
         TempoPartida tempoPartida = TempoPartida.create()
                 .setDataInicio(dataInicio)
                 .setDataFim(dataFim)
-                .setTipo(TiposTempoPartida.PRIMEIRO_SET)
+                .setTipo(TipoTempoPartida.PRIMEIRO_SET)
                 .commit();
         return null;
     }

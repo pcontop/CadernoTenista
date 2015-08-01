@@ -13,7 +13,7 @@ public class TempoPartida implements Serializable{
     private String id;
     private Date dataInicio;
     private Date dataFim;
-    private TiposTempoPartida tipoTempoPartida;
+    private TipoTempoPartida tipoTempoPartida;
 
     public String getId() {
         return id;
@@ -35,11 +35,11 @@ public class TempoPartida implements Serializable{
         this.dataFim = dataFim;
     }
 
-    public TiposTempoPartida getTipoTempoPartida() {
+    public TipoTempoPartida getTipoTempoPartida() {
         return tipoTempoPartida;
     }
 
-    public void setTipoTempoPartida(TiposTempoPartida tipoTempoPartida) {
+    public void setTipoTempoPartida(TipoTempoPartida tipoTempoPartida) {
         this.tipoTempoPartida = tipoTempoPartida;
     }
 
@@ -89,7 +89,7 @@ public class TempoPartida implements Serializable{
             return this;
         }
 
-        public Builder setTipo(TiposTempoPartida tipoTempoPartida){
+        public Builder setTipo(TipoTempoPartida tipoTempoPartida){
             tempoPartida.tipoTempoPartida = tipoTempoPartida;
             return this;
         }

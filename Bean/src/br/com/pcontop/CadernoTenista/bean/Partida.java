@@ -97,11 +97,11 @@ public class Partida implements Comparable<Partida>, Serializable {
 
     @JsonIgnore
     public Date getDataInicio() {
-        return getDataInicioTipoTempo(TiposTempoPartida.PRIMEIRO_INTERVALO);
+        return getDataInicioTipoTempo(TipoTempoPartida.PRIMEIRO_INTERVALO);
     }
 
     @JsonIgnore
-    private Date getDataInicioTipoTempo(TiposTempoPartida tipoTempoPartida){
+    private Date getDataInicioTipoTempo(TipoTempoPartida tipoTempoPartida){
         for (TempoPartida tempoPartida: getTemposPartida()){
             if (tempoPartida.getTipoTempoPartida().equals(tipoTempoPartida)){
                 return tempoPartida.getDataInicio();
@@ -112,17 +112,17 @@ public class Partida implements Comparable<Partida>, Serializable {
 
     @JsonIgnore
     public Date getDataFimPrimeiroSet() {
-        return getDataInicioTipoTempo(TiposTempoPartida.PRIMEIRO_INTERVALO);
+        return getDataInicioTipoTempo(TipoTempoPartida.PRIMEIRO_INTERVALO);
     }
 
     @JsonIgnore
     public Date getDataInicioSegundoSet() {
-        return getDataInicioTipoTempo(TiposTempoPartida.SEGUNDO_SET);
+        return getDataInicioTipoTempo(TipoTempoPartida.SEGUNDO_SET);
     }
 
     @JsonIgnore
     public Date getDataFimSegundoSet() {
-        return getDataInicioTipoTempo(TiposTempoPartida.SEGUNDO_INTERVALO);
+        return getDataInicioTipoTempo(TipoTempoPartida.SEGUNDO_INTERVALO);
     }
 
     public Jogador busqueJogadorPorId(String idJogador) {
@@ -295,7 +295,7 @@ public class Partida implements Comparable<Partida>, Serializable {
         return temposPartida;
     }
 
-    public TiposTempoPartida getTipoTempoPartida(){
+    public TipoTempoPartida getTipoTempoPartida(){
         if (tempoPartida==null){
             return null;
         }

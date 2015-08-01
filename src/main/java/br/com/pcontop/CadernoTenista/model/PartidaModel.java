@@ -12,7 +12,7 @@ import br.com.pcontop.CadernoTenista.bean.Olheiro;
 import br.com.pcontop.CadernoTenista.bean.Partida;
 import br.com.pcontop.CadernoTenista.bean.TempoPartida;
 import br.com.pcontop.CadernoTenista.bean.TiposEvento;
-import br.com.pcontop.CadernoTenista.bean.TiposTempoPartida;
+import br.com.pcontop.CadernoTenista.bean.TipoTempoPartida;
 import br.com.pcontop.CadernoTenista.model.dao.DAOFactory;
 import br.com.pcontop.CadernoTenista.model.dao.eventoJogo.EventoJogoDAO;
 import br.com.pcontop.CadernoTenista.model.dao.jogador.JogadorDAO;
@@ -50,7 +50,7 @@ public class PartidaModel {
 
     public Partida criePartida(Localidade local, Olheiro olheiro){
         Jogador jogador1 = crieJogador(null, ColorConstants.COR_PADRAO_JOGADOR_1_AVAI);
-        TempoPartida tempoPartida = crieTempoPartida(TiposTempoPartida.ANTES_PARTIDA, new Date());
+        TempoPartida tempoPartida = crieTempoPartida(TipoTempoPartida.ANTES_PARTIDA, new Date());
 
         Partida partida = Partida.create()
                                  .setLocal(local)
@@ -65,7 +65,7 @@ public class PartidaModel {
         return partida;
     }
 
-    private TempoPartida crieTempoPartida(TiposTempoPartida tipoTempoPartida, Date dataInicio) {
+    private TempoPartida crieTempoPartida(TipoTempoPartida tipoTempoPartida, Date dataInicio) {
         TempoPartida tempoPartida = TempoPartida.create()
                 .setTipo(tipoTempoPartida)
                 .setDataInicio(dataInicio)

@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by PauloBruno on 13/01/14.
  */
-public enum TiposTempoPartida implements Serializable {
+public enum TipoTempoPartida implements Serializable {
     APOS_JOGO("apos_jogo", null),
     SETIMO_SET("setimo_set", APOS_JOGO),
     SEXTO_INTERVALO("sexto_intervalo", SETIMO_SET),
@@ -24,9 +24,9 @@ public enum TiposTempoPartida implements Serializable {
             ;
 
     private final String descricao;
-    private final TiposTempoPartida proximoTipoTempo;
+    private final TipoTempoPartida proximoTipoTempo;
 
-    TiposTempoPartida(String descricao, TiposTempoPartida proximoTipoTempo) {
+    TipoTempoPartida(String descricao, TipoTempoPartida proximoTipoTempo) {
         this.descricao=descricao;
         this.proximoTipoTempo = proximoTipoTempo;
     }
@@ -35,7 +35,7 @@ public enum TiposTempoPartida implements Serializable {
         return descricao;
     }
 
-    public TiposTempoPartida getProximoTipoTempo(){
+    public TipoTempoPartida getProximoTipoTempo(){
         return proximoTipoTempo;
     }
 }

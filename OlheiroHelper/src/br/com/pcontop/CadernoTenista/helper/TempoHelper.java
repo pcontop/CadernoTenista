@@ -2,7 +2,7 @@ package br.com.pcontop.CadernoTenista.helper;
 
 import br.com.pcontop.CadernoTenista.bean.Partida;
 import br.com.pcontop.CadernoTenista.bean.TempoPartida;
-import br.com.pcontop.CadernoTenista.bean.TiposTempoPartida;
+import br.com.pcontop.CadernoTenista.bean.TipoTempoPartida;
 
 import java.util.Date;
 
@@ -67,7 +67,7 @@ public class TempoHelper {
         return tempoPartida.getTipoTempoPartida().getDescricao();
     }
 
-    public static TiposTempoPartida getTipoTempoPartida(Partida partida, Date hora) {
+    public static TipoTempoPartida getTipoTempoPartida(Partida partida, Date hora) {
         TempoPartida tempoPartida = getTempoPartida(partida, hora);
         if (tempoPartida==null){
             return null;

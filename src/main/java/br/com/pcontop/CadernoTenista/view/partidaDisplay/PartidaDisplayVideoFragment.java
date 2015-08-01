@@ -28,7 +28,7 @@ import br.com.pcontop.CadernoTenista.R;
 import br.com.pcontop.CadernoTenista.bean.EventoPartida;
 import br.com.pcontop.CadernoTenista.bean.Jogador;
 import br.com.pcontop.CadernoTenista.bean.Partida;
-import br.com.pcontop.CadernoTenista.bean.TiposTempoPartida;
+import br.com.pcontop.CadernoTenista.bean.TipoTempoPartida;
 import br.com.pcontop.CadernoTenista.bean.TiposEvento;
 import br.com.pcontop.CadernoTenista.control.FabricaController;
 import br.com.pcontop.CadernoTenista.control.OlheiroController;
@@ -280,15 +280,15 @@ public class PartidaDisplayVideoFragment extends Fragment implements TelaPrincip
         }
     }
 
-    private void chequeVideos(Partida partida, TiposTempoPartida tempoJogo){
-        if (tempoJogo.equals(TiposTempoPartida.PRIMEIRO_SET)){
+    private void chequeVideos(Partida partida, TipoTempoPartida tempoJogo){
+        if (tempoJogo.equals(TipoTempoPartida.PRIMEIRO_SET)){
             if (partida.getPathVideoPrimeiroTempo()==null){
                 Intent getContentIntent = FileUtils.createGetContentIntent();
                 Intent intent = Intent.createChooser(getContentIntent, getText(R.string.selecione_video_primeiro_set));
                 startActivityForResult(intent, REQUEST_CHOOSER_PRIMEIRO);
             }
         }
-        if (tempoJogo.equals(TiposTempoPartida.SEGUNDO_SET)){
+        if (tempoJogo.equals(TipoTempoPartida.SEGUNDO_SET)){
             if (partida.getPathVideoSegundoTempo()==null){
                 Intent getContentIntent = FileUtils.createGetContentIntent();
                 Intent intent = Intent.createChooser(getContentIntent, getText(R.string.selecione_video_segundo_set));
@@ -342,7 +342,7 @@ public class PartidaDisplayVideoFragment extends Fragment implements TelaPrincip
     }
 
     public void puleVideoParaEvento(EventoPartida eventoPartida) {
-        TiposTempoPartida tempoJogo = TempoHelper.getTipoTempoPartida(partida, eventoPartida.getHora());
+        TipoTempoPartida tempoJogo = TempoHelper.getTipoTempoPartida(partida, eventoPartida.getHora());
         eventoPartidaAtual = eventoPartida;
         chequeVideos(partida, tempoJogo);
         try {
@@ -374,14 +374,14 @@ public class PartidaDisplayVideoFragment extends Fragment implements TelaPrincip
         videoView.seekTo(tempoTranscorridoMilisec);
     }
 
-    private boolean inicializePlayer(TiposTempoPartida tempoJogo) throws IOException {
+    private boolean inicializePlayer(TipoTempoPartida tempoJogo) throws IOException {
 
         String pathVideo=null;
-        if (tempoJogo.equals(TiposTempoPartida.PRIMEIRO_SET)){
+        if (tempoJogo.equals(TipoTempoPartida.PRIMEIRO_SET)){
             pathVideo = partida.getPathVideoPrimeiroTempo();
         }
 
-        if (tempoJogo.equals(TiposTempoPartida.SEGUNDO_SET)){
+        if (tempoJogo.equals(TipoTempoPartida.SEGUNDO_SET)){
             pathVideo = partida.getPathVideoSegundoTempo();
         }
 
