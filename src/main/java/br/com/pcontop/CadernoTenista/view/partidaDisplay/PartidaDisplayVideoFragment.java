@@ -29,7 +29,7 @@ import br.com.pcontop.CadernoTenista.bean.EventoPartida;
 import br.com.pcontop.CadernoTenista.bean.Jogador;
 import br.com.pcontop.CadernoTenista.bean.Partida;
 import br.com.pcontop.CadernoTenista.bean.TipoTempoPartida;
-import br.com.pcontop.CadernoTenista.bean.TiposEvento;
+import br.com.pcontop.CadernoTenista.bean.TipoEvento;
 import br.com.pcontop.CadernoTenista.control.FabricaController;
 import br.com.pcontop.CadernoTenista.control.OlheiroController;
 import br.com.pcontop.CadernoTenista.helper.TempoHelper;
@@ -237,7 +237,7 @@ public class PartidaDisplayVideoFragment extends Fragment implements TelaPrincip
         }
 
         private void definaCorItem(EventoPartida eventoPartida, LinearLayout layoutItem) {
-            int corTipoEvento = getCorTipoEvento(eventoPartida.getTiposEvento());
+            int corTipoEvento = getCorTipoEvento(eventoPartida.getTipoEvento());
             int corComAlpha = adicioneAlpha(corTipoEvento);
             layoutItem.setBackgroundColor(corComAlpha);
         }
@@ -248,8 +248,8 @@ public class PartidaDisplayVideoFragment extends Fragment implements TelaPrincip
             return cor;
         }
 
-        private int getCorTipoEvento(TiposEvento tiposEvento){
-            switch (tiposEvento.getQualificadorJogada()){
+        private int getCorTipoEvento(TipoEvento tipoEvento){
+            switch (tipoEvento.getQualificadorJogada()){
                 case BOA:
                     return Color.GREEN;
                 case RUIM:
@@ -272,7 +272,7 @@ public class PartidaDisplayVideoFragment extends Fragment implements TelaPrincip
             decorridos.setText(descDecorridos);
 
             TextView tipoEvento = (TextView) layoutItem.findViewById(R.id.lista_passes_tipo_passe);
-            String tipoEventoRaw = eventoPartida.getTiposEvento().getDescricao();
+            String tipoEventoRaw = eventoPartida.getTipoEvento().getDescricao();
             String tipoEventoTraduzido = TextTranslator.translateFromStringName(getActivity(), tipoEventoRaw);
             tipoEvento.setText(tipoEventoTraduzido);
 

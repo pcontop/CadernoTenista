@@ -121,7 +121,7 @@ public class PartidaTransf implements Serializable {
         return dataCriacao;
     }
 
-    public Set<TiposEvento> getTiposEventosSelecionados() {
+    public Set<TipoEvento> getTiposEventosSelecionados() {
         return tiposEventosSelecionados;
     }
 

@@ -95,6 +95,7 @@ public class TempoPartida implements Serializable{
         }
 
         public TempoPartida commit(){
+            tempoPartida.id=UUIDProvider.getNew();
             if (tempoPartida.id==null || tempoPartida.tipoTempoPartida==null){
                 throw new UnsupportedOperationException();
             }

@@ -6,9 +6,9 @@ import java.util.Set;
 /**
  * Created by PauloBruno on 22/06/2014.
  */
-public class SetTiposEventos extends LinkedHashSet<TiposEvento> {
+public class SetTiposEventos extends LinkedHashSet<TipoEvento> {
     public SetTiposEventos( ){};
-    public SetTiposEventos(Set<TiposEvento> tiposEventos){
-        this.addAll(tiposEventos);
+    public SetTiposEventos(Set<TipoEvento> tipoEventos){
+        this.addAll(tipoEventos);
     }
 }

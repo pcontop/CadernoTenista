@@ -54,11 +54,11 @@ public class PartidaHelper {
         return null;
     }
 
-    private static Set<TiposEvento> buildTiposEventos() {
-        HashSet<TiposEvento> tiposEventos = new HashSet<>();
-        tiposEventos.add(TiposEvento.ACE_CERTO);
-        tiposEventos.add(TiposEvento.BACKHAND_CERTO);
-        return tiposEventos;
+    private static Set<TipoEvento> buildTiposEventos() {
+        HashSet<TipoEvento> tipoEventos = new HashSet<>();
+        tipoEventos.add(TipoEvento.ACE_CERTO);
+        tipoEventos.add(TipoEvento.BACKHAND_CERTO);
+        return tipoEventos;
     }
 
     private static Localidade buildLocal() {
@@ -83,7 +83,7 @@ public class PartidaHelper {
         List<EventoPartida> eventos = new ArrayList<>();
         eventos.add(eventoPartida);
         EventoPartida eventoPartida2 = EventoPartida.create()
-                .setTipoEvento(TiposEvento.ACE_CERTO)
+                .setTipoEvento(TipoEvento.ACE_CERTO)
                 .setHora(new Date())
                 .commit();
         eventos.add(eventoPartida2);
@@ -92,13 +92,13 @@ public class PartidaHelper {
 
     private static List<EventoPartida> buildListaEventos2(){
         EventoPartida eventoPartida = EventoPartida.create()
-                .setTipoEvento(TiposEvento.BACKHAND_ERRADO)
+                .setTipoEvento(TipoEvento.BACKHAND_ERRADO)
                 .setHora(new Date())
                 .commit();
         List<EventoPartida> eventos = new ArrayList<EventoPartida>();
         eventos.add(eventoPartida);
         EventoPartida eventoPartida2 = EventoPartida.create()
-                .setTipoEvento(TiposEvento.ACE_ERRADO)
+                .setTipoEvento(TipoEvento.ACE_ERRADO)
                 .setHora(new Date())
                 .commit();
         eventos.add(eventoPartida2);
@@ -107,13 +107,13 @@ public class PartidaHelper {
 
     private static List<EventoPartida> buildListaEventos3(){
         EventoPartida eventoPartida = EventoPartida.create()
-                .setTipoEvento(TiposEvento.BACKHAND_CERTO)
+                .setTipoEvento(TipoEvento.BACKHAND_CERTO)
                 .setHora(new Date())
                 .commit();
         List<EventoPartida> eventos = new ArrayList<EventoPartida>();
         eventos.add(eventoPartida);
         EventoPartida eventoPartida2 = EventoPartida.create()
-                .setTipoEvento(TiposEvento.BACKHAND_ERRADO)
+                .setTipoEvento(TipoEvento.BACKHAND_ERRADO)
                 .setHora(new Date())
                 .commit();
         eventos.add(eventoPartida2);
@@ -122,13 +122,13 @@ public class PartidaHelper {
 
     private static List<EventoPartida> buildListaEventos4(){
         EventoPartida eventoPartida = EventoPartida.create()
-                .setTipoEvento(TiposEvento.ACE_ERRADO)
+                .setTipoEvento(TipoEvento.ACE_ERRADO)
                 .setHora(new Date())
                 .commit();
         List<EventoPartida> eventos = new ArrayList<EventoPartida>();
         eventos.add(eventoPartida);
         EventoPartida eventoPartida2 = EventoPartida.create()
-                .setTipoEvento(TiposEvento.ACE_CERTO)
+                .setTipoEvento(TipoEvento.ACE_CERTO)
                 .setHora(new Date())
                 .commit();
         eventos.add(eventoPartida2);
@@ -138,7 +138,7 @@ public class PartidaHelper {
 
     public static EventoPartida buildEventoJogo(){
         EventoPartida eventoPartida = EventoPartida.create()
-                .setTipoEvento(TiposEvento.ACE_CERTO)
+                .setTipoEvento(TipoEvento.ACE_CERTO)
                 .setHora(new Date())
                 .commit();
         return eventoPartida;

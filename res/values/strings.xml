@@ -77,5 +77,6 @@
     <string name="lado_2">Second Side</string>
     <string name="selecione_video_primeiro_set">Choose video for first Set.</string>
     <string name="selecione_video_segundo_set">Choose video for second Set.</string>
+    <string name="nao_encontrado">Not found.</string>
 
 </resources>

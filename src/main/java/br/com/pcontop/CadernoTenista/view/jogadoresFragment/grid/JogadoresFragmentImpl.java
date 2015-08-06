@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.*;
 import br.com.pcontop.CadernoTenista.R;
 import br.com.pcontop.CadernoTenista.bean.Jogador;
-import br.com.pcontop.CadernoTenista.bean.TiposEvento;
+import br.com.pcontop.CadernoTenista.bean.TipoEvento;
 import br.com.pcontop.CadernoTenista.control.FabricaController;
 import br.com.pcontop.CadernoTenista.control.OlheiroController;
 import br.com.pcontop.CadernoTenista.control.disabler.CanBeDisabled;
@@ -223,18 +223,18 @@ public class JogadoresFragmentImpl extends Fragment implements JogadoresFragment
             }
 
             private void adicioneBotoes() {
-                for (TiposEvento tiposEvento : olheiroController.getTiposEventosJogadoresSelecionados(jogador)){
-                    final TiposEvento tiposEventoPassar = tiposEvento;
+                for (TipoEvento tipoEvento : olheiroController.getTiposEventosJogadoresSelecionados(jogador)){
+                    final TipoEvento tipoEventoPassar = tipoEvento;
                     final ViewGroup externalButton = (ViewGroup) inflater.inflate(R.layout.botao_evento, null, false);
                     final TextView quantidadeEventos = (TextView) externalButton.findViewById(R.id.jogador_quantidade_eventos);
-                    atualizeContagemEvento(tiposEventoPassar, jogador, quantidadeEventos);
+                    atualizeContagemEvento(tipoEventoPassar, jogador, quantidadeEventos);
                     Button botaoEvento = getButtonFromLayout(externalButton);
-                    botaoEvento.setText(olheiroController.getStringDeNomeRef(tiposEvento.getDescricao()));
+                    botaoEvento.setText(olheiroController.getStringDeNomeRef(tipoEvento.getDescricao()));
                     botaoEvento.setOnClickListener(new OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            olheiroController.addEvento(tiposEventoPassar, jogador, new Date());
-                            atualizeContagemEvento(tiposEventoPassar, jogador, quantidadeEventos);
+                            olheiroController.addEvento(tipoEventoPassar, jogador, new Date());
+                            atualizeContagemEvento(tipoEventoPassar, jogador, quantidadeEventos);
                         }
                     });
                     botoes.add(externalButton);
@@ -244,8 +244,8 @@ public class JogadoresFragmentImpl extends Fragment implements JogadoresFragment
                 gridBotoes.setAdapter(new BotoesAdapter());
             }
 
-            private void atualizeContagemEvento(TiposEvento tiposEventoPassar, Jogador jogador, TextView quantidadeEventos) {
-                int quantidade = olheiroController.getQuantidadeEventos(jogador, tiposEventoPassar);
+            private void atualizeContagemEvento(TipoEvento tipoEventoPassar, Jogador jogador, TextView quantidadeEventos) {
+                int quantidade = olheiroController.getQuantidadeEventos(jogador, tipoEventoPassar);
                 quantidadeEventos.setText(quantidade+"");
             }
 

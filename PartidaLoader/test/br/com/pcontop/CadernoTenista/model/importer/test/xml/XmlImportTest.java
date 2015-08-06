@@ -54,6 +54,6 @@ public class XmlImportTest extends Assert {
     private void verifiqueAtributosEvetoJogo(EventoPartida eventoPartida) {
         assertNotNull(eventoPartida.getId());
         assertNotNull(eventoPartida.getHora());
-        assertNotNull(eventoPartida.getTiposEvento());
+        assertNotNull(eventoPartida.getTipoEvento());
     }
 }

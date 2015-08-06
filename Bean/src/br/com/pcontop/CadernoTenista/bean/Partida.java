@@ -21,7 +21,7 @@ public class Partida implements Comparable<Partida>, Serializable {
     private Jogador jogador2;
     private Date dataCriacao;
     private Date ultimoEnvio;
-    private SetTiposEventos tiposEventosSelecionados;
+    private SetTiposEventos tiposEventosSelecionados = new SetTiposEventos();
     private String pathVideoPrimeiroTempo;
     private String pathVideoSegundoTempo;
     private TempoPartida tempoPartida;
@@ -158,8 +158,8 @@ public class Partida implements Comparable<Partida>, Serializable {
             return this;
         }
 
-        public Builder setTiposEventosSelecionados(Set<TiposEvento> tiposEventosSelecionados) {
-            partida.tiposEventosSelecionados = new SetTiposEventos(tiposEventosSelecionados);
+        public Builder setTiposEventosSelecionados(Set<TipoEvento> tipoEventosSelecionados) {
+            partida.tiposEventosSelecionados = new SetTiposEventos(tipoEventosSelecionados);
             return this;
         }
 
@@ -242,7 +242,7 @@ public class Partida implements Comparable<Partida>, Serializable {
         return dataCriacao;
     }
 
-    public Set<TiposEvento> getTiposEventosSelecionados() {
+    public Set<TipoEvento> getTiposEventosSelecionados() {
         return tiposEventosSelecionados;
     }
 

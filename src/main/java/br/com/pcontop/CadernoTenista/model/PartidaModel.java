@@ -5,14 +5,15 @@ import android.content.Context;
 import java.util.Date;
 import java.util.List;
 
+import br.com.pcontop.CadernoTenista.R;
 import br.com.pcontop.CadernoTenista.bean.EventoPartida;
 import br.com.pcontop.CadernoTenista.bean.Jogador;
 import br.com.pcontop.CadernoTenista.bean.Localidade;
 import br.com.pcontop.CadernoTenista.bean.Olheiro;
 import br.com.pcontop.CadernoTenista.bean.Partida;
 import br.com.pcontop.CadernoTenista.bean.TempoPartida;
-import br.com.pcontop.CadernoTenista.bean.TiposEvento;
 import br.com.pcontop.CadernoTenista.bean.TipoTempoPartida;
+import br.com.pcontop.CadernoTenista.bean.TipoEvento;
 import br.com.pcontop.CadernoTenista.model.dao.DAOFactory;
 import br.com.pcontop.CadernoTenista.model.dao.eventoJogo.EventoJogoDAO;
 import br.com.pcontop.CadernoTenista.model.dao.jogador.JogadorDAO;
@@ -22,7 +23,6 @@ import br.com.pcontop.CadernoTenista.model.export.Exporter;
 import br.com.pcontop.CadernoTenista.model.export.ExporterException;
 import br.com.pcontop.CadernoTenista.model.export.ExporterFactory;
 import br.com.pcontop.CadernoTenista.view.ColorConstants;
-import javafx.scene.paint.Color;
 
 /**
  * Created with IntelliJ IDEA.
@@ -48,21 +48,28 @@ public class PartidaModel {
         this.localidadeDAO=DAOFactory.getLocalidadeDAO(context);
     }
 
-    public Partida criePartida(Localidade local, Olheiro olheiro){
+    public Partida criePartidaAtual(){
         Jogador jogador1 = crieJogador(null, ColorConstants.COR_PADRAO_JOGADOR_1_AVAI);
         TempoPartida tempoPartida = crieTempoPartida(TipoTempoPartida.ANTES_PARTIDA, new Date());
 
         Partida partida = Partida.create()
-                                 .setLocal(local)
-                                 .setOlheiro(olheiro)
+                                 .setLocal(getLocal())
+                                 .setOlheiro(getOlheiro())
                                  .setJogador1(jogador1)
                                  .setTempoPartida(tempoPartida)
                                  .commit();
 
-        partida.getTiposEventosSelecionados().add(TiposEvento.BACKHAND_CERTO);
-        partida.getTiposEventosSelecionados().add(TiposEvento.BACKHAND_ERRADO);
+        partida.getTiposEventosSelecionados().add(TipoEvento.BACKHAND_CERTO);
+        partida.getTiposEventosSelecionados().add(TipoEvento.BACKHAND_ERRADO);
         setPartidaAtual(partida);
         return partida;
+    }
+
+    public Localidade getLocal() {
+        if (getPartidaAtual()==null){
+            return null;
+        }
+        return getPartidaAtual().getLocal();
     }
 
     private TempoPartida crieTempoPartida(TipoTempoPartida tipoTempoPartida, Date dataInicio) {
@@ -119,15 +126,15 @@ public class PartidaModel {
     }
 
 
-    public void crieEventoEInsira(TiposEvento tiposEvento, Jogador jogador, Date hora){
-        EventoPartida eventoPartida = crieEvento(tiposEvento, hora);
+    public void crieEventoEInsira(TipoEvento tipoEvento, Jogador jogador, Date hora){
+        EventoPartida eventoPartida = crieEvento(tipoEvento, hora);
         jogador.getEventos().add(eventoPartida);
         insiraOuAtualize(eventoPartida);
     }
 
-    public EventoPartida crieEvento(TiposEvento tiposEvento, Date hora){
+    public EventoPartida crieEvento(TipoEvento tipoEvento, Date hora){
             EventoPartida eventoPartida = EventoPartida.create()
-                    .setTipoEvento(tiposEvento)
+                    .setTipoEvento(tipoEvento)
                     .setHora(hora)
                     .commit();
             return eventoPartida;
@@ -145,7 +152,8 @@ public class PartidaModel {
     }
 
     public int getCor(Jogador jogador) {
-        return jogador.getCorAsInt();
+        int cor = 0xff000000 + Integer.parseInt(jogador.getCor(),16);
+        return cor;
     }
 
 
@@ -156,6 +164,13 @@ public class PartidaModel {
 
     public Partida getPartidaAtual(){
         return partidaAtual;
+    }
+
+    public Partida getPartidaAtualOuCrie(){
+        if (getPartidaAtual()==null){
+            criePartidaAtual();
+        }
+        return getPartidaAtual();
     }
 
     public void recuperePartida(String idPartida) {
@@ -177,8 +192,8 @@ public class PartidaModel {
         //ODBProvider.closeConnection();
     }
 
-    public int getQuantidadeEventos(Jogador jogador, TiposEvento tiposEventoPassar) {
-        return jogador.busqueEventosdoTipo(tiposEventoPassar).size();
+    public int getQuantidadeEventos(Jogador jogador, TipoEvento tipoEventoPassar) {
+        return jogador.busqueEventosdoTipo(tipoEventoPassar).size();
     }
 
     public boolean exportePartida(Partida partida) throws ExporterException {
@@ -219,14 +234,15 @@ public class PartidaModel {
     }
 
     public int getCorJogador1() {
-        return partidaAtual.getJogador1().getCorAsInt();
+        return getCor(partidaAtual.getJogador1());
     }
 
     public int getCorJogador2() {
         Jogador jogador2 = partidaAtual.getJogador2();
         if (jogador2!=null) {
-            return partidaAtual.getJogador2().getCorAsInt();
+            return getCor(partidaAtual.getJogador2());
         }
-        return 0xff000000 + Integer.parseInt(Color.AQUAMARINE.toString(),16);
+        return context.getResources().getColor(R.color.aqua);
     }
+
 }

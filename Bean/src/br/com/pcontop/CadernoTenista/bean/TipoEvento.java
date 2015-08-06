@@ -9,7 +9,7 @@ import java.io.Serializable;
  * time: 22:34
  * To change this template use File | Settings | File Templates.
  */
-public enum TiposEvento implements Serializable {
+public enum TipoEvento implements Serializable {
     BACKHAND_CERTO("jogador_backhand_certo", QualificadorJogada.BOA),
     BACKHAND_ERRADO("jogador_backhand_errado", QualificadorJogada.RUIM),
     ACE_CERTO("jogador_ace_certo", QualificadorJogada.BOA),
@@ -27,7 +27,7 @@ public enum TiposEvento implements Serializable {
         return qualificadorJogada;
     }
 
-    TiposEvento(String descricao, QualificadorJogada qualificadorJogada){
+    TipoEvento(String descricao, QualificadorJogada qualificadorJogada){
         this.descricao = descricao;
         this.qualificadorJogada = qualificadorJogada;
     }

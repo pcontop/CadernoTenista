@@ -19,7 +19,7 @@ public class EventoPartida implements Comparable<EventoPartida>, Serializable {
     @Id
     private String id;
     @Enumerated(EnumType.STRING)
-    private TiposEvento tiposEvento;
+    private TipoEvento tipoEvento;
     private Date hora;
 
     private EventoPartida() {
@@ -38,8 +38,8 @@ public class EventoPartida implements Comparable<EventoPartida>, Serializable {
     public static class Builder {
         EventoPartida eventoPartida = new EventoPartida();
 
-        public Builder setTipoEvento(TiposEvento tiposEvento) {
-            eventoPartida.tiposEvento = tiposEvento;
+        public Builder setTipoEvento(TipoEvento tipoEvento) {
+            eventoPartida.tipoEvento = tipoEvento;
             return this;
         }
 
@@ -86,7 +86,7 @@ public class EventoPartida implements Comparable<EventoPartida>, Serializable {
     public String toString() {
         String result = "EventoPartida: ["
                 + "id: " + id
-                + ", Tipo Evento: " + tiposEvento
+                + ", Tipo Evento: " + tipoEvento
                 + ", Hora: " + hora
                 +"]";
         return result;
@@ -96,8 +96,8 @@ public class EventoPartida implements Comparable<EventoPartida>, Serializable {
         return id;
     }
 
-    public TiposEvento getTiposEvento() {
-        return tiposEvento;
+    public TipoEvento getTipoEvento() {
+        return tipoEvento;
     }
 
     public Date getHora() {

@@ -2,7 +2,7 @@ package br.com.pcontop.CadernoTenista.control.dialogs;
 
 import br.com.pcontop.CadernoTenista.bean.Jogador;
 import br.com.pcontop.CadernoTenista.bean.Partida;
-import br.com.pcontop.CadernoTenista.bean.TiposEvento;
+import br.com.pcontop.CadernoTenista.bean.TipoEvento;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -29,7 +29,7 @@ public class DialogEventosHelper {
 
     public static boolean[] getTiposEventosJogadorSelecionados(Partida partida) {
         List<Boolean> ativos = new ArrayList<>();
-        for (TiposEvento evento: TiposEvento.values()){
+        for (TipoEvento evento: TipoEvento.values()){
             ativos.add(partida.getTiposEventosSelecionados().contains(evento));
         }
         boolean[] ativosArray = new boolean[ativos.size()];
@@ -46,7 +46,7 @@ public class DialogEventosHelper {
         if (jogador.getTiposEventos()==null){
             return getTiposEventosJogadorSelecionados(partida);
         }
-        for (TiposEvento evento: TiposEvento.values()){
+        for (TipoEvento evento: TipoEvento.values()){
             ativos.add(jogador.getTiposEventos().contains(evento));
         }
         boolean[] ativosArray = new boolean[ativos.size()];
@@ -61,7 +61,7 @@ public class DialogEventosHelper {
     public static void setTiposEventosSelecionadosPartida(Partida partida, Set<Integer> selectedTiposEventos){
         partida.getTiposEventosSelecionados().clear();
         for (Integer posicao:selectedTiposEventos){
-            partida.getTiposEventosSelecionados().add(TiposEvento.values()[posicao]);
+            partida.getTiposEventosSelecionados().add(TipoEvento.values()[posicao]);
         }
     }
 
@@ -72,7 +72,7 @@ public class DialogEventosHelper {
             jogador.inicializeTiposEventos();
         }
         for (Integer posicao:selectedTiposEventos){
-            jogador.getTiposEventos().add(TiposEvento.values()[posicao]);
+            jogador.getTiposEventos().add(TipoEvento.values()[posicao]);
         }
     }
 

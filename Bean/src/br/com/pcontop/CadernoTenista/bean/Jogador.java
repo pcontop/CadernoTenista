@@ -1,12 +1,15 @@
 package br.com.pcontop.CadernoTenista.bean;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  * Created with IntelliJ IDEA.
@@ -21,11 +24,11 @@ public class Jogador implements Serializable {
     private String id;
     private String nome;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<EventoPartida> eventos;
-    private SetTiposEventos tiposEventos;
+    private List<EventoPartida> eventos = new ArrayList<>();
+    private SetTiposEventos tiposEventos = new SetTiposEventos();
     private String cor;
 
-    public Set<TiposEvento> getTiposEventos() {
+    public Set<TipoEvento> getTiposEventos() {
         return tiposEventos;
     }
 
@@ -50,12 +53,6 @@ public class Jogador implements Serializable {
 
     }
 
-    @JsonIgnore
-    public int getCorAsInt(){
-        int cor = 0xff000000 + Integer.parseInt(this.cor,16);
-        return cor;
-    }
-
     public String getCor() {
         return cor;
     }
@@ -77,10 +74,10 @@ public class Jogador implements Serializable {
         return new Builder();
     }
 
-    public List<EventoPartida> busqueEventosdoTipo(TiposEvento tiposEvento){
+    public List<EventoPartida> busqueEventosdoTipo(TipoEvento tipoEvento){
         List<EventoPartida> eventosDoTipo = new ArrayList<>();
         for (EventoPartida eventoPartida :eventos) {
-            if (eventoPartida.getTiposEvento().equals(tiposEvento)){
+            if (eventoPartida.getTipoEvento().equals(tipoEvento)){
                 eventosDoTipo.add(eventoPartida);
             }
         }
@@ -104,8 +101,8 @@ public class Jogador implements Serializable {
             return this;
         }
 
-        public Builder setTiposEventos(Set<TiposEvento> tiposEventos){
-            jogador.tiposEventos = (SetTiposEventos) tiposEventos;
+        public Builder setTiposEventos(Set<TipoEvento> tipoEventos){
+            jogador.tiposEventos = (SetTiposEventos) tipoEventos;
             return this;
         }
 
@@ -153,7 +150,7 @@ public class Jogador implements Serializable {
     public List<EventoPartida> busqueEventos(QualificadorJogada qualificadorJogada){
         List<EventoPartida> eventosDoQualificador = new ArrayList<>();
         for (EventoPartida eventoPartida : eventos){
-            if (eventoPartida.getTiposEvento().getQualificadorJogada().equals(qualificadorJogada)){
+            if (eventoPartida.getTipoEvento().getQualificadorJogada().equals(qualificadorJogada)){
                 eventosDoQualificador.add(eventoPartida);
             }
         }

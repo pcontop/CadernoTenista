@@ -130,7 +130,7 @@ public class FileExporterExcel extends FileExporter {
         cell.setCellStyle(styles.get("cell_normal_date"));
 
         cell = linha1.createCell(3);
-        String tipoEvento = TextTranslator.translateFromStringName(getContext(), eventoPartida.getTiposEvento().getDescricao());
+        String tipoEvento = TextTranslator.translateFromStringName(getContext(), eventoPartida.getTipoEvento().getDescricao());
         cell.setCellValue(tipoEvento);
         cell.setCellStyle(styles.get("cell_normal"));
 
