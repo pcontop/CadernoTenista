@@ -1,19 +1,20 @@
 package br.com.pcontop.CadernoTenista.model.dao.test;
 
-import br.com.pcontop.CadernoTenista.bean.Partida;
-import br.com.pcontop.CadernoTenista.model.dao.DAOFactory;
-import br.com.pcontop.CadernoTenista.bean.UUIDProvider;
-import br.com.pcontop.CadernoTenista.model.dao.partida.PartidaDaoNeodatis;
 import junit.framework.Assert;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.neodatis.odb.OID;
 
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import br.com.pcontop.CadernoTenista.bean.Partida;
+import br.com.pcontop.CadernoTenista.bean.UUIDProvider;
+import br.com.pcontop.CadernoTenista.model.dao.DAOFactory;
+import br.com.pcontop.CadernoTenista.model.dao.partida.PartidaDaoNeodatis;
 
 /**
  * Created with IntelliJ IDEA.

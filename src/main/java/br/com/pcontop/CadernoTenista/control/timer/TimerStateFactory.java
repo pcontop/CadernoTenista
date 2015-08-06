@@ -22,7 +22,7 @@ public class TimerStateFactory {
             case APOS_JOGO:
                 return new TimerStateFinal().setOlheiroController(olheiroController);
             default:
-                return null;
+                return new TimerStateInicial().setOlheiroController(olheiroController);
         }
     }
 

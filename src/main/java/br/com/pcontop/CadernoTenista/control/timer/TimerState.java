@@ -12,6 +12,7 @@ import br.com.pcontop.CadernoTenista.view.TimerFragment;
 public interface TimerState {
     public TimerState inicialize(TimerState lastTimerState);
     public TimerState transiteProximoEstado();
+    public TimerState transiteFimDePartida();
     public TimerStateType getTimerStateType();
     public TimerState recuperarDescanso(TimerFragment timerFragment);
     public void updateTimerWatchers();

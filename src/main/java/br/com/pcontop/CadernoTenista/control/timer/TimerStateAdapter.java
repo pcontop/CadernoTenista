@@ -52,11 +52,20 @@ public abstract class TimerStateAdapter implements TimerState {
         }
     }
 
+    @Override
+    public TimerState transiteFimDePartida() {
+        olheiroController.transiteFimDePartida(new Date());
+        return getTimerState();
+    }
 
     @Override
     public TimerState transiteProximoEstado() {
         olheiroController.transiteProximoTempoPartida(new Date());
-        TimerState proximoEstado = TimerStateFactory.busque(olheiroController);
+        return getTimerState();
+    }
+
+    private TimerState getTimerState() {
+        TimerState proximoEstado = TimerStateFactory.crie(olheiroController, this);
         this.destroy();
         return proximoEstado;
     }

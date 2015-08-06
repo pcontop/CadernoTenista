@@ -57,13 +57,11 @@ public class PartidaModel {
 
     public Partida criePartidaAtual(){
         Jogador jogador1 = crieJogador(context.getString(R.string.jogador1), ColorConstants.COR_PADRAO_JOGADOR_1_AVAI);
-        TempoPartida tempoPartida = crieTempoPartida(TipoTempoPartida.ANTES_PARTIDA, new Date());
 
         Partida partida = Partida.create()
                                  .setLocal(getLocal())
                                  .setOlheiro(getOlheiro())
                                  .setJogador1(jogador1)
-                                 .setTempoPartida(tempoPartida)
                                  .commit();
 
         partida.getTiposEventosSelecionados().add(TipoEvento.BACKHAND_CERTO);
@@ -195,7 +193,7 @@ public class PartidaModel {
         setPartidaAtual(partida);
     }
 
-    public void salvePartida() {
+    public void salvePartidaAtual() {
         insiraOuAtualize(partidaAtual);
     }
 
@@ -228,7 +226,7 @@ public class PartidaModel {
             localidade = getNewLocalidade(descricao, latitude, longitude);
         }
         partidaAtual.setLocal(localidade);
-        salvePartida();
+        salvePartidaAtual();
         return localidade;
     }
 
@@ -242,12 +240,16 @@ public class PartidaModel {
     }
 
     public void transiteProximoTempoPartida(Date date) {
-        partidaAtual.transiteProximoTempo(date);
+        if (!partidaAtual.transiteProximoTempo(date)){
+            salvePartidaAtual();
+            criePartidaAtual();
+        }
+        salvePartidaAtual();
     }
 
     public void removaJogador(Jogador jogador) {
         partidaAtual.remova(jogador);
-        salvePartida();
+        salvePartidaAtual();
     }
 
     public int getCorJogador1() {
@@ -262,4 +264,8 @@ public class PartidaModel {
         return context.getResources().getColor(R.color.aqua);
     }
 
+    public void transiteFimDePartida(Date date) {
+        partidaAtual.transiteFimDePartida(date);
+        salvePartidaAtual();
+    }
 }

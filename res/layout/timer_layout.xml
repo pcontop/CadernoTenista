@@ -76,4 +76,13 @@
             android:text=""
             android:textColor="#000000"
             />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/timer_botao_fim"
+                android:orientation="vertical"
+                android:layout_below="@id/timer_botao"
+                android:text="@string/terminar_partida"
+                android:textColor="#000000"
+                />
     </RelativeLayout>

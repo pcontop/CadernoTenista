@@ -1,4 +1,4 @@
-package br.com.pcontop.CadernoTenista.bean.br.com.pcontop.CadernoOlheiro.bean.test;
+package br.com.pcontop.CadernoTenista.bean.test;
 
 import br.com.pcontop.CadernoTenista.bean.*;
 
@@ -15,8 +15,6 @@ public class PartidaHelper {
 
     public static Partida buildPartidaMinima(){
         Partida partida = Partida.create()
-                .setTiposEventosSelecionados(null)
-                .setLocal(null)
                 .commit();
         return partida;
     }
@@ -31,7 +29,6 @@ public class PartidaHelper {
                 .setJogador1(buildJogador())
                 .setJogador2(buildJogador2())
                 .setTempoPartida(buildTempoPartida())
-                .setTemposPartida(buildTemposPartida())
                 .commit();
         return partida;
     }
@@ -51,7 +48,7 @@ public class PartidaHelper {
                 .setDataFim(dataFim)
                 .setTipo(TipoTempoPartida.PRIMEIRO_SET)
                 .commit();
-        return null;
+        return tempoPartida;
     }
 
     private static Set<TipoEvento> buildTiposEventos() {

@@ -278,7 +278,7 @@ public class OlheiroController {
     }
 
     public void salvePartida() {
-        partidaModel.salvePartida();
+        partidaModel.salvePartidaAtual();
     }
 
     public void setListaPartidasMainFragment(ListaPartidasMainFragment listaPartidasMainFragment) {
@@ -449,6 +449,10 @@ public class OlheiroController {
         partidaModel.transiteProximoTempoPartida(date);
     }
 
+    public void transiteFimDePartida(Date date) {
+        partidaModel.transiteFimDePartida(date);
+    }
+
     public TempoPartida getTempoPartidaAtual(){
         return getPartidaOuCrie().getTempoPartida();
     }
@@ -464,4 +468,5 @@ public class OlheiroController {
     public int getCorJogador2() {
         return partidaModel.getCorJogador2();
     }
+
 }

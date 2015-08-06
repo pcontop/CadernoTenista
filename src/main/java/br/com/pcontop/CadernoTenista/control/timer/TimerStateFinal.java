@@ -1,5 +1,6 @@
 package br.com.pcontop.CadernoTenista.control.timer;
 
+import br.com.pcontop.CadernoTenista.R;
 import br.com.pcontop.CadernoTenista.view.TimerFragment;
 
 /**
@@ -13,6 +14,7 @@ public class TimerStateFinal extends TimerStateAdapter {
     @Override
     public TimerState inicialize(TimerState lastTimerState) {
         super.inicialize(lastTimerState);
+        getTimerFragment().setBotaoTimerTexto(R.string.iniciar_partida);
         return transiteProximoEstado();
     }
 

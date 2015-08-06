@@ -27,6 +27,7 @@ import br.com.pcontop.CadernoTenista.control.timer.TimerStateFactory;
  */
 public class TimerFragmentImpl extends Fragment implements TimerFragment {
     private Button botaoTimer;
+    private Button botaoFimPartida;
     private static TextView relogio;
     private static int estadoSalvo;
     private static final String SALVAR_ESTADO="estado";
@@ -145,8 +146,10 @@ public class TimerFragmentImpl extends Fragment implements TimerFragment {
 
     private void inicializeViews(RelativeLayout relativeLayout) {
         botaoTimer = (Button) relativeLayout.findViewById(R.id.timer_botao);
+        botaoFimPartida = (Button) relativeLayout.findViewById(R.id.timer_botao_fim);
         relogio = (TextView) relativeLayout.findViewById(R.id.timer_display);
         definaComportamentoBotao();
+        definaComportamentoBotaoFim();
     }
 
     private void definaComportamentoBotao() {
@@ -158,8 +161,21 @@ public class TimerFragmentImpl extends Fragment implements TimerFragment {
         });
     }
 
+    private void definaComportamentoBotaoFim() {
+        botaoFimPartida.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                acaoBotaoFimPartida();
+            }
+        });
+    }
+
     private void acaoBotao() {
         setTimerState(getTimerState().transiteProximoEstado());
+    }
+
+    private void acaoBotaoFimPartida() {
+        setTimerState(getTimerState().transiteFimDePartida());
     }
 
     @Override
