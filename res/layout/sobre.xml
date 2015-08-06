@@ -36,25 +36,12 @@
               android:layout_toRightOf="@id/about_developer"
               style="@style/SobreNormal"
             />
-    <TextView android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:text="@string/colaboracao"
-              android:layout_below="@id/about_developer"
-              android:id="@+id/about_colaboracao"
-              style="@style/SobreBold"
-            />
-    <TextView android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:text="@string/olhar_digital"
-              android:layout_below="@id/about_developer"
-              android:layout_toRightOf="@id/about_colaboracao"
-              style="@style/SobreNormal"
-            />
+
 
     <TextView android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:text="@string/avaliacao_disclaimer"
-              android:layout_below="@id/about_colaboracao"
+              android:layout_below="@id/about_developer"
               android:gravity="center"
               style="@style/SobreBold"
               android:paddingTop="25dp"

@@ -212,10 +212,13 @@ public class PartidaModel {
     }
 
     public boolean exportePartida(Partida partida) throws ExporterException {
+        int quantidade=3;
         Exporter exporter = ExporterFactory.getInstance();
-        if (exporter.export(context, partida)){
-            insiraOuAtualize(partida);
-            return true;
+        for (int i=0;i<quantidade;i++) {
+            if (exporter.export(context, partida)) {
+                insiraOuAtualize(partida);
+                return true;
+            }
         }
         return false;
     }

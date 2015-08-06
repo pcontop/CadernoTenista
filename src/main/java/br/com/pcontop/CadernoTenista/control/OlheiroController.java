@@ -2,6 +2,7 @@ package br.com.pcontop.CadernoTenista.control;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -312,23 +313,8 @@ public class OlheiroController {
         return partidaModel.getQuantidadeEventos(jogador, tipoEventoPassar);
     }
 
-    public boolean exportePartida(Activity activity, Partida partida){
-        int contador=0;
-        while (contador < 3){
-
-            try {
-                if (partidaModel.exportePartida(partida)) {
-                    toast(activity, R.string.partida_enviada, Toast.LENGTH_SHORT);
-                    return true;
-                }
-            } catch (ExporterException e) {
-                Log.e("CadernoOlheiro","Problema ao exportar",e);
-            }
-            contador++;
-            toast(R.string.reenviando_partida, Toast.LENGTH_SHORT);
-        }
-        toast(activity, R.string.erro_exportacao, Toast.LENGTH_SHORT);
-        return false;
+    public void exportePartida(Activity activity, Partida partida){
+        new EnviePartidaAsync(activity, getPartida()).execute();
     }
 
     public void removaPartidaDaLista(Partida partida) {
@@ -468,5 +454,47 @@ public class OlheiroController {
     public int getCorJogador2() {
         return partidaModel.getCorJogador2();
     }
+
+    public void exportePartidaAtual(Activity activity){
+        new EnviePartidaAsync(activity, getPartida()).execute();
+    }
+
+    private class EnviePartidaAsync extends AsyncTask<String,Integer,Boolean> {
+
+        private final Activity activity;
+        private final Partida partida;
+        private boolean resultado=false;
+
+        public EnviePartidaAsync(Activity activity, Partida partida){
+            super();
+            this.activity = activity;
+            this.partida = partida;
+        }
+
+        @Override
+        protected Boolean doInBackground(String... strings) {
+            try {
+                if (partidaModel.exportePartida(partida)) {
+                    resultado = true;
+                    return true;
+                }
+            } catch (ExporterException e) {
+                Log.e("CadernoOlheiro", "Problema ao exportar", e);
+            }
+            return false;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean aBoolean) {
+            if (resultado){
+                toast(activity, R.string.partida_enviada, Toast.LENGTH_SHORT);
+            } else {
+                Toast.makeText(context,context.getText(R.string.erro_exportacao),Toast.LENGTH_SHORT).show();
+            }
+            super.onPostExecute(aBoolean);
+            atualizeDisplayPartida();
+        }
+    }
+
 
 }

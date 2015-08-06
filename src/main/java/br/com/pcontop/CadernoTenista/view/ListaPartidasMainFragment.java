@@ -4,18 +4,27 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
-import android.view.*;
-import android.widget.*;
-import br.com.pcontop.CadernoTenista.R;
-import br.com.pcontop.CadernoTenista.bean.Partida;
-import br.com.pcontop.CadernoTenista.control.FabricaController;
-import br.com.pcontop.CadernoTenista.control.OlheiroController;
+import android.view.ContextMenu;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
+
+import br.com.pcontop.CadernoTenista.R;
+import br.com.pcontop.CadernoTenista.bean.Partida;
+import br.com.pcontop.CadernoTenista.control.FabricaController;
+import br.com.pcontop.CadernoTenista.control.OlheiroController;
 
 /**
  * Created with IntelliJ IDEA.
@@ -112,21 +121,6 @@ public class ListaPartidasMainFragment extends Fragment implements TelaPrincipal
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    }
-
-    private void enviar(Partida partida){
-        //Toast.makeText(getActivity(),"Enviando partida " + partida,Toast.LENGTH_SHORT).show();
-        try {
-            Boolean resultado = new EnviePartidaAsync(getActivity(), olheiroController).execute(partida).get() ;
-            if (resultado){
-                this.refreshDisplay();
-            }
-        } catch (InterruptedException e) {
-            Log.e("ListPartidasMainFragment", "Erro ao enviar partida.", e);
-        } catch (ExecutionException e) {
-            Log.e("ListPartidasMainFragment", "Erro ao enviar partida.", e);
-        }
-        //olheiroController.exportePartida(getActivity(), partida);
     }
 
     private void remover(Partida partida){
@@ -226,7 +220,7 @@ public class ListaPartidasMainFragment extends Fragment implements TelaPrincipal
         Partida partida = partidas.get(info.position);
         switch (menuItemIndex){
             case R.id.context_menu_lista_partidas_enviar:
-                enviar(partida);
+                olheiroController.exportePartida(getActivity(), partida);
                 return true;
             case R.id.context_menu_lista_partidas_remover:
                 remover(partida);

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.res.Configuration;
 import android.media.MediaPlayer;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
@@ -185,19 +186,7 @@ public class DrawerPartida extends Activity {
                 olheiroController.definaEventosPartida();
                 return true;
             case R.id.menu_partida_enviar_partida:
-
-                //olheiroController.exportePartidaDisplayPartida();
-                try {
-                    Partida partida = olheiroController.getPartidaDisplayPartida();
-                    Boolean result = new EnviePartidaAsync(this, olheiroController).execute(partida).get();
-                    if (result){
-                        olheiroController.atualizeDisplayPartida();
-                    }
-                } catch (InterruptedException e) {
-                    Log.e("DrawerPartida","Erro ao enviar partida.",e);
-                } catch (ExecutionException e) {
-                    Log.e("DrawerPartida","Erro ao enviar partida.",e);
-                }
+                olheiroController.exportePartidaAtual(this);
                 return true;
             case R.id.menu_partida_escolher_local:
                 olheiroController.definaLocalidadePartida();
