@@ -18,19 +18,10 @@
     <string name="alterar_nome">Alterar</string>
     <string name="defina_nome_jogador">Nome do Jogador</string>
     <string name="escolher_eventos">Eventos</string>
-    <string name="jogador_chute_a_gol_defendido">Chute a Gol: Defendido</string>
-    <string name="jogador_chute_a_gol_fora">Chute a Gol: Fora</string>
-    <string name="jogador_chute_a_gol_gol">Chute a Gol: Gol</string>
-    <string name="jogador_lancamento_certo">Lançamento Certo</string>
-    <string name="jogador_lancamento_errado">Lançamento Errado</string>
-    <string name="jogador_drible_certo">Drible Certo</string>
-    <string name="jogador_drible_errado">Drible Errado</string>
-    <string name="jogador_desarme_recuperacao">Desarme: Recuperação</string>
-    <string name="jogador_desarme_falta">Desarme: Falta</string>
-    <string name="jogador_desarme_tentativa">Desarme: Tentativa</string>
-    <string name="jogador_interceptacao_certa">Interceptação Certa</string>
-    <string name="jogador_interceptacao_errada">Interceptação Errada</string>
-    <string name="jogador_falta_sofrida">Falta Sofrida</string>
+    <string name="ace_certo">Ace: Certo</string>
+    <string name="ace_errado">Ace: Errado</string>
+    <string name="jogador_backhand_certo">Backhand: Certo</string>
+    <string name="jogador_backhand_errado">Backhand: Errado</string>
     <string name="escolha_eventos">Escolha Eventos</string>
     <string name="ok">Ok</string>
     <string name="cancelar">Cancelar</string>
@@ -77,5 +68,6 @@
     <string name="selecione_video_primeiro_set">Escolha o vídeo para o primeiro Set.</string>
     <string name="selecione_video_segundo_set">Escolha o vídeo para o segundo Set.</string>
     <string name="nao_encontrado">Não encontrado.</string>
+    <string name="jogador1">Jogador 1</string>
 
 </resources>

@@ -19,19 +19,10 @@
     <string name="alterar_nome">Alter</string>
     <string name="defina_nome_jogador">Player\'s Name</string>
     <string name="escolher_eventos">Events</string>
-    <string name="jogador_chute_a_gol_defendido">Goal Kick: Defended</string>
-    <string name="jogador_chute_a_gol_fora">Goal Kick: Out</string>
-    <string name="jogador_chute_a_gol_gol">Goal Kick: Goal</string>
-    <string name="jogador_lancamento_certo">Correct Stroke</string>
-    <string name="jogador_lancamento_errado">Wrong Stroke</string>
-    <string name="jogador_drible_certo">Correct Dribble</string>
-    <string name="jogador_drible_errado">Wrong Dribble</string>
-    <string name="jogador_desarme_recuperacao">Disarm: Recovery</string>
-    <string name="jogador_desarme_falta">Disarm: Foul</string>
-    <string name="jogador_desarme_tentativa">Disarm: Attempt</string>
-    <string name="jogador_interceptacao_certa">Correct Interception</string>
-    <string name="jogador_interceptacao_errada">Wrong Interception</string>
-    <string name="jogador_falta_sofrida">Suffered Foul</string>
+    <string name="ace_certo">Ace: Correct</string>
+    <string name="ace_errado">Ace: Incorrect</string>
+    <string name="jogador_backhand_certo">Backhand: Correct</string>
+    <string name="jogador_backhand_errado">Backhand: Incorrect</string>
     <string name="escolha_eventos">Choose Events</string>
     <string name="ok">Ok</string>
     <string name="cancelar">Cancel</string>
@@ -78,5 +69,6 @@
     <string name="selecione_video_primeiro_set">Choose video for first Set.</string>
     <string name="selecione_video_segundo_set">Choose video for second Set.</string>
     <string name="nao_encontrado">Not found.</string>
+    <string name="jogador1">Player 1</string>
 
 </resources>

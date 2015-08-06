@@ -26,6 +26,7 @@ public class Partida implements Comparable<Partida>, Serializable {
     private String pathVideoSegundoTempo;
     private TempoPartida tempoPartida;
     private ListTemposPartida temposPartida = new ListTemposPartida();
+    private Date dataInicio;
 
     private Partida(){
         dataCriacao = new Date();
@@ -97,7 +98,7 @@ public class Partida implements Comparable<Partida>, Serializable {
 
     @JsonIgnore
     public Date getDataInicio() {
-        return getDataInicioTipoTempo(TipoTempoPartida.PRIMEIRO_INTERVALO);
+        return dataInicio;
     }
 
     @JsonIgnore
@@ -289,6 +290,9 @@ public class Partida implements Comparable<Partida>, Serializable {
     public void setTempoPartida(TempoPartida tempoPartida) {
         temposPartida.add(this.tempoPartida);
         this.tempoPartida = tempoPartida;
+        if (tempoPartida.getTipoTempoPartida().equals(TipoTempoPartida.PRIMEIRO_SET)){
+            this.dataInicio = tempoPartida.getDataInicio();
+        }
     }
 
     public ListTemposPartida getTemposPartida() {

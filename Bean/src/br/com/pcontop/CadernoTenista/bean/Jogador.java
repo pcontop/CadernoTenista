@@ -102,7 +102,7 @@ public class Jogador implements Serializable {
         }
 
         public Builder setTiposEventos(Set<TipoEvento> tipoEventos){
-            jogador.tiposEventos = (SetTiposEventos) tipoEventos;
+            jogador.tiposEventos = new SetTiposEventos(tipoEventos);
             return this;
         }
 

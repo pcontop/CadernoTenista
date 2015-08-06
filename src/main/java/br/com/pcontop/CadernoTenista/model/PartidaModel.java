@@ -3,7 +3,9 @@ package br.com.pcontop.CadernoTenista.model;
 import android.content.Context;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import br.com.pcontop.CadernoTenista.R;
 import br.com.pcontop.CadernoTenista.bean.EventoPartida;
@@ -37,6 +39,11 @@ public class PartidaModel {
     PartidaDAO partidaDAO;
     EventoJogoDAO eventoJogoDAO;
     LocalidadeDAO localidadeDAO;
+    private static Set<TipoEvento> tiposEventosDefault  = new HashSet<>();
+    static {
+        tiposEventosDefault.add(TipoEvento.BACKHAND_CERTO);
+        tiposEventosDefault.add(TipoEvento.BACKHAND_ERRADO);
+    }
 
 
     private Partida partidaAtual;
@@ -49,7 +56,7 @@ public class PartidaModel {
     }
 
     public Partida criePartidaAtual(){
-        Jogador jogador1 = crieJogador(null, ColorConstants.COR_PADRAO_JOGADOR_1_AVAI);
+        Jogador jogador1 = crieJogador(context.getString(R.string.jogador1), ColorConstants.COR_PADRAO_JOGADOR_1_AVAI);
         TempoPartida tempoPartida = crieTempoPartida(TipoTempoPartida.ANTES_PARTIDA, new Date());
 
         Partida partida = Partida.create()
@@ -86,12 +93,22 @@ public class PartidaModel {
     }
 
     public Jogador crieJogador(String nome, String cor) {
+
         Jogador jogador = Jogador.create()
                 .setNome(nome)
                 .setCor(cor)
+                .setTiposEventos(getTiposEventosPartida())
                 .commit()
                 ;
         return jogador;
+    }
+
+    private Set<TipoEvento> getTiposEventosPartida() {
+        if (getPartidaAtual()!=null){
+            return getPartidaAtual().getTiposEventosSelecionados();
+        } else {
+            return tiposEventosDefault;
+        }
     }
 
     public Partida getPartida(String id)  {
