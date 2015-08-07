@@ -161,8 +161,11 @@ public class PartidaModel {
     }
 
 
-    public void addJogadorPartida(Jogador jogador) {
-        partidaAtual.setJogador2(jogador);
+    public void adicionarOuAlterarJogadorPartida(Jogador jogador) {
+        //Insira se for novo.
+        if (!partidaAtual.getJogadores().contains(jogador)) {
+            partidaAtual.setJogador2(jogador);
+        }
         insiraOuAtualize(partidaAtual);
     }
 

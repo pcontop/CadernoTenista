@@ -35,6 +35,7 @@ import br.com.pcontop.CadernoTenista.view.DrawerPartida;
 import br.com.pcontop.CadernoTenista.view.ListaPartidasMainFragment;
 import br.com.pcontop.CadernoTenista.view.ParametroTela;
 import br.com.pcontop.CadernoTenista.view.PartidaMainFragment;
+import br.com.pcontop.CadernoTenista.view.TelaPrincipal;
 import br.com.pcontop.CadernoTenista.view.Telas;
 import br.com.pcontop.CadernoTenista.view.TimerFragment;
 import br.com.pcontop.CadernoTenista.view.dialogs.ActionDialogJogador;
@@ -64,6 +65,7 @@ public class OlheiroController {
     static PartidaModel partidaModel;
     private ListaPartidasMainFragment listaPartidasMainFragment;
     private static List<TimerWatcher> timerWatcherList = new ArrayList<>();
+    private TelaPrincipal telaAtual;
 
     static {
         Map<TimerStateType, ExecuteEnablerDisabler> actionMap = new HashMap<>();
@@ -155,7 +157,7 @@ public class OlheiroController {
     }
 
     public void addJogador(Jogador jogador){
-        partidaModel.addJogadorPartida(jogador);
+        partidaModel.adicionarOuAlterarJogadorPartida(jogador);
         jogadoresFragment.redesenhe();
     }
 
@@ -171,7 +173,7 @@ public class OlheiroController {
     }
 
     public String getProximoNomeJogador(){
-        return "Jogador " + (getPartida().getJogadores().size()+1);
+        return context.getText(R.string.jogador) + " " + (getPartida().getJogadores().size()+1);
     }
 
     public void addNewJogador(String nome){
@@ -193,7 +195,7 @@ public class OlheiroController {
 
     public void editarJogador(Jogador jogador, String nomeJogador){
         jogador.setNome(nomeJogador);
-        partidaModel.addJogadorPartida(jogador);
+        partidaModel.adicionarOuAlterarJogadorPartida(jogador);
         jogadoresFragment.redesenhe();
     }
 
@@ -319,7 +321,7 @@ public class OlheiroController {
 
     public void removaPartidaDaLista(Partida partida) {
         partidaModel.remova(partida);
-        listaPartidasMainFragment.refreshDisplay();
+        listaPartidasMainFragment.refresh();
     }
 
     public void setPartidaDisplayMainFragment(PartidaDisplay partidaDisplayMainFragment) {
@@ -424,7 +426,7 @@ public class OlheiroController {
     }
 
     public void atualizeDisplayPartida() {
-        partidaDisplayMainFragment.refreshDisplay();
+        partidaDisplayMainFragment.refresh();
     }
 
     public Date getDataInicioTempoAtual() {
@@ -496,5 +498,14 @@ public class OlheiroController {
         }
     }
 
+    public void setTelaAtual(TelaPrincipal telaAtual){
+        this.telaAtual = telaAtual;
+    }
+
+    public void atualizeTelaAtual(){
+        if (telaAtual!=null) {
+            telaAtual.refresh();
+        }
+    }
 
 }

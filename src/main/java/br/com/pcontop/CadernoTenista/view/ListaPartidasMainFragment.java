@@ -73,6 +73,7 @@ public class ListaPartidasMainFragment extends Fragment implements TelaPrincipal
     private void registerOlheiroController() {
         olheiroController = FabricaController.getOlheiroController(getActivity());
         olheiroController.setListaPartidasMainFragment(this);
+        olheiroController.setTelaAtual(this);
     }
 
     @Override
@@ -128,7 +129,8 @@ public class ListaPartidasMainFragment extends Fragment implements TelaPrincipal
         olheiroController.removaPartidaDaLista(partida);
     }
 
-    public void refreshDisplay(){
+    @Override
+    public void refresh(){
         listaPartidasAdapter.notifyDataSetInvalidated();
     }
 
@@ -194,7 +196,7 @@ public class ListaPartidasMainFragment extends Fragment implements TelaPrincipal
             ListaPartidasMainFragment.this.partidas = partidas;
             handler.post(new Runnable() {
                 public void run() {
-                    refreshDisplay();
+                    refresh();
                 }
             });
         }

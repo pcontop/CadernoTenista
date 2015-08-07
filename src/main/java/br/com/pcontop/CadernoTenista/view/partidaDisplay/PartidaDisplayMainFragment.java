@@ -38,10 +38,11 @@ public class PartidaDisplayMainFragment extends Fragment implements TelaPrincipa
         super.onActivityCreated(savedInstanceState);
         olheiroController = FabricaController.getOlheiroController(getActivity());
         olheiroController.setPartidaDisplayMainFragment(this);
+        olheiroController.setTelaAtual(this);
         if (savedInstanceState!=null){
             recuperePartida(savedInstanceState);
         }
-        refreshDisplay();
+        refresh();
 
     }
 
@@ -86,11 +87,11 @@ public class PartidaDisplayMainFragment extends Fragment implements TelaPrincipa
 
     private void refreshDisplay(Partida partida) {
         PartidaDisplayMainFragment.partida = partida;
-        refreshDisplay();
+        refresh();
     }
 
     @Override
-    public void refreshDisplay(){
+    public void refresh(){
         if (mainView!=null && partida!=null){
             apresenteDatas();
             adicioneJogadores();

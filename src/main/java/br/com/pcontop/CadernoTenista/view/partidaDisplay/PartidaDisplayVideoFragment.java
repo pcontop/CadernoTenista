@@ -68,10 +68,11 @@ public class PartidaDisplayVideoFragment extends Fragment implements TelaPrincip
         super.onActivityCreated(savedInstanceState);
         olheiroController = FabricaController.getOlheiroController(getActivity());
         olheiroController.setPartidaDisplayMainFragment(this);
+        olheiroController.setTelaAtual(this);
         if (savedInstanceState!=null){
             recuperePartida(savedInstanceState);
         }
-        refreshDisplay();
+        refresh();
         if (savedInstanceState!=null){
             recupereVideo(savedInstanceState);
         }
@@ -129,13 +130,13 @@ public class PartidaDisplayVideoFragment extends Fragment implements TelaPrincip
 
             }
             if (jogador!=null && partida!=null){
-                refreshDisplay();
+                refresh();
             }
         }
     }
 
     @Override
-    public void refreshDisplay(){
+    public void refresh(){
         if (mainView!=null && partida!=null){
             apresenteDatas();
             prepareVideo();

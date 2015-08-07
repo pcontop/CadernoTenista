@@ -12,4 +12,5 @@ import java.util.Map;
 public interface TelaPrincipal {
     public Telas getTela();
     public void setParams(Map<ParametroTela, Object> params);
+    public void refresh();
 }

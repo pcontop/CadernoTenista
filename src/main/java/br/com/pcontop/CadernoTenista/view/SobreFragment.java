@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import br.com.pcontop.CadernoTenista.R;
+import br.com.pcontop.CadernoTenista.control.FabricaController;
+import br.com.pcontop.CadernoTenista.control.OlheiroController;
 
 import java.util.Map;
 
@@ -19,7 +21,19 @@ public class SobreFragment extends Fragment implements TelaPrincipal {
     }
 
     @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        OlheiroController olheiroController = FabricaController.getOlheiroController(this.getActivity());
+        olheiroController.setTelaAtual(this);
+    }
+
+    @Override
     public void setParams(Map<ParametroTela, Object> params) {
+
+    }
+
+    @Override
+    public void refresh() {
 
     }
 

@@ -36,10 +36,16 @@ public class PartidaMainFragment extends Fragment implements TelaPrincipal {
     }
 
     @Override
+    public void refresh() {
+
+    }
+
+    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         olheiroController = FabricaController.getOlheiroController(getActivity());
         olheiroController.setPartidaMainFragment(this);
+        olheiroController.setTelaAtual(this);
     }
 
     public PartidaMainFragment(){}
@@ -60,8 +66,6 @@ public class PartidaMainFragment extends Fragment implements TelaPrincipal {
         if (savedInstanceState == null) {
             TimerFragmentImpl timerFragmentImpl = TimerFragmentImpl.getInstance();
             getFragmentManager().beginTransaction().replace(R.id.timer_fragment, timerFragmentImpl, TIMER_FRAGMENT).commit();
-            //JogadoresFragmentImpl jogadoresFragmentImpl = JogadoresFragmentImpl.getInstance();
-            //JogadoresFragmentGridResizebleImpl jogadoresFragmentImpl = JogadoresFragmentGridResizebleImpl.getInstance();
             JogadoresFragmentLinearImpl jogadoresFragmentImpl = JogadoresFragmentLinearImpl.getInstance();
 
             getFragmentManager().beginTransaction().replace(R.id.passe_fragment, jogadoresFragmentImpl, JOGADORES_FRAGMENT).commit();
