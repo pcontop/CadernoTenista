@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="BeanCadernoTenistaTenista:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/BeanCadernoTenistaTenista_jar</output-path>
+    <root id="archive" name="BeanCadernoTenista.jar">
+      <element id="module-output" name="Bean" />
+    </root>
+  </artifact>
+</component>
