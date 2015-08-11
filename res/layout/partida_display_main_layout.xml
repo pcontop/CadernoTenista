@@ -101,6 +101,12 @@
                 />
 
     </RelativeLayout>
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/chart1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
     <GridView
               android:id="@+id/partida_display_grid_jogadores"
               android:layout_width="match_parent"

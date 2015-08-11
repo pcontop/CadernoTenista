@@ -5,7 +5,7 @@ import org.junit.Test;
 import java.io.File;
 
 import br.com.pcontop.CadernoTenista.bean.Partida;
-import br.com.pcontop.CadernoTenista.bean.test.PartidaHelper;
+import br.com.pcontop.CadernoTenista.bean.PartidaHelper;
 import br.com.pcontop.CadernoTenista.model.export.ExporterException;
 import br.com.pcontop.CadernoTenista.model.export.excel.file.FileExporterExcel;
 import br.com.pcontop.CadernoTenista.model.export.file.FileExporter;

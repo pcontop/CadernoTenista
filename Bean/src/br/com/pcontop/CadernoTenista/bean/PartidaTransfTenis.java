@@ -13,7 +13,7 @@ import java.util.Set;
  * To change this template use File | Settings | File Templates.
  */
 @Entity
-public class PartidaTransf implements Serializable {
+public class PartidaTransfTenis implements Serializable {
     @Id
     private String id;
     @ManyToOne(fetch = FetchType.EAGER)
@@ -32,10 +32,10 @@ public class PartidaTransf implements Serializable {
     private String pathVideoPrimeiroTempo;
     private String pathVideoSegundoTempo;
 
-    private PartidaTransf(){
+    private PartidaTransfTenis(){
     }
 
-    public PartidaTransf(Partida partida){
+    public PartidaTransfTenis(Partida partida){
         this.id =partida.getId();
         this.dataCriacao = partida.getDataCriacao();
         this.jogador1 = partida.getJogador1();
@@ -53,7 +53,7 @@ public class PartidaTransf implements Serializable {
 
     @Override
     public String toString() {
-        return "PartidaTransf{" +
+        return "PartidaTransfTenis{" +
                 "id='" + id + '\'' +
                 ", olheiro=" + olheiro +
                 ", local=" + local +
@@ -74,7 +74,7 @@ public class PartidaTransf implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        PartidaTransf partida = (PartidaTransf) o;
+        PartidaTransfTenis partida = (PartidaTransfTenis) o;
 
         if (id != null ? !id.equals(partida.id) : partida.id != null) return false;
 

@@ -452,6 +452,11 @@ public class PartidaDisplayVideoFragment extends Fragment implements TelaPrincip
             return videoView.canSeekForward();
         }
 
+        @Override
+        public int getAudioSessionId() {
+            return 0;
+        }
+
     }
 
     @Override

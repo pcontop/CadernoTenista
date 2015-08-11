@@ -3,10 +3,10 @@ package br.com.pcontop.CadernoTenista.model.importer.test.xml;
 import org.junit.Test;
 
 import br.com.pcontop.CadernoTenista.bean.Partida;
-import br.com.pcontop.CadernoTenista.bean.test.PartidaHelper;
+import br.com.pcontop.CadernoTenista.bean.PartidaHelper;
 import br.com.pcontop.CadernoTenista.model.xml.XmlConverter;
 
-import static junit.framework.Assert.assertTrue;
+import static junit.framework.TestCase.assertTrue;
 import static junit.framework.TestCase.assertNotNull;
 
 /**

@@ -1,4 +1,4 @@
-package br.com.pcontop.CadernoTenista.bean.test;
+package br.com.pcontop.CadernoTenista.bean;
 
 import br.com.pcontop.CadernoTenista.bean.*;
 

@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.util.Date;
 
 import br.com.pcontop.CadernoTenista.bean.Partida;
+import br.com.pcontop.CadernoTenista.bean.PartidaHelper;
 import br.com.pcontop.CadernoTenista.bean.TipoTempoPartida;
 
 import static org.junit.Assert.assertNotNull;
