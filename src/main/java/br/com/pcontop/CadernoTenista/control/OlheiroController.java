@@ -131,7 +131,11 @@ public class OlheiroController {
     }
 
     public void updateTimeWatchers(){
-        getTimerState().updateTimerWatchers();
+        if (getTimerState()!=null) {
+            getTimerState().updateTimerWatchers();
+        } else {
+            //todo resolver aqui.
+        }
     }
 
 

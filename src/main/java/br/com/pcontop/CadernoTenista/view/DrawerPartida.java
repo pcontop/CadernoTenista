@@ -4,24 +4,23 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.res.Configuration;
 import android.media.MediaPlayer;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import br.com.pcontop.CadernoTenista.R;
-import br.com.pcontop.CadernoTenista.bean.Partida;
-import br.com.pcontop.CadernoTenista.control.FabricaController;
-import br.com.pcontop.CadernoTenista.control.OlheiroController;
 
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
+
+import br.com.pcontop.CadernoTenista.R;
+import br.com.pcontop.CadernoTenista.control.FabricaController;
+import br.com.pcontop.CadernoTenista.control.OlheiroController;
+import br.com.pcontop.CadernoTenista.control.timer.TimerState;
+import br.com.pcontop.CadernoTenista.control.timer.TimerStateFinal;
 
 /**
  * Created with IntelliJ IDEA.
@@ -206,6 +205,11 @@ public class DrawerPartida extends Activity {
         public void onItemClick(AdapterView parent, View view, int position, long id) {
             switch (position){
                 case 0:
+
+                    final TimerState timerState = olheiroController.getTimerState();
+                    if (timerState==null || timerState instanceof TimerStateFinal){
+                        olheiroController.criePartida();
+                    }
                     vaParaTela(Telas.PARTIDA);
                     break;
                 case 1:

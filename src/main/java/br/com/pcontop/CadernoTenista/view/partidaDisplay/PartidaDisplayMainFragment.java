@@ -56,9 +56,6 @@ public class PartidaDisplayMainFragment extends Fragment implements TelaPrincipa
     private static Partida partida;
     private View mainView;
     private static final String PARTIDA = "Partida";
-    private PieChart mChart;
-    private Jogador jogador;
-    private Typeface tf;
 
 
     public static PartidaDisplayMainFragment getInstance(){
@@ -109,7 +106,6 @@ public class PartidaDisplayMainFragment extends Fragment implements TelaPrincipa
             switch (param){
                 case PARTIDA:
                     Partida partida = (Partida) params.get(param);
-                    jogador = partida.getJogador1();
                     refreshDisplay(partida);
                     break;
                 default:
@@ -128,102 +124,10 @@ public class PartidaDisplayMainFragment extends Fragment implements TelaPrincipa
         if (mainView!=null && partida!=null){
             apresenteDatas();
             adicioneJogadores();
-            apresenteGrafico();
         }
     }
 
-    private void apresenteGrafico() {
-        mChart = (PieChart) mainView.findViewById(R.id.chart1);
-        mChart.setUsePercentValues(true);
-        mChart.setDescription("");
 
-        mChart.setDragDecelerationFrictionCoef(0.95f);
-
-        tf = Typeface.createFromAsset(getActivity().getAssets(), "OpenSans-Regular.ttf");
-
-        mChart.setCenterTextTypeface(Typeface.createFromAsset(getActivity().getAssets(), "OpenSans-Light.ttf"));
-
-        mChart.setDrawHoleEnabled(true);
-        mChart.setHoleColorTransparent(true);
-
-        mChart.setTransparentCircleColor(Color.WHITE);
-        mChart.setTransparentCircleAlpha(110);
-
-        mChart.setHoleRadius(58f);
-        mChart.setTransparentCircleRadius(61f);
-
-        mChart.setDrawCenterText(true);
-
-        mChart.setRotationAngle(0);
-        // enable rotation of the chart by touch
-        mChart.setRotationEnabled(true);
-
-        // mChart.setUnit(" €");
-        // mChart.setDrawUnitsInChart(true);
-
-        // add a selection listener
-        mChart.setOnChartValueSelectedListener(this);
-
-        mChart.setCenterText(jogador.getNome());
-
-        setData(100);
-
-        mChart.animateY(1500, Easing.EasingOption.EaseInOutQuad);
-        // mChart.spin(2000, 0, 360);
-
-        Legend l = mChart.getLegend();
-        l.setPosition(Legend.LegendPosition.RIGHT_OF_CHART);
-        l.setXEntrySpace(7f);
-        l.setYEntrySpace(0f);
-        l.setYOffset(0f);
-
-    }
-
-    private void setData(float range) {
-
-        float mult = range;
-
-        if (jogador==null){
-            return;
-        }
-
-        ArrayList<Entry> yVals1 = new ArrayList<Entry>();
-
-        // IMPORTANT: In a PieChart, no values (Entry) should have the same
-        // xIndex (even if from different DataSets), since no values can be
-        // drawn above each other.
-        int i=0;
-        ArrayList<String> xVals = new ArrayList<String>();
-        ArrayList<Integer> colors = new ArrayList<Integer>();
-
-        for (TipoEvento tipoEvento: jogador.getTiposEventos()) {
-            float quantidade = (float) jogador.busqueEventosDoTipo(tipoEvento).size();
-            yVals1.add(new Entry(quantidade, i));
-            xVals.add(olheiroController.getStringDeNomeRef(tipoEvento.getDescricao()));
-            colors.add(getCorTipoEvento(tipoEvento));
-            i++;
-        }
-
-        PieDataSet dataSet = new PieDataSet(yVals1, getText(R.string.jogadas).toString());
-        dataSet.setSliceSpace(3f);
-        dataSet.setSelectionShift(5f);
-
-        // add a lot of colors
-
-        dataSet.setColors(colors);
-
-        PieData data = new PieData(xVals, dataSet);
-        data.setValueFormatter(new PercentFormatter());
-        data.setValueTextSize(11f);
-        data.setValueTextColor(Color.BLACK);
-        data.setValueTypeface(tf);
-        mChart.setData(data);
-
-        // undo all highlights
-        mChart.highlightValues(null);
-
-        mChart.invalidate();
-    }
 
     private void adicioneJogadores() {
         GridView gridJogadores = (GridView) mainView.findViewById(R.id.partida_display_grid_jogadores);
@@ -305,15 +209,111 @@ public class PartidaDisplayMainFragment extends Fragment implements TelaPrincipa
     private class DisplayJogador extends LinearLayout {
         private Jogador jogador;
         private LayoutInflater inflater;
+        private PieChart mChart;
+        private Typeface tf;
 
         public DisplayJogador(Context context, LayoutInflater inflater, Jogador jogador){
             super(context);
-            inflater.inflate(R.layout.jogador_display_layout,this,true);
+            inflater.inflate(R.layout.jogador_display_layout, this, true);
             this.inflater = inflater;
             this.jogador=jogador;
             definaNome();
             definaCor();
             definaPasses();
+            apresenteGrafico();
+        }
+
+        private void apresenteGrafico() {
+            mChart = (PieChart) this.findViewById(R.id.chart_jogador);
+            mChart.setUsePercentValues(true);
+            mChart.setDescription("");
+
+            mChart.setDragDecelerationFrictionCoef(0.95f);
+
+            tf = Typeface.createFromAsset(getActivity().getAssets(), "OpenSans-Regular.ttf");
+
+            mChart.setCenterTextTypeface(Typeface.createFromAsset(getActivity().getAssets(), "OpenSans-Light.ttf"));
+
+            mChart.setDrawHoleEnabled(true);
+            mChart.setHoleColorTransparent(true);
+
+            mChart.setTransparentCircleColor(Color.WHITE);
+            mChart.setTransparentCircleAlpha(110);
+
+            mChart.setHoleRadius(58f);
+            mChart.setTransparentCircleRadius(61f);
+
+            mChart.setDrawCenterText(true);
+
+            mChart.setRotationAngle(0);
+            // enable rotation of the chart by touch
+            mChart.setRotationEnabled(true);
+
+            // mChart.setUnit(" €");
+            // mChart.setDrawUnitsInChart(true);
+
+            // add a selection listener
+            mChart.setOnChartValueSelectedListener(PartidaDisplayMainFragment.this);
+
+            mChart.setCenterText(jogador.getNome());
+
+            setData(100);
+
+            mChart.animateY(1500, Easing.EasingOption.EaseInOutQuad);
+            // mChart.spin(2000, 0, 360);
+
+            Legend l = mChart.getLegend();
+            l.setPosition(Legend.LegendPosition.RIGHT_OF_CHART);
+            l.setXEntrySpace(7f);
+            l.setYEntrySpace(0f);
+            l.setYOffset(0f);
+
+        }
+
+        private void setData(float range) {
+
+            float mult = range;
+
+            if (jogador==null){
+                return;
+            }
+
+            ArrayList<Entry> yVals1 = new ArrayList<Entry>();
+
+            // IMPORTANT: In a PieChart, no values (Entry) should have the same
+            // xIndex (even if from different DataSets), since no values can be
+            // drawn above each other.
+            int i=0;
+            ArrayList<String> xVals = new ArrayList<String>();
+            ArrayList<Integer> colors = new ArrayList<Integer>();
+
+            for (TipoEvento tipoEvento: jogador.getTiposEventos()) {
+                float quantidade = (float) jogador.busqueEventosDoTipo(tipoEvento).size();
+                yVals1.add(new Entry(quantidade, i));
+                xVals.add(olheiroController.getStringDeNomeRef(tipoEvento.getDescricao()));
+                colors.add(getCorTipoEvento(tipoEvento));
+                i++;
+            }
+
+            PieDataSet dataSet = new PieDataSet(yVals1, getText(R.string.jogadas).toString());
+            dataSet.setSliceSpace(3f);
+            dataSet.setSelectionShift(5f);
+
+            // add a lot of colors
+
+            dataSet.setColors(colors);
+
+            PieData data = new PieData(xVals, dataSet);
+            data.setValueFormatter(new PercentFormatter());
+            data.setValueTextSize(11f);
+            data.setValueTextColor(Color.BLACK);
+            data.setValueTypeface(tf);
+            mChart.setData(data);
+
+            // undo all highlights
+            mChart.highlightValues(null);
+
+            mChart.invalidate();
         }
 
         private void definaNome() {

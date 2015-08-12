@@ -11,7 +11,7 @@ import br.com.pcontop.CadernoTenista.control.OlheiroController;
  */
 public class TimerStateFactory {
 
-    public static TimerState busque(OlheiroController olheiroController){
+    public static TimerState busqueEstadoAtual(OlheiroController olheiroController){
         switch(olheiroController.getTempoPartidaAtual().getTipoTempoPartida()){
             case ANTES_PARTIDA:
                 return new TimerStateInicial().setOlheiroController(olheiroController);
@@ -28,11 +28,11 @@ public class TimerStateFactory {
 
 
     public static TimerState crie(OlheiroController olheiroController, TimerState lastTimerState){
-        return busque(olheiroController).inicialize(lastTimerState);
+        return busqueEstadoAtual(olheiroController).inicialize(lastTimerState);
     }
 
     public static TimerState recupere(OlheiroController olheiroController){
-        return busque(olheiroController);
+        return busqueEstadoAtual(olheiroController);
     }
 
 }
