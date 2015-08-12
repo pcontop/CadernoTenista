@@ -211,7 +211,7 @@ public class PartidaModel {
     }
 
     public int getQuantidadeEventos(Jogador jogador, TipoEvento tipoEventoPassar) {
-        return jogador.busqueEventosdoTipo(tipoEventoPassar).size();
+        return jogador.busqueEventosDoTipo(tipoEventoPassar).size();
     }
 
     public boolean exportePartida(Partida partida) throws ExporterException {

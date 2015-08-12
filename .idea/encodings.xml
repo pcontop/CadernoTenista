@@ -2,6 +2,16 @@
 <project version="4">
   <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false">
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/assets/OpenSans-Bold.ttf" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/assets/OpenSans-BoldItalic.ttf" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/assets/OpenSans-ExtraBold.ttf" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/assets/OpenSans-ExtraBoldItalic.ttf" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/assets/OpenSans-Italic.ttf" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/assets/OpenSans-Light.ttf" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/assets/OpenSans-LightItalic.ttf" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/assets/OpenSans-Regular.ttf" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/assets/OpenSans-Semibold.ttf" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/assets/OpenSans-SemiboldItalic.ttf" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/libs/mpandroidchartlibrary-2-1-3.jar" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/src/main/java/br/com/pcontop/CadernoTenista/view/partidaDisplay/MyMarkerView.java" charset="windows-1252" />
   </component>

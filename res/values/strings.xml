@@ -70,5 +70,6 @@
     <string name="selecione_video_segundo_set">Choose video for second Set.</string>
     <string name="nao_encontrado">Not found.</string>
     <string name="jogador1">Player 1</string>
+    <string name="jogadas">Plays</string>
 
 </resources>

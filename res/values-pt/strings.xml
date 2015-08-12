@@ -69,5 +69,6 @@
     <string name="selecione_video_segundo_set">Escolha o vídeo para o segundo Set.</string>
     <string name="nao_encontrado">Não encontrado.</string>
     <string name="jogador1">Jogador 1</string>
+    <string name="jogadas">Jogadas</string>
 
 </resources>

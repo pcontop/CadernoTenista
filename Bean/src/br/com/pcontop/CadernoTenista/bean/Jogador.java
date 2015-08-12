@@ -74,7 +74,7 @@ public class Jogador implements Serializable {
         return new Builder();
     }
 
-    public List<EventoPartida> busqueEventosdoTipo(TipoEvento tipoEvento){
+    public List<EventoPartida> busqueEventosDoTipo(TipoEvento tipoEvento){
         List<EventoPartida> eventosDoTipo = new ArrayList<>();
         for (EventoPartida eventoPartida :eventos) {
             if (eventoPartida.getTipoEvento().equals(tipoEvento)){
@@ -156,4 +156,5 @@ public class Jogador implements Serializable {
         }
         return eventosDoQualificador;
     }
+
 }
