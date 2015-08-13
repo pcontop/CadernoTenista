@@ -3,13 +3,18 @@ package br.com.pcontop.CadernoTenista.view;
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
-import android.view.*;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import java.util.Map;
+
 import br.com.pcontop.CadernoTenista.R;
 import br.com.pcontop.CadernoTenista.control.FabricaController;
 import br.com.pcontop.CadernoTenista.control.OlheiroController;
 import br.com.pcontop.CadernoTenista.view.jogadoresFragment.relative.JogadoresFragmentLinearImpl;
-
-import java.util.Map;
 
 
 /**
@@ -63,13 +68,13 @@ public class PartidaMainFragment extends Fragment implements TelaPrincipal {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.partida_main,null,false);
-        if (savedInstanceState == null) {
+        //if (savedInstanceState == null) {
             TimerFragmentImpl timerFragmentImpl = TimerFragmentImpl.getInstance();
             getFragmentManager().beginTransaction().replace(R.id.timer_fragment, timerFragmentImpl, TIMER_FRAGMENT).commit();
             JogadoresFragmentLinearImpl jogadoresFragmentImpl = JogadoresFragmentLinearImpl.getInstance();
 
             getFragmentManager().beginTransaction().replace(R.id.passe_fragment, jogadoresFragmentImpl, JOGADORES_FRAGMENT).commit();
-        }
+        //}
         return view;
     }
 
