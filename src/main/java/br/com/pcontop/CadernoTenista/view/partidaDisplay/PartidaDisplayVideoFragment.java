@@ -176,6 +176,8 @@ public class PartidaDisplayVideoFragment extends Fragment implements TelaPrincip
         TextView textLocal = (TextView) mainView.findViewById(R.id.partida_display_localizacao_valor);
         String strLocal = partida.getLocal()==null?getString(R.string.sem_localidade_definida):partida.getLocal().getDescricao();
         textLocal.setText(strLocal);
+        //TODO - Corrigir depois!
+        /*
         setTextViewDate(
                 R.id.partida_display_data_inicio_valor,
                 partida.getDataInicio(),
@@ -196,6 +198,7 @@ public class PartidaDisplayVideoFragment extends Fragment implements TelaPrincip
                 partida.getDataFimSegundoSet(),
                 R.string.sem_data_fim_primeiro_tempo_definida
         );
+        */
     }
     
    private void setTextViewDate(int idTextView, Date data, int idTextoDataVazia){

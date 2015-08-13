@@ -219,7 +219,7 @@ public class OlheiroController {
         try {
             text=context.getString(resId);
         } catch (Exception e){
-            text = context.getText(R.string.nao_encontrado).toString();
+            text = name;//context.getText(R.string.nao_encontrado).toString();
         }
         return text;
     }

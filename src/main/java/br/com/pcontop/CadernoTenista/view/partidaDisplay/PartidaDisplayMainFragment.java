@@ -10,13 +10,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.LinearLayout;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.animation.Easing;
@@ -40,6 +38,7 @@ import java.util.TreeSet;
 import br.com.pcontop.CadernoTenista.R;
 import br.com.pcontop.CadernoTenista.bean.Jogador;
 import br.com.pcontop.CadernoTenista.bean.Partida;
+import br.com.pcontop.CadernoTenista.bean.TempoPartida;
 import br.com.pcontop.CadernoTenista.bean.TipoEvento;
 import br.com.pcontop.CadernoTenista.control.FabricaController;
 import br.com.pcontop.CadernoTenista.control.OlheiroController;
@@ -139,26 +138,20 @@ public class PartidaDisplayMainFragment extends Fragment implements TelaPrincipa
         TextView textLocal = (TextView) mainView.findViewById(R.id.partida_display_localizacao_valor);
         String strLocal = partida.getLocal()==null?getString(R.string.sem_localidade_definida):partida.getLocal().getDescricao();
         textLocal.setText(strLocal);
-        setTextViewDate(
-                R.id.partida_display_data_inicio_valor,
-                partida.getDataInicio(),
-                R.string.sem_data_inicio_definida
-        );
-        setTextViewDate(
-                R.id.partida_display_data_fim_primeiro_tempo_valor,
-                partida.getDataFimPrimeiroSet(),
-                R.string.sem_data_fim_primeiro_tempo_definida
-        );
-        setTextViewDate(
-                R.id.partida_display_data_inicio_segundo_tempo_valor,
-                partida.getDataInicioSegundoSet(),
-                R.string.sem_data_inicio_definida
-        );
-        setTextViewDate(
-                R.id.partida_display_data_fim_segundo_tempo_valor,
-                partida.getDataFimSegundoSet(),
-                R.string.sem_data_fim_primeiro_tempo_definida
-        );
+        LinearLayout layoutTempos = (LinearLayout) mainView.findViewById(R.id.partida_display_tempos);
+        LinearLayout layoutHeaderTempos = (LinearLayout) getActivity().getLayoutInflater().inflate(R.layout.partida_display_tempo_header_layout,null);
+        layoutTempos.addView(layoutHeaderTempos);
+        for (TempoPartida tempoPartida: partida.getTemposAtivos()){
+            LinearLayout layoutTempo = (LinearLayout) getActivity().getLayoutInflater().inflate(R.layout.partida_display_tempo_value_layout, null);
+            TextView setView = (TextView) layoutTempo.findViewById(R.id.set_nome);
+            setView.setText(olheiroController.getStringDeNomeRef(tempoPartida.getTipoTempoPartida().getDescricao()));
+            TextView setInicio = (TextView) layoutTempo.findViewById(R.id.set_inicio);
+            setInicio.setText(LanguageFormatter.getDateFormat(tempoPartida.getDataInicio(), R.string.nao_encontrado, getActivity()));
+            TextView setFim = (TextView) layoutTempo.findViewById(R.id.set_fim_value);
+            setFim.setText(LanguageFormatter.getDateFormat(tempoPartida.getDataFim(), R.string.nao_encontrado, getActivity()));
+            layoutTempos.addView(layoutTempo);
+        }
+
         setTextViewDate(
                 R.id.partida_display_data_ultimo_envio_valor,
                 partida.getUltimoEnvio(),
@@ -255,7 +248,7 @@ public class PartidaDisplayMainFragment extends Fragment implements TelaPrincipa
             // add a selection listener
             mChart.setOnChartValueSelectedListener(PartidaDisplayMainFragment.this);
 
-            mChart.setCenterText(jogador.getNome());
+            mChart.setCenterText(getText(R.string.jogadas).toString());
 
             setData(100);
 
@@ -318,6 +311,7 @@ public class PartidaDisplayMainFragment extends Fragment implements TelaPrincipa
 
         private void definaNome() {
             TextView displayNome = (TextView) findViewById(R.id.jogador_display_nome_jogador);
+            /*
             displayNome.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -341,6 +335,7 @@ public class PartidaDisplayMainFragment extends Fragment implements TelaPrincipa
 
                 }
             });
+            */
             displayNome.setText(jogador.getNome());
         }
 

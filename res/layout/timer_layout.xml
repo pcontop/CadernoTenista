@@ -9,7 +9,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/timer_display"
             android:hint="Relogio Jogo"
-            android:text="@string/inicio"
+            android:text="@string/inicio_relogio"
             android:background="#000000"
             android:textColor="#FFFFFF"
             android:gravity="center"

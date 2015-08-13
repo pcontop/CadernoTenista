@@ -16,14 +16,36 @@
                   style="@style/PartidaDisplayHeader"
                   android:text="@string/local"
                   android:id="@+id/partida_display_localizacao"/>
+        <TextView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Valor"
+            style="@style/PartidaDisplayEntry"
+            android:layout_toRightOf="@id/partida_display_localizacao"
+            android:id="@+id/partida_display_localizacao_valor"
+            />
+        <TextView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/PartidaDisplayHeader"
+            android:text="@string/ultimo_envio"
+            android:id="@+id/partida_display_data_ultimo_envio"
+            android:layout_below="@id/partida_display_localizacao"/>
 
         <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="Valor"
-                  style="@style/PartidaDisplayEntry"
-                  android:layout_toRightOf="@id/partida_display_localizacao"
-                  android:id="@+id/partida_display_localizacao_valor"
-                />
+            android:layout_height="wrap_content"
+            android:text="Valor"
+            style="@style/PartidaDisplayEntry"
+            android:id="@+id/partida_display_data_ultimo_envio_valor"
+            android:layout_toRightOf="@id/partida_display_data_ultimo_envio"
+            android:layout_below="@id/partida_display_localizacao"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/partida_display_tempos"
+            android:orientation="vertical"
+            android:layout_below="@id/partida_display_data_ultimo_envio">
+        </LinearLayout>
+<!--
         <TextView android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   style="@style/PartidaDisplayHeader"
@@ -84,31 +106,8 @@
                   android:layout_toRightOf="@id/partida_display_data_fim_segundo_tempo"
                   android:layout_below="@id/partida_display_data_inicio_segundo_tempo_valor"
                 />
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  style="@style/PartidaDisplayHeader"
-                  android:text="@string/ultimo_envio"
-                  android:id="@+id/partida_display_data_ultimo_envio"
-                  android:layout_below="@id/partida_display_data_fim_segundo_tempo"/>
-
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="Valor"
-                  style="@style/PartidaDisplayEntry"
-                  android:id="@+id/partida_display_data_ultimo_envio_valor"
-                  android:layout_toRightOf="@id/partida_display_data_ultimo_envio"
-                  android:layout_below="@id/partida_display_data_fim_segundo_tempo_valor"
-                />
-
+                -->
     </RelativeLayout>
-    <!--
-    <com.github.mikephil.charting.charts.PieChart
-        android:id="@+id/chart1"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        />
-        -->
     <GridView
               android:id="@+id/partida_display_grid_jogadores"
               android:layout_width="match_parent"

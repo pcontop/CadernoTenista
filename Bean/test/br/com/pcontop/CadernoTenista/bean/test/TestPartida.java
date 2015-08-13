@@ -36,7 +36,7 @@ public class TestPartida {
         partida.transiteProximoTempo(dataInicio);
         assertTrue(partida.getTipoTempoPartida().equals(TipoTempoPartida.SEGUNDO_SET));
         partida.transiteFimDePartida(new Date());
-        assertTrue(partida.getTipoTempoPartida().equals(TipoTempoPartida.APOS_JOGO));
+        assertTrue(partida.getTipoTempoPartida().equals(TipoTempoPartida.APOS_PARTIDA));
 
     }
 

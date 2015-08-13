@@ -5,7 +5,7 @@
     <string name="app_name">Tennis Scout Notebook</string>
     <string name="hello">Hello CadernoTenista!</string>
     <string name="action_settings">Configurations</string>
-    <string name="inicio">00:00:00</string>
+    <string name="inicio_relogio">00:00:00</string>
     <string name="iniciar_partida">Match Start</string>
     <string name="iniciar_set">Start Set</string>
     <string name="terminar_set">End Set</string>
@@ -29,9 +29,6 @@
     <string name="drawer_open">Choose an action</string>
     <string name="drawer_close">Closed</string>
     <string name="data_inicio">Started at:</string>
-    <string name="terminou_prim_tempo_em">End First Quarter:</string>
-    <string name="comecou_segundo_tempo_em">Start Second Quarter:</string>
-    <string name="terminou_segundo_tempo_em">End Second Quarter:</string>
     <string name="passes_anotados">Noted Passes:</string>
     <string name="local">Location:</string>
     <string name="remover_partida">Remove Match</string>
@@ -46,11 +43,6 @@
     <string name="escolha_localidade">Define match\'s Location</string>
     <string name="escolher_local">Location</string>
     <string name="alterar_tipos_passe_jogador">Alter Events</string>
-    <string name="antes_jogo">Before Match</string>
-    <string name="primeiro_tempo">First Quarter</string>
-    <string name="intervalo">Interval</string>
-    <string name="segundo_tempo">Second Quarter</string>
-    <string name="apos_jogo">After Match</string>
     <string name="indefinida">Undefined</string>
     <string name="desenvolvedor">Developer:</string>
     <string name="paulo_contopoulos">Paulo Contopoulos</string>
@@ -71,5 +63,24 @@
     <string name="nao_encontrado">Not found.</string>
     <string name="jogador1">Player 1</string>
     <string name="jogadas">Plays</string>
+    <string name="set">Set</string>
+    <string name="inicio">Start</string>
+    <string name="fim">End</string>
+    <string name="antes_partida">Before Match</string>
+    <string name="primeiro_set">First Set</string>
+    <string name="primeiro_intervalo">First Interval</string>
+    <string name="segundo_set">Second Set</string>
+    <string name="segundo_intervalo">Second Interval</string>
+    <string name="terceiro_set">Third Set</string>
+    <string name="terceiro_intervalo">Third Interval</string>
+    <string name="quarto_set">Fourth Set</string>
+    <string name="quarto_intervalo">Fourth Interval</string>
+    <string name="quinto_set">Fifth Set</string>
+    <string name="quinto_intervalo">Fifth Interval</string>
+    <string name="sexto_set">Sixth Set</string>
+    <string name="sexto_intervalo">Sixth Interval</string>
+    <string name="setimo_set">Seventh Set</string>
+    <string name="setimo_intervalo">Seventh Interval</string>
+    <string name="apos_partida">After Match</string>
 
 </resources>

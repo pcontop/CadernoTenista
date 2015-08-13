@@ -19,7 +19,7 @@ public class TimerStateFactory {
                 return new TimerStateSetEmAndamento().setOlheiroController(olheiroController);
             case PRIMEIRO_INTERVALO:case SEGUNDO_INTERVALO:case TERCEIRO_INTERVALO:case QUARTO_INTERVALO: case QUINTO_INTERVALO:case SEXTO_INTERVALO:
                 return new TimerStateFimSet().setOlheiroController(olheiroController);
-            case APOS_JOGO:
+            case APOS_PARTIDA:
                 return new TimerStateFinal().setOlheiroController(olheiroController);
             default:
                 return new TimerStateInicial().setOlheiroController(olheiroController);

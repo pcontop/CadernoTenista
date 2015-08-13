@@ -8,7 +8,7 @@
     <string name="iniciar_set">Iniciar Set</string>
     <string name="terminar_set">Terminar Set</string>
     <string name="terminar_partida">Terminar Partida</string>
-    <string name="inicio">00:00:00</string>
+    <string name="inicio_relogio">00:00:00</string>
     <string name="jogador_passe_certo">Passe Certo</string>
     <string name="jogador_passe_errado">Passe Errado</string>
     <string name="adicione_jogador">Adicione Jogador</string>
@@ -28,9 +28,6 @@
     <string name="drawer_open">Escolha uma Ação</string>
     <string name="drawer_close">Fechado</string>
     <string name="data_inicio">Início em:</string>
-    <string name="terminou_prim_tempo_em">Fim Primeiro Tempo:</string>
-    <string name="comecou_segundo_tempo_em">Início Segundo Tempo:</string>
-    <string name="terminou_segundo_tempo_em">Fim Segundo Tempo:</string>
     <string name="passes_anotados">Passes Anotados:</string>
     <string name="local">Local:</string>
     <string name="remover_partida">Remover Partida</string>
@@ -45,11 +42,6 @@
     <string name="escolha_localidade">Defina o local da partida</string>
     <string name="escolher_local">Local</string>
     <string name="alterar_tipos_passe_jogador">Alterar Eventos</string>
-    <string name="antes_jogo">Antes do Jogo</string>
-    <string name="primeiro_tempo">Primeiro Tempo</string>
-    <string name="intervalo">Intervalo</string>
-    <string name="segundo_tempo">Segundo Tempo</string>
-    <string name="apos_jogo">Após Jogo</string>
     <string name="indefinida">Indefinida</string>
     <string name="desenvolvedor">Desenvolvedor:</string>
     <string name="paulo_contopoulos">Paulo Contopoulos</string>
@@ -70,5 +62,25 @@
     <string name="nao_encontrado">Não encontrado.</string>
     <string name="jogador1">Jogador 1</string>
     <string name="jogadas">Jogadas</string>
+    <string name="inicio">Início</string>
+    <string name="fim">Fim</string>
+
+    <string name="antes_partida">Antes da Partida</string>
+    <string name="primeiro_set">Primeiro Set</string>
+    <string name="primeiro_intervalo">Primeiro Intervalo</string>
+    <string name="segundo_set">Segundo Set</string>
+    <string name="segundo_intervalo">Segundo Intervalo</string>
+    <string name="terceiro_set">Terceiro Set</string>
+    <string name="terceiro_intervalo">Terceiro Intervalo</string>
+    <string name="quarto_set">Quarto Set</string>
+    <string name="quarto_intervalo">Quarto Intervalo</string>
+    <string name="quinto_set">Quinto Set</string>
+    <string name="quinto_intervalo">Quinto Intervalo</string>
+    <string name="sexto_set">Sexto Set</string>
+    <string name="sexto_intervalo">Sexto Intervalo</string>
+    <string name="setimo_set">Sétimo Set</string>
+    <string name="setimo_intervalo">Sétimo Intervalo</string>
+    <string name="apos_partida">Depois da Partida</string>
+
 
 </resources>

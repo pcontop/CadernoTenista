@@ -143,7 +143,8 @@ public class Partida implements Comparable<Partida>, Serializable {
     }
 
     public void transiteFimDePartida(Date date) {
-        TempoPartida tempoPartida = TempoPartida.create().setDataInicio(date).setTipo(TipoTempoPartida.APOS_JOGO).commit();
+        tempoPartida.setDataFim(date);
+        TempoPartida tempoPartida = TempoPartida.create().setDataInicio(date).setTipo(TipoTempoPartida.APOS_PARTIDA).commit();
         setTempoPartida(tempoPartida);
     }
 
@@ -339,6 +340,16 @@ public class Partida implements Comparable<Partida>, Serializable {
             jogadores.add(jogador2);
         }
         return jogadores;
+    }
+
+    public List<TempoPartida> getTemposAtivos(){
+        List<TempoPartida> temposAtivos = new ArrayList<>();
+        for (TempoPartida tempoPartida: temposPartida){
+            if (tempoPartida.getTipoTempoPartida().isAtivo()){
+                temposAtivos.add(tempoPartida);
+            }
+        }
+        return temposAtivos;
     }
 
 }
