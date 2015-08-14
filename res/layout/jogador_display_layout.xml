@@ -14,7 +14,7 @@
             android:id="@+id/jogador_display_nome_jogador"
             android:gravity="center"
             android:text="Jogador1"
-            android:textSize="20dp"
+            android:textSize="30dp"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
             android:textStyle="bold"

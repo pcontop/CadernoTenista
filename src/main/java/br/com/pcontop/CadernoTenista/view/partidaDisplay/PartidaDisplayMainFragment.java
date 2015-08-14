@@ -225,7 +225,8 @@ public class PartidaDisplayMainFragment extends Fragment implements TelaPrincipa
 
             tf = Typeface.createFromAsset(getActivity().getAssets(), "OpenSans-Regular.ttf");
 
-            mChart.setCenterTextTypeface(Typeface.createFromAsset(getActivity().getAssets(), "OpenSans-Light.ttf"));
+            mChart.setCenterTextTypeface(Typeface.createFromAsset(getActivity().getAssets(), "OpenSans-Semibold.ttf"));
+            mChart.setCenterTextSize(15f);
 
             mChart.setDrawHoleEnabled(true);
             mChart.setHoleColorTransparent(true);
@@ -255,11 +256,15 @@ public class PartidaDisplayMainFragment extends Fragment implements TelaPrincipa
             mChart.animateY(1500, Easing.EasingOption.EaseInOutQuad);
             // mChart.spin(2000, 0, 360);
 
+
             Legend l = mChart.getLegend();
+            l.setEnabled(false);
+            /*
             l.setPosition(Legend.LegendPosition.RIGHT_OF_CHART);
             l.setXEntrySpace(7f);
             l.setYEntrySpace(0f);
             l.setYOffset(0f);
+            */
 
         }
 
@@ -283,7 +288,7 @@ public class PartidaDisplayMainFragment extends Fragment implements TelaPrincipa
             for (TipoEvento tipoEvento: jogador.getTiposEventos()) {
                 float quantidade = (float) jogador.busqueEventosDoTipo(tipoEvento).size();
                 yVals1.add(new Entry(quantidade, i));
-                xVals.add(olheiroController.getStringDeNomeRef(tipoEvento.getDescricao()));
+                xVals.add(olheiroController.getStringDeNomeRef(tipoEvento.getDescricao()).split(":")[0]);
                 colors.add(getCorTipoEvento(tipoEvento));
                 i++;
             }
@@ -298,7 +303,7 @@ public class PartidaDisplayMainFragment extends Fragment implements TelaPrincipa
 
             PieData data = new PieData(xVals, dataSet);
             data.setValueFormatter(new PercentFormatter());
-            data.setValueTextSize(11f);
+            data.setValueTextSize(15f);
             data.setValueTextColor(Color.BLACK);
             data.setValueTypeface(tf);
             mChart.setData(data);
