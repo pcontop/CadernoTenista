@@ -5,24 +5,20 @@
     <string name="app_name">Tennis Scout Notebook</string>
     <string name="hello">Hello CadernoTenista!</string>
     <string name="action_settings">Configurations</string>
+
+    <!-- Timer -->
     <string name="inicio_relogio">00:00:00</string>
     <string name="iniciar_partida">Match Start</string>
     <string name="iniciar_set">Start Set</string>
     <string name="terminar_set">End Set</string>
     <string name="terminar_partida">End Match</string>
-    <string name="jogador_passe_certo">Right Pass</string>
-    <string name="jogador_passe_errado">Wrong Pass</string>
+
     <string name="adicione_jogador">Add Player</string>
-    <string name="escolha_time">Pick player\'s team</string>
     <string name="jogador">Player</string>
     <string name="delete">Delete</string>
     <string name="alterar_nome">Alter</string>
     <string name="defina_nome_jogador">Player\'s Name</string>
     <string name="escolher_eventos">Events</string>
-    <string name="ace_certo">Ace: Correct</string>
-    <string name="ace_errado">Ace: Incorrect</string>
-    <string name="jogador_backhand_certo">Backhand: Correct</string>
-    <string name="jogador_backhand_errado">Backhand: Incorrect</string>
     <string name="escolha_eventos">Choose Events</string>
     <string name="ok">Ok</string>
     <string name="cancelar">Cancel</string>
@@ -32,40 +28,49 @@
     <string name="passes_anotados">Noted Passes:</string>
     <string name="local">Location:</string>
     <string name="remover_partida">Remove Match</string>
-    <string name="enviar_partida">Export Match</string>
     <string name="escolha_acao">Choose Action</string>
-    <string name="nome_diretorio_geracao">SoccerScout</string>
+
+    <!--Exportar -->
+    <string name="enviar_partida">Export Match</string>
+    <string name="nome_diretorio_geracao">TennisScout</string>
     <string name="erro_exportacao">An error has ocurred when exporting the match.</string>
+    <string name="partida_enviada">Match was exported succesfully</string>
+    <string name="ultimo_envio">Sent to Server:</string>
+    <string name="nao_enviado">Not sent.</string>
+    <string name="reenviando_partida">Trying to send match again.</string>
+
     <string name="sem_localidade_definida">Unknown</string>
     <string name="sem_data_inicio_definida">Not Started</string>
     <string name="sem_data_fim_primeiro_tempo_definida">Not Ended</string>
-    <string name="partida_enviada">Match was exported succesfully</string>
     <string name="escolha_localidade">Define match\'s Location</string>
     <string name="escolher_local">Location</string>
     <string name="alterar_tipos_passe_jogador">Alter Events</string>
     <string name="indefinida">Undefined</string>
+
+    <!-- About -->
     <string name="desenvolvedor">Developer:</string>
     <string name="paulo_contopoulos">Paulo Contopoulos</string>
     <string name="versao_beta">Beta Version</string>
-    <string name="colaboracao">In Colaboration With:</string>
-    <string name="olhar_digital">Olheiro Digital</string>
     <string name="avaliacao_disclaimer">This version is For evaluation purposes only. Not for commercial use!</string>
-    <string name="video_passes">Watch video from the plays</string>
+
+
+    <!-- Video -->
     <string name="passes_de">Plays from</string>
     <string name="escolha_arquivo">Choose File</string>
-    <string name="ultimo_envio">Sent to Server:</string>
-    <string name="nao_enviado">Not sent.</string>
-    <string name="reenviando_partida">Trying to send match again.</string>
+    <string name="video_passes">Watch video from the plays</string>
     <string name="lado_1">First Side</string>
     <string name="lado_2">Second Side</string>
     <string name="selecione_video_primeiro_set">Choose video for first Set.</string>
     <string name="selecione_video_segundo_set">Choose video for second Set.</string>
     <string name="nao_encontrado">Not found.</string>
+
     <string name="jogador1">Player 1</string>
     <string name="jogadas">Plays</string>
     <string name="set">Set</string>
     <string name="inicio">Start</string>
     <string name="fim">End</string>
+
+    <!--Tempos-->
     <string name="antes_partida">Before Match</string>
     <string name="primeiro_set">First Set</string>
     <string name="primeiro_intervalo">First Interval</string>
@@ -82,5 +87,11 @@
     <string name="setimo_set">Seventh Set</string>
     <string name="setimo_intervalo">Seventh Interval</string>
     <string name="apos_partida">After Match</string>
+
+    <!--Jogadas-->
+    <string name="jogador_backhand_certo">Backhand: Correct</string>
+    <string name="jogador_backhand_errado">Backhand: Incorrect</string>
+    <string name="jogador_ace_certo">Ace: Correct</string>
+    <string name="jogador_ace_errado">Ace: Incorrect</string>
 
 </resources>

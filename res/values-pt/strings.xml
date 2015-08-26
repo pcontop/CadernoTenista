@@ -4,24 +4,20 @@
     <string name="app_name">Caderno Tenista</string>
     <string name="action_settings">Configurações</string>
     <string name="hello">Olá Mundo! Creditar http://www.freesfx.co.uk/info/eula/</string>
+
+    <!--Timer -->
+    <string name="inicio_relogio">00:00:00</string>
     <string name="iniciar_partida">Iniciar Partida</string>
     <string name="iniciar_set">Iniciar Set</string>
     <string name="terminar_set">Terminar Set</string>
     <string name="terminar_partida">Terminar Partida</string>
-    <string name="inicio_relogio">00:00:00</string>
-    <string name="jogador_passe_certo">Passe Certo</string>
-    <string name="jogador_passe_errado">Passe Errado</string>
+
     <string name="adicione_jogador">Adicione Jogador</string>
-    <string name="escolha_time">Escolha o time do jogador</string>
     <string name="jogador">Jogador</string>
     <string name="delete">Remover</string>
     <string name="alterar_nome">Alterar</string>
     <string name="defina_nome_jogador">Nome do Jogador</string>
     <string name="escolher_eventos">Eventos</string>
-    <string name="ace_certo">Ace: Certo</string>
-    <string name="ace_errado">Ace: Errado</string>
-    <string name="jogador_backhand_certo">Backhand: Certo</string>
-    <string name="jogador_backhand_errado">Backhand: Errado</string>
     <string name="escolha_eventos">Escolha Eventos</string>
     <string name="ok">Ok</string>
     <string name="cancelar">Cancelar</string>
@@ -31,40 +27,47 @@
     <string name="passes_anotados">Passes Anotados:</string>
     <string name="local">Local:</string>
     <string name="remover_partida">Remover Partida</string>
-    <string name="enviar_partida">Exportar Partida</string>
     <string name="escolha_acao">Escolha Ação</string>
-    <string name="nome_diretorio_geracao">CadernoOlheiros</string>
+
+    <!--Exportar -->
+    <string name="enviar_partida">Exportar Partida</string>
+    <string name="nome_diretorio_geracao">CadernoTenista</string>
     <string name="erro_exportacao">Erro ao exportar partida.</string>
+    <string name="partida_enviada">Partida foi exportada com sucesso</string>
+    <string name="ultimo_envio">Enviado em:</string>
+    <string name="nao_enviado">Não enviado.</string>
+    <string name="reenviando_partida">Tentando enviar a partida novamente.</string>
+
     <string name="sem_localidade_definida">Desconhecido</string>
     <string name="sem_data_inicio_definida">Não Iniciada</string>
     <string name="sem_data_fim_primeiro_tempo_definida">Não Terminado</string>
-    <string name="partida_enviada">Partida foi exportada com sucesso</string>
     <string name="escolha_localidade">Defina o local da partida</string>
     <string name="escolher_local">Local</string>
     <string name="alterar_tipos_passe_jogador">Alterar Eventos</string>
     <string name="indefinida">Indefinida</string>
+
+    <!-- About -->
     <string name="desenvolvedor">Desenvolvedor:</string>
     <string name="paulo_contopoulos">Paulo Contopoulos</string>
     <string name="versao_beta">Versão Beta</string>
-    <string name="colaboracao">Em Colaboração Com:</string>
-    <string name="olhar_digital">Olheiro Digital</string>
     <string name="avaliacao_disclaimer">Essa versão é apenas para propósitos de avaliação. Não é para uso comercial!</string>
+
+    <!-- Video -->
     <string name="video_passes">Assistir vídeo dos passes</string>
     <string name="passes_de">Passes de</string>
     <string name="escolha_arquivo">Escolha Arquivo</string>
-    <string name="ultimo_envio">Enviado em:</string>
-    <string name="nao_enviado">Não enviado.</string>
-    <string name="reenviando_partida">Tentando enviar a partida novamente.</string>
     <string name="lado_1">Lado 1</string>
     <string name="lado_2">Lado 2</string>
     <string name="selecione_video_primeiro_set">Escolha o vídeo para o primeiro Set.</string>
     <string name="selecione_video_segundo_set">Escolha o vídeo para o segundo Set.</string>
+
     <string name="nao_encontrado">Não encontrado.</string>
     <string name="jogador1">Jogador 1</string>
     <string name="jogadas">Jogadas</string>
     <string name="inicio">Início</string>
     <string name="fim">Fim</string>
 
+    <!--Tempos-->
     <string name="antes_partida">Antes da Partida</string>
     <string name="primeiro_set">Primeiro Set</string>
     <string name="primeiro_intervalo">Primeiro Intervalo</string>
@@ -82,5 +85,10 @@
     <string name="setimo_intervalo">Sétimo Intervalo</string>
     <string name="apos_partida">Depois da Partida</string>
 
+    <!--Jogadas-->
+    <string name="jogador_ace_certo">Ace: Certo</string>
+    <string name="jogador_ace_errado">Ace: Errado</string>
+    <string name="jogador_backhand_certo">Backhand: Certo</string>
+    <string name="jogador_backhand_errado">Backhand: Errado</string>
 
 </resources>
